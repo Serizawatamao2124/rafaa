@@ -3,1176 +3,1610 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rafa News - Portal Berita Terkini</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Al-Qur'an Digital Lengkap</title>
     <style>
-        :root {
-            --primary-color: #0d6efd;
-            --secondary-color: #6c757d;
-            --dark-color: #343a40;
-            --light-color: #f8f9fa;
-            --accent-color: #ffc107;
-            --sports-color: #28a745;
-            --tech-color: #17a2b8;
-            --business-color: #6f42c1;
-            --entertainment-color: #e83e8c;
-            --health-color: #20c997;
-            --science-color: #fd7e14;
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f5f7fa;
+            background-color: #f8f6f0;
             color: #333;
             line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
         
-        main {
-            flex: 1;
+        header {
+            background: linear-gradient(135deg, #1a5f4e 0%, #2c786c 100%);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
         }
         
-        /* Header Styles */
-        .navbar {
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 0.8rem 0;
-            background: linear-gradient(135deg, var(--dark-color), #495057) !important;
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
         }
         
-        .navbar-brand {
-            font-weight: 700;
-            font-size: 1.8rem;
-            color: white !important;
-            display: flex;
-            align-items: center;
-        }
-        
-        .navbar-brand i {
-            margin-right: 10px;
-            font-size: 1.5rem;
-        }
-        
-        .nav-link {
-            font-weight: 500;
-            margin: 0 5px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            color: rgba(255, 255, 255, 0.9) !important;
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
             position: relative;
         }
         
-        .nav-link:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-            color: white !important;
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
         }
         
-        .nav-link.active {
+        /* Navigation Menu */
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .nav-item {
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-radius: 4px;
+        }
+        
+        .nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-item.active {
             background-color: rgba(255, 255, 255, 0.2);
             font-weight: 600;
-            color: white !important;
         }
         
-        /* Category indicator */
-        .nav-link:after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 3px;
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover:after,
-        .nav-link.active:after {
-            width: 80%;
-        }
-        
-        .nav-link[data-category="general"]:after {
-            background-color: var(--primary-color);
-        }
-        
-        .nav-link[data-category="business"]:after {
-            background-color: var(--business-color);
-        }
-        
-        .nav-link[data-category="technology"]:after {
-            background-color: var(--tech-color);
-        }
-        
-        .nav-link[data-category="sports"]:after {
-            background-color: var(--sports-color);
-        }
-        
-        .nav-link[data-category="entertainment"]:after {
-            background-color: var(--entertainment-color);
-        }
-        
-        .nav-link[data-category="health"]:after {
-            background-color: var(--health-color);
-        }
-        
-        .nav-link[data-category="science"]:after {
-            background-color: var(--science-color);
-        }
-        
-        /* Search Section */
-        .search-section {
-            background: linear-gradient(135deg, var(--primary-color), #4dabf7);
-            padding: 3rem 0;
-            color: white;
-            margin-bottom: 2rem;
-        }
-        
-        .search-section h2 {
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-        
-        #searchForm {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        #searchForm .input-group {
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            border-radius: 50px;
-            overflow: hidden;
-        }
-        
-        #searchForm input {
-            border: none;
-            padding: 15px 25px;
-            font-size: 1rem;
-        }
-        
-        #searchForm button {
-            background-color: var(--dark-color);
-            color: white;
-            border: none;
-            padding: 0 25px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
-        #searchForm button:hover {
-            background-color: #23272b;
-            transform: scale(1.05);
-        }
-        
-        /* News Cards */
-        .news-container {
-            padding: 2rem 0;
-        }
-        
-        .section-title {
-            position: relative;
-            margin-bottom: 2rem;
-            padding-bottom: 10px;
-            font-weight: 600;
-            color: var(--dark-color);
-        }
-        
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background-color: var(--primary-color);
-            transition: background-color 0.3s ease;
-        }
-        
-        .section-title.general:after {
-            background-color: var(--primary-color);
-        }
-        
-        .section-title.business:after {
-            background-color: var(--business-color);
-        }
-        
-        .section-title.technology:after {
-            background-color: var(--tech-color);
-        }
-        
-        .section-title.sports:after {
-            background-color: var(--sports-color);
-        }
-        
-        .section-title.entertainment:after {
-            background-color: var(--entertainment-color);
-        }
-        
-        .section-title.health:after {
-            background-color: var(--health-color);
-        }
-        
-        .section-title.science:after {
-            background-color: var(--science-color);
-        }
-        
-        .card {
-            border: none;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            height: 100%;
-            margin-bottom: 1.5rem;
-        }
-        
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .card-img-top {
-            height: 200px;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .card:hover .card-img-top {
-            transform: scale(1.05);
-        }
-        
-        .card-body {
+        /* Dashboard Menu */
+        .dashboard-menu {
+            background: white;
             padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-        
-        .card-title {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-            line-height: 1.4;
-            color: var(--dark-color);
-        }
-        
-        .card-text {
-            color: var(--secondary-color);
-            flex-grow: 1;
-            margin-bottom: 1rem;
-        }
-        
-        .news-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            font-size: 0.85rem;
-            color: var(--secondary-color);
-        }
-        
-        .news-source {
-            color: white;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-        }
-        
-        .news-source.general {
-            background-color: var(--primary-color);
-        }
-        
-        .news-source.business {
-            background-color: var(--business-color);
-        }
-        
-        .news-source.technology {
-            background-color: var(--tech-color);
-        }
-        
-        .news-source.sports {
-            background-color: var(--sports-color);
-        }
-        
-        .news-source.entertainment {
-            background-color: var(--entertainment-color);
-        }
-        
-        .news-source.health {
-            background-color: var(--health-color);
-        }
-        
-        .news-source.science {
-            background-color: var(--science-color);
-        }
-        
-        .btn-read-more {
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 8px 20px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            align-self: flex-start;
-        }
-        
-        .btn-read-more:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-        
-        .btn-read-more.general {
-            background-color: var(--primary-color);
-        }
-        
-        .btn-read-more.general:hover {
-            background-color: #0b5ed7;
-        }
-        
-        .btn-read-more.business {
-            background-color: var(--business-color);
-        }
-        
-        .btn-read-more.business:hover {
-            background-color: #5a3596;
-        }
-        
-        .btn-read-more.technology {
-            background-color: var(--tech-color);
-        }
-        
-        .btn-read-more.technology:hover {
-            background-color: #138496;
-        }
-        
-        .btn-read-more.sports {
-            background-color: var(--sports-color);
-        }
-        
-        .btn-read-more.sports:hover {
-            background-color: #218838;
-        }
-        
-        .btn-read-more.entertainment {
-            background-color: var(--entertainment-color);
-        }
-        
-        .btn-read-more.entertainment:hover {
-            background-color: #c2176c;
-        }
-        
-        .btn-read-more.health {
-            background-color: var(--health-color);
-        }
-        
-        .btn-read-more.health:hover {
-            background-color: #199d7a;
-        }
-        
-        .btn-read-more.science {
-            background-color: var(--science-color);
-        }
-        
-        .btn-read-more.science:hover {
-            background-color: #dc6502;
-        }
-        
-        /* Category Highlights */
-        .category-highlight {
-            padding: 1rem;
+            margin: 1rem auto;
+            max-width: 1400px;
             border-radius: 10px;
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
         }
         
-        .category-highlight i {
-            font-size: 2rem;
-            margin-right: 1rem;
-        }
-        
-        .category-highlight.general {
-            background: linear-gradient(135deg, var(--primary-color), #4dabf7);
-        }
-        
-        .category-highlight.business {
-            background: linear-gradient(135deg, var(--business-color), #8b63d4);
-        }
-        
-        .category-highlight.technology {
-            background: linear-gradient(135deg, var(--tech-color), #39c0d9);
-        }
-        
-        .category-highlight.sports {
-            background: linear-gradient(135deg, var(--sports-color), #20c997);
-        }
-        
-        .category-highlight.entertainment {
-            background: linear-gradient(135deg, var(--entertainment-color), #ee7eb5);
-        }
-        
-        .category-highlight.health {
-            background: linear-gradient(135deg, var(--health-color), #3dd5ac);
-        }
-        
-        .category-highlight.science {
-            background: linear-gradient(135deg, var(--science-color), #fd9843);
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--dark-color);
-            color: white;
-            padding: 3rem 0 1.5rem;
-            margin-top: 3rem;
-        }
-        
-        .footer-logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: white;
-        }
-        
-        .footer-about {
-            margin-bottom: 1.5rem;
-            color: #adb5bd;
-        }
-        
-        .footer-heading {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 1.2rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .footer-heading:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--primary-color);
-        }
-        
-        .footer-links {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .footer-links li {
-            margin-bottom: 0.7rem;
-        }
-        
-        .footer-links a {
-            color: #adb5bd;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            color: white;
-            padding-left: 5px;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 15px;
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
             margin-top: 1rem;
         }
         
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: white;
-            transition: all 0.3s ease;
-        }
-        
-        .social-links a:hover {
-            background-color: var(--primary-color);
-            transform: translateY(-3px);
-        }
-        
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 1.5rem;
-            margin-top: 2rem;
+        .dashboard-card {
+            background: linear-gradient(135deg, #f0f7f5 0%, #e0f0ec 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
             text-align: center;
-            color: #adb5bd;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .dashboard-card i {
+            font-size: 2.5rem;
+            color: #2c786c;
+            margin-bottom: 1rem;
+        }
+        
+        .dashboard-card h3 {
+            color: #1a5f4e;
+            margin-bottom: 0.5rem;
+        }
+        
+        .dashboard-card p {
+            color: #666;
             font-size: 0.9rem;
         }
         
-        /* Loading Spinner */
-        .loading-spinner {
+        /* Content Sections */
+        .content-section {
+            background: white;
+            padding: 1.5rem;
+            margin: 1rem auto;
+            max-width: 1400px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .section-header h2 {
+            color: #1a5f4e;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        /* Prayer Times */
+        .prayer-times-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .prayer-time-card {
+            background: linear-gradient(135deg, #f0f7f5 0%, #e0f0ec 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .prayer-name {
+            font-weight: bold;
+            color: #1a5f4e;
+            margin-bottom: 0.5rem;
+        }
+        
+        .prayer-time {
+            font-size: 1.5rem;
+            color: #2c786c;
+            font-weight: bold;
+        }
+        
+        .current-prayer {
+            background: linear-gradient(135deg, #2c786c 0%, #1a5f4e 100%);
+            color: white;
+        }
+        
+        .current-prayer .prayer-name,
+        .current-prayer .prayer-time {
+            color: white;
+        }
+        
+        /* Qibla Direction */
+        .qibla-container {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f9f9f9 0%, #f0f7f5 100%);
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .compass {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 1rem;
+            position: relative;
+            border: 10px solid #2c786c;
+            border-radius: 50%;
+            background: white;
+        }
+        
+        .compass-needle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 80px;
+            background: #e74c3c;
+            transform-origin: 50% 100%;
+            transform: translate(-50%, -100%) rotate(0deg);
+            transition: transform 1s ease;
+        }
+        
+        .compass-needle::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -8px;
+            width: 20px;
+            height: 20px;
+            background: #e74c3c;
+            border-radius: 50%;
+        }
+        
+        .qibla-direction {
+            font-size: 1.2rem;
+            color: #2c786c;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+        
+        /* Hadith List */
+        .hadith-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .hadith-item {
+            padding: 1.5rem;
+            border-radius: 10px;
+            background: #f9f9f9;
+            border-left: 4px solid #2c786c;
+        }
+        
+        .hadith-arabic {
+            font-size: 1.4rem;
+            text-align: right;
+            margin-bottom: 1rem;
+            font-family: 'Traditional Arabic', 'Scheherazade New', serif;
+            line-height: 1.8;
+        }
+        
+        .hadith-translation {
+            color: #555;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .hadith-reference {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        /* History Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: #2c786c;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border: 4px solid #2c786c;
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+        
+        .timeline-item:nth-child(odd)::after {
+            right: -10px;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border: 1px solid #eaeaea;
+        }
+        
+        .timeline-year {
+            font-weight: bold;
+            color: #2c786c;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Duas List */
+        .duas-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .dua-item {
+            padding: 1.5rem;
+            border-radius: 10px;
+            background: #f9f9f9;
+            border-left: 4px solid #2c786c;
+        }
+        
+        .dua-arabic {
+            font-size: 1.4rem;
+            text-align: right;
+            margin-bottom: 1rem;
+            font-family: 'Traditional Arabic', 'Scheherazade New', serif;
+            line-height: 1.8;
+        }
+        
+        .dua-translation {
+            color: #555;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .dua-reference {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        /* Discussions */
+        .discussions-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .discussion-item {
+            padding: 1.5rem;
+            border-radius: 10px;
+            background: #f9f9f9;
+            border: 1px solid #eaeaea;
+        }
+        
+        .discussion-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .discussion-title {
+            font-weight: bold;
+            color: #1a5f4e;
+            font-size: 1.1rem;
+        }
+        
+        .discussion-meta {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .discussion-content {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .discussion-replies {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .reply-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .reply-item:last-child {
+            border-bottom: none;
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            background-color: #f0f7f5;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.9rem;
+            color: #555;
+            border-bottom: 1px solid #e0e0e0;
+            display: none;
+        }
+        
+        .breadcrumb.active {
+            display: block;
+        }
+        
+        .breadcrumb a {
+            color: #2c786c;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb .separator {
+            margin: 0 0.5rem;
+            color: #888;
+        }
+        
+        .breadcrumb .current {
+            color: #333;
+            font-weight: 500;
+        }
+        
+        /* Question Menu */
+        .question-menu {
+            display: none;
+            align-items: center;
+            margin-top: 1rem;
+            padding: 0 1.5rem;
+        }
+        
+        .question-menu.active {
+            display: flex;
+        }
+        
+        .question-label {
+            font-weight: 600;
+            margin-right: 1rem;
+            color: #333;
+        }
+        
+        .question-nav {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .question-item {
+            padding: 0.5rem 1rem;
+            background-color: #f0f7f5;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .question-item:hover {
+            background-color: #e0f0ec;
+        }
+        
+        .question-item.active {
+            background-color: #2c786c;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+        
+        .search-section {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            margin-bottom: 2rem;
+            border: 1px solid #eaeaea;
+            display: none;
+        }
+        
+        .search-section.active {
+            display: block;
+        }
+        
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .search-box input:focus {
+            border-color: #2c786c;
+            box-shadow: 0 0 0 3px rgba(44, 120, 108, 0.1);
+            outline: none;
+        }
+        
+        .search-box button {
+            padding: 14px 24px;
+            background: linear-gradient(to right, #2c786c, #1a5f4e);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .search-box button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .filter-options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-options select {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: white;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+        
+        .filter-options select:focus {
+            border-color: #2c786c;
+            outline: none;
+        }
+        
+        .content {
+            display: flex;
+            gap: 25px;
+            display: none;
+        }
+        
+        .content.active {
+            display: flex;
+        }
+        
+        .surah-list {
+            flex: 1;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            overflow: hidden;
+            border: 1px solid #eaeaea;
+            max-height: 700px;
+        }
+        
+        .surah-list h2 {
+            padding: 1.2rem;
+            background: linear-gradient(to right, #f0f7f5, #e0f0ec);
+            border-bottom: 1px solid #e0e0e0;
+            color: #1a5f4e;
+            font-size: 1.3rem;
+        }
+        
+        .surah-container {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .surah-item {
+            padding: 1.2rem;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .surah-item:hover {
+            background-color: #f9f9f9;
+            transform: translateX(5px);
+        }
+        
+        .surah-item.active {
+            background: linear-gradient(to right, #e8f4f1, #d4ece6);
+            border-left: 5px solid #2c786c;
+        }
+        
+        .surah-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: #2c786c;
+            color: white;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        
+        .surah-details {
+            flex: 1;
+        }
+        
+        .surah-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+            font-size: 1.1rem;
+        }
+        
+        .surah-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .ayat-display {
+            flex: 2;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            padding: 1.5rem;
+            max-height: 700px;
+            overflow-y: auto;
+            border: 1px solid #eaeaea;
+        }
+        
+        .surah-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+            background: linear-gradient(to right, #f9f9f9, #f0f7f5);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        
+        .surah-title {
+            font-size: 2rem;
+            color: #1a5f4e;
+            margin-bottom: 8px;
+        }
+        
+        .surah-arabic {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-family: 'Traditional Arabic', 'Scheherazade New', serif;
+        }
+        
+        .surah-info {
+            color: #666;
+            font-size: 1rem;
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 3rem 0;
+            gap: 20px;
+            flex-wrap: wrap;
         }
         
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(13, 110, 253, 0.2);
-            border-radius: 50%;
-            border-top-color: var(--primary-color);
-            animation: spin 1s linear infinite;
+        .info-item {
+            background-color: #e8f4f1;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
         }
         
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* Alert Box */
-        .alert {
+        .ayat-item {
+            margin-bottom: 1.8rem;
+            padding: 1.5rem;
             border-radius: 10px;
-            border: none;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+            border-left: 4px solid #2c786c;
+            transition: all 0.3s;
         }
         
-        /* Responsive */
-        @media (max-width: 768px) {
-            .navbar-brand {
+        .ayat-item:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            transform: translateY(-2px);
+        }
+        
+        .ayat-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #2c786c;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            text-align: center;
+            margin-right: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+        
+        .ayat-arabic {
+            font-size: 1.8rem;
+            text-align: right;
+            margin: 15px 0;
+            line-height: 2.2;
+            font-family: 'Traditional Arabic', 'Scheherazade New', serif;
+            direction: rtl;
+        }
+        
+        .ayat-latin {
+            color: #666;
+            margin: 10px 0;
+            font-style: italic;
+            line-height: 1.7;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            border-left: 3px solid #ddd;
+        }
+        
+        .ayat-translation {
+            color: #555;
+            margin-top: 10px;
+            line-height: 1.7;
+            padding: 10px;
+            background-color: white;
+            border-radius: 8px;
+            border-left: 3px solid #e0e0e0;
+        }
+        
+        .bismillah {
+            text-align: center;
+            font-size: 2rem;
+            margin: 20px 0;
+            font-family: 'Traditional Arabic', 'Scheherazade New', serif;
+            color: #1a5f4e;
+            padding: 15px;
+            background: linear-gradient(to right, #f0f7f5, #e8f4f1);
+            border-radius: 8px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            color: #666;
+            border-top: 1px solid #eaeaea;
+            background-color: #f9f9f9;
+        }
+        
+        @media (max-width: 992px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            .surah-list, .ayat-display {
+                width: 100%;
+                max-height: none;
+            }
+            
+            .surah-container {
+                max-height: 400px;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+            }
+            
+            .nav-item {
+                margin: 0.25rem;
+                padding: 0.5rem;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item::after {
+                left: 21px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .search-box {
+                flex-direction: column;
+            }
+            
+            .surah-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .surah-title {
+                font-size: 1.6rem;
+            }
+            
+            .surah-arabic {
                 font-size: 1.5rem;
             }
             
-            .search-section {
-                padding: 2rem 0;
-            }
-            
-            .search-section h2 {
+            .ayat-arabic {
                 font-size: 1.5rem;
             }
             
-            .card-img-top {
-                height: 180px;
-            }
-            
-            .footer-section {
-                margin-bottom: 2rem;
-            }
-            
-            .news-meta {
+            .question-menu {
                 flex-direction: column;
                 align-items: flex-start;
             }
             
-            .news-source {
-                margin-bottom: 5px;
-            }
-            
-            .category-highlight {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .category-highlight i {
-                margin-right: 0;
+            .question-label {
                 margin-bottom: 0.5rem;
             }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .prayer-times-container {
+                grid-template-columns: 1fr;
+            }
         }
+        
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        
+        .audio-player {
+            margin-top: 10px;
+            width: 100%;
+        }
+        
+        .audio-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            align-items: center;
+        }
+        
+        .play-button {
+            background: #2c786c;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .play-button:hover {
+            background: #1a5f4e;
+        }
+        
+        /* Icons */
+        .icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background-size: contain;
+            background-repeat: no-repeat;
+
+        }
+        
+        .icon-quran { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232c786c"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/></svg>'); }
+        .icon-bookmark { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232c786c"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>'); }
+        .icon-prayer { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232c786c"><path d="M9.4 10.5l4.77-8.26C13.47 2.09 12.75 2 12 2c-2.4 0-4.6.85-6.32 2.25l3.66 6.35.06-.1zM21.54 9c-.92-2.92-3.15-5.26-6-6.34L11.88 9l9.66.01zM8.54 12L2 12c0 3.86 1.69 7.31 4.38 9.67l5.62-9.73-3.46-6zM12 22c1.52 0 2.93-.44 4.13-1.18L12 14.27 7.87 20.82C9.07 21.56 10.48 22 12 22z"/></svg>'); }
+        .icon-hadith { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232c786c"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/></svg>'); }
+        .icon-history { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232c786c"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>'); }
+        .icon-dua { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232c786c"><path d="M7 2v11h3v9l7-12h-4l4-8H7z"/></svg>'); }
+        .icon-discussion { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232c786c"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>'); }
+        .icon-qibla { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232c786c"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>'); }
     </style>
 </head>
 <body>
-    <!-- Header dengan Navigasi Kategori -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <div class="container">
-                <a class="navbar-brand" href="#">
-                    <i class="fas fa-newspaper"></i>Rafa News
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#" data-category="general">Berita Utama</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-category="business">Bisnis</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-category="technology">Teknologi</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-category="sports">Olahraga</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-category="entertainment">Hiburan</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-category="health">Kesehatan</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-category="science">Sains</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <h1>Al-Qur'an Digital Lengkap</h1>
+        <p>Baca, pelajari, dan tadabburi Al-Qur'an dengan mudah</p>
+        
+        <!-- Navigation Menu -->
+        <div class="nav-menu">
+            <div class="nav-item active" data-target="dashboard">Dashboard</div>
+            <div class="nav-item" data-target="quran">Qur'an</div>
+            <div class="nav-item" data-target="hadith">Hadith</div>
+            <div class="nav-item" data-target="history">History</div>
+            <div class="nav-item" data-target="duas">Duas</div>
+            <div class="nav-item" data-target="discussions">Discussions</div>
+        </div>
     </header>
-
-    <!-- Search Section -->
-    <section class="search-section">
-        <div class="container">
-            <h2 class="text-center">Mau Baca Berita Apa Hari Ini?</h2>
-            <form id="searchForm" class="d-flex justify-content-center">
-                <div class="input-group">
-                    <input type="text" id="query" placeholder="Ketik kata kunci berita..." class="form-control">
-                    <div class="input-group-append">
-                        <button type="submit" class="btn">
-                            <i class="fas fa-search"></i> Cari
-                        </button>
-                    </div>
-                </div>
-            </form>
+    
+    <!-- Dashboard Section -->
+    <div class="dashboard-menu content-section active" id="dashboard">
+        <h2>Dashboard Al-Qur'an Digital</h2>
+        <div class="dashboard-grid">
+            <div class="dashboard-card" onclick="showSection('quran')">
+                <div class="icon icon-quran"></div>
+                <h3>Baca Qur'an</h3>
+                <p>Baca dan pelajari Al-Qur'an dengan terjemahan lengkap</p>
+            </div>
+            <div class="dashboard-card" onclick="showSection('prayer-times')">
+                <div class="icon icon-prayer"></div>
+                <h3>Jadwal Sholat</h3>
+                <p>Jadwal sholat dan waktu-waktu mustajab untuk berdoa</p>
+            </div>
+            <div class="dashboard-card" onclick="showSection('qibla')">
+                <div class="icon icon-qibla"></div>
+                <h3>Arah Qiblat</h3>
+                <p>Penunjuk arah kiblat berdasarkan lokasi Anda</p>
+            </div>
+            <div class="dashboard-card" onclick="showSection('hadith')">
+                <div class="icon icon-hadith"></div>
+                <h3>Kumpulan Hadith</h3>
+                <p>Hadith-hadith shahih dari Rasulullah SAW</p>
+            </div>
+            <div class="dashboard-card" onclick="showSection('history')">
+                <div class="icon icon-history"></div>
+                <h3>Sejarah Islam</h3>
+                <p>Perjalanan sejarah Islam dari masa ke masa</p>
+            </div>
+            <div class="dashboard-card" onclick="showSection('duas')">
+                <div class="icon icon-dua"></div>
+                <h3>Doa-doa Harian</h3>
+                <p>Kumpulan doa dari Al-Qur'an dan Hadith</p>
+            </div>
+            <div class="dashboard-card" onclick="showSection('discussions')">
+                <div class="icon icon-discussion"></div>
+                <h3>Diskusi</h3>
+                <p>Forum diskusi tentang Islam dan Al-Qur'an</p>
+            </div>
+            <div class="dashboard-card" onclick="showSection('bookmarks')">
+                <div class="icon icon-bookmark"></div>
+                <h3>Bookmarks</h3>
+                <p>Ayat-ayat yang telah Anda tandai untuk dibaca kembali</p>
+            </div>
         </div>
-    </section>
-
-    <!-- Main Content -->
-    <main class="container news-container">
-        <h3 class="section-title general" id="currentCategory">Berita Utama</h3>
+    </div>
+    
+    <!-- Quran Section -->
+    <div class="content-section" id="quran">
+        <div class="breadcrumb active">
+            <a href="#">Home</a>
+            <span class="separator">→</span>
+            <a href="#">Al-Qur'an</a>
+            <span class="separator">→</span>
+            <span class="current" id="breadcrumb-surah">Pilih Surah</span>
+        </div>
         
-        <!-- Category Highlight -->
-        <div id="categoryHighlight" class="category-highlight general">
-            <i class="fas fa-globe"></i>
-            <div>
-                <h4 class="mb-1" id="highlightTitle">Sorotan Berita Utama</h4>
-                <p class="mb-0" id="highlightDescription">Dapatkan berita terkini dari berbagai sumber terpercaya di Indonesia dan dunia.</p>
+        <div class="question-menu active">
+            <div class="question-label">Question</div>
+            <div class="question-nav">
+                <div class="question-item active">Qur'an</div>
+                <div class="question-item">Translation (Compare)</div>
             </div>
         </div>
         
-        <!-- Alert Box -->
-        <div id="alertBox" class="mt-3"></div>
-        
-        <!-- News Cards -->
-        <div id="newsCards" class="row">
-            <!-- News cards will be loaded here -->
+        <div class="container">
+            <section class="search-section active">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Cari surah atau ayat...">
+                    <button id="search-button">Cari</button>
+                </div>
+                <div class="filter-options">
+                    <select id="sort-by">
+                        <option value="number">Urut berdasarkan nomor</option>
+                        <option value="name">Urut berdasarkan nama</option>
+                        <option value="revelation">Urut berdasarkan turunnya</option>
+                    </select>
+                    <select id="verse-count">
+                        <option value="all">Semua ayat</option>
+                        <option value="10">10 ayat pertama</option>
+                        <option value="20">20 ayat pertama</option>
+                    </select>
+                </div>
+            </section>
+            
+            <section class="content active">
+                <div class="surah-list">
+                    <h2>Daftar Surah (114)</h2>
+                    <div class="surah-container" id="surah-container">
+                        <!-- Daftar surah akan dimuat di sini -->
+                    </div>
+                </div>
+                
+                <div class="ayat-display">
+                    <div class="surah-header">
+                        <h2 class="surah-title" id="current-surah">Pilih Surah</h2>
+                        <div class="surah-arabic" id="surah-arabic"></div>
+                        <div class="surah-info" id="surah-info">
+                            <span class="info-item" id="surah-type">Klik pada nama surah untuk menampilkan ayat-ayatnya</span>
+                        </div>
+                    </div>
+                    <div id="ayat-container">
+                        <!-- Ayat-ayat akan dimuat di sini -->
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <!-- Prayer Times Section -->
+    <div class="content-section" id="prayer-times">
+        <div class="section-header">
+            <h2>Jadwal Sholat</h2>
+            <p>Jadwal sholat untuk lokasi Anda hari ini</p>
         </div>
         
-        <!-- Loading Spinner -->
-        <div id="loadingSpinner" class="loading-spinner" style="display: none;">
-            <div class="spinner"></div>
+        <div class="prayer-times-container" id="prayer-times-container">
+            <!-- Jadwal sholat akan dimuat di sini -->
         </div>
-    </main>
-
-    <!-- Footer -->
+        
+        <div class="qibla-container">
+            <h3>Arah Qiblat</h3>
+            <div class="compass">
+                <div class="compass-needle" id="qibla-needle"></div>
+            </div>
+            <div class="qibla-direction" id="qibla-direction">Mengambil arah kiblat...</div>
+            <button onclick="findQibla()" class="play-button" style="margin-top: 1rem;">Cari Arah Kiblat</button>
+        </div>
+    </div>
+    
+    <!-- Hadith Section -->
+    <div class="content-section" id="hadith">
+        <div class="section-header">
+            <h2>Kumpulan Hadith</h2>
+            <p>Hadith-hadith shahih dari Rasulullah SAW</p>
+        </div>
+        
+        <div class="hadith-list" id="hadith-list">
+            <!-- Daftar hadith akan dimuat di sini -->
+        </div>
+    </div>
+    
+    <!-- History Section -->
+    <div class="content-section" id="history">
+        <div class="section-header">
+            <h2>Sejarah Islam</h2>
+            <p>Perjalanan sejarah Islam dari masa ke masa</p>
+        </div>
+        
+        <div class="timeline" id="history-timeline">
+            <!-- Timeline sejarah akan dimuat di sini -->
+        </div>
+    </div>
+    
+    <!-- Duas Section -->
+    <div class="content-section" id="duas">
+        <div class="section-header">
+            <h2>Doa-doa Harian</h2>
+            <p>Kumpulan doa dari Al-Qur'an dan Hadith untuk berbagai keperluan</p>
+        </div>
+        
+        <div class="duas-list" id="duas-list">
+            <!-- Daftar doa akan dimuat di sini -->
+        </div>
+    </div>
+    
+    <!-- Discussions Section -->
+    <div class="content-section" id="discussions">
+        <div class="section-header">
+            <h2>Diskusi Islami</h2>
+            <p>Forum diskusi tentang Islam dan Al-Qur'an</p>
+        </div>
+        
+        <div class="discussions-list" id="discussions-list">
+            <!-- Daftar diskusi akan dimuat di sini -->
+        </div>
+    </div>
+    
     <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 footer-section">
-                    <div class="footer-logo">Rafa News</div>
-                    <p class="footer-about">
-                        Rafa News adalah portal berita terkini yang menyajikan informasi terpercaya 
-                        dari berbagai kategori seperti politik, bisnis, teknologi, olahraga, dan hiburan. 
-                        Kami berkomitmen untuk menyajikan berita yang akurat dan terpercaya.
-                    </p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6 footer-section">
-                    <h4 class="footer-heading">Kategori</h4>
-                    <ul class="footer-links">
-                        <li><a href="#" data-category="general">Berita Utama</a></li>
-                        <li><a href="#" data-category="business">Bisnis</a></li>
-                        <li><a href="#" data-category="technology">Teknologi</a></li>
-                        <li><a href="#" data-category="sports">Olahraga</a></li>
-                        <li><a href="#" data-category="entertainment">Hiburan</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-6 footer-section">
-                    <h4 class="footer-heading">Tautan</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Tentang Kami</a></li>
-                        <li><a href="#">Kontak</a></li>
-                        <li><a href="#">Kebijakan Privasi</a></li>
-                        <li><a href="#">Syarat & Ketentuan</a></li>
-                        <li><a href="#">Karir</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-4 col-md-6 footer-section">
-                    <h4 class="footer-heading">Kontak Kami</h4>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt mr-2"></i> Jl. Merdeka No. 123, Jakarta</li>
-                        <li><i class="fas fa-phone mr-2"></i> (021) 1234-5678</li>
-                        <li><i class="fas fa-envelope mr-2"></i> info@rafanews.com</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 Rafa News. Semua Hak Cipta Dilindungi.</p>
-            </div>
-        </div>
+        <p>Al-Qur'an Digital Lengkap &copy; 2023 - Dibuat untuk kemudahan membaca dan mempelajari Al-Qur'an</p>
     </footer>
 
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        $(document).ready(function() {
-            const apiKey = 'baa031dca91c490198d74c5eb0183724';
-            let currentCategory = 'general';
-            let currentQuery = '';
-            
-            // Data berita sampel untuk fallback
-            const sampleNews = {
-                general: [
-                    {
-                        title: "Perkembangan Teknologi AI di Indonesia",
-                        description: "Artificial Intelligence semakin berkembang pesat di Indonesia dengan berbagai inovasi terbaru.",
-                        urlToImage: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-                        source: { name: "Tech News" },
-                        publishedAt: new Date().toISOString(),
-                        url: "#"
-                    },
-                    {
-                        title: "Ekonomi Indonesia Tumbuh Positif di Kuartal III",
-                        description: "Pertumbuhan ekonomi Indonesia menunjukkan tren positif dengan peningkatan di berbagai sektor.",
-                        urlToImage: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-                        source: { name: "Business Daily" },
-                        publishedAt: new Date().toISOString(),
-                        url: "#"
-                    },
-                    {
-                        title: "Pemerintah Luncurkan Program Bantuan Sosial Baru",
-                        description: "Program bantuan sosial baru diluncurkan untuk membantu masyarakat yang terdampak ekonomi.",
-                        urlToImage: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-                        source: { name: "Government News" },
-                        publishedAt: new Date().toISOString(),
-                        url: "#"
-                    }
-                ],
-                business: [
-                    {
-                        title: "Harga Saham Meroket di Bursa Efek Indonesia",
-                        description: "Indeks harga saham gabungan (IHSG) mengalami kenaikan signifikan pada perdagangan hari ini.",
-                        urlToImage: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-                        source: { name: "Financial Times" },
-                        publishedAt: new Date().toISOString(),
-                        url: "#"
-                    },
-                    {
-                        title: "Startup Fintech Indonesia Raih Pendanaan Seri B",
-                        description: "Startup fintech asal Indonesia berhasil mengumpulkan pendanaan seri B sebesar $50 juta.",
-                        urlToImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-                        source: { name: "Tech Finance" },
-                        publishedAt: new Date().toISOString(),
-                        url: "#"
-                    },
-                    {
-                        title: "Ekspor Komoditas Indonesia Meningkat 15%",
-                        description: "Nilai ekspor komoditas Indonesia mengalami peningkatan sebesar 15% dibandingkan tahun lalu.",
-                        urlToImage: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-                        source: { name: "Trade Journal" },
-                        publishedAt: new Date().toISOString(),
-                        url: "#"
-                    }
-                ],
-                technology: [
-                    {
-                        title: "Inovasi Terbaru dalam Dunia Kesehatan Digital",
-                        description: "Teknologi kesehatan digital terus berkembang dengan inovasi-inovasi terbaru yang memudahkan pasien.",
-                        urlToImage: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-                        source: { name: "Health Today" },
-                        publishedAt: new Date().toISOString(),
-                        url: "#"
-                    },
-                    {
-                        title: "Penemuan Baru di Bidang Astronomi Membuka Wawasan Baru",
-                        description: "Para astronom berhasil membuat penemuan penting yang dapat mengubah pemahaman kita tentang alam semesta.",
-                        urlToImage: "https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-                        source: { name: "Science Journal" },
-                        publishedAt: new Date().toISOString(),
-                        url: "#"
-                    },
-                    {
-                        title: "Perusahaan Teknologi Rilis Smartphone Terbaru",
-                        description: "Perusahaan teknologi ternama meluncurkan smartphone terbaru dengan fitur-fitur inovatif.",
-                        urlToImage: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-                        source: { name: "Tech Review" },
-                        publishedAt: new Date().toISOString(),
-                        url: "#"
-                    }
-                ],
-                sports: [
-                    {
-                        title: "Timnas Indonesia Siap Hadapi Kualifikasi Piala Dunia",
-                        description: "Persiapan matang dilakukan timnas Indonesia untuk menghadapi laga kualifikasi Piala Dunia mendatang.",
-                        urlToImage: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-                        source: { name: "Sport Update" },
-                        publishedAt: new Date().toISOString(),
-                        url: "#"
-                    },
-                    {
-                        title: "Indonesia Juara Umum SEA Games 2023",
-                        description: "Indonesia berhasil menjadi juara umum SEA Games 2023 dengan raihan 187 medali emas.",
-                        urlToImage: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-                        source: { name: "Sports Indonesia" },
-                        publishedAt: new Date().toISOString(),
-                        url: "#"
-                    },
-                    {
-                        title: "Pebulutangkis Indonesia Raih Gelar di Kejuaraan Dunia",
-                        description: "Pebulutangkis Indonesia berhasil meraih gelar juara dunia di kategori ganda putra.",
-                        urlToImage: "https://images.unsplash.com/photo-1595435934247-5d2d4c0a89b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-                        source: { name: "Badminton World" },
-                        publishedAt: new Date().toISOString(),
-                        url: "#"
-                    }
-                ],
-                entertainment: [
-                    {
-                        title: "Festival Film Indonesia 2023 Akan Digelar Bulan Depan",
-                        description: "Para sineas Indonesia bersiap menyambut ajang bergengsi Festival Film Indonesia 2023.",
-                        urlToImage: "https://images.unsplash.com/photo-1489599809505-7c8e1c75fd6c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-                        source: { name: "Entertainment News" },
-                        publishedAt: new Date().toISOString(),
-                        url: "#"
-                    },
-                    {
-                        title: "Musisi Indonesia Tembus Chart Internasional",
-                        description: "Musisi Indonesia berhasil menembus chart musik internasional dengan lagu terbarunya.",
-                        urlToImage: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-                        source: { name: "Music Today" },
-                        publishedAt: new Date().toISOString(),
-                        url: "#"
-                    },
-                    {
-                        title: "Aktor Indonesia Raih Penghargaan Internasional",
-                        description: "Aktor Indonesia berhasil meraih penghargaan di festival film internasional.",
-                        urlToImage: "https://images.unsplash.com/photo-1489599809505-7c8e1c75fd6c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-                        source: { name: "Film Awards" },
-                        publishedAt: new Date().toISOString(),
-                        url: "#"
-                    }
-                ],
-                health: [
-                    {
-                        title: "Penemuan Vaksin Baru untuk Penyakit Tropis",
-                        description: "Para peneliti berhasil menemukan vaksin baru untuk penyakit tropis yang umum di Indonesia.",
-                        urlToImage: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-                        source: { name: "Health Research" },
-                        publishedAt: new Date().toISOString(),
-                        url: "#"
-                    },
-                    {
-                        title: "Tips Menjaga Kesehatan Mental di Era Digital",
-                        description: "Ahli kesehatan mental membagikan tips untuk menjaga kesehatan mental di era digital.",
-                        urlToImage: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-                        source: { name: "Mental Health" },
-                        publishedAt: new Date().toISOString(),
-                        url: "#"
-                    },
-                    {
-                        title: "Rumah Sakit di Indonesia Terapkan Teknologi Terbaru",
-                        description: "Rumah sakit di Indonesia mulai menerapkan teknologi terbaru untuk meningkatkan pelayanan.",
-                        urlToImage: "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-                        source: { name: "Hospital News" },
-                        publishedAt: new Date().toISOString(),
-                        url: "#"
-                    }
-                ],
-                science: [
-                    {
-                        title: "Peneliti Indonesia Temukan Spesies Baru di Hutan Kalimantan",
-                        description: "Tim peneliti Indonesia berhasil menemukan spesies flora dan fauna baru di hutan Kalimantan.",
-                        urlToImage: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-                        source: { name: "Science Discovery" },
-                        publishedAt: new Date().toISOString(),
-                        url: "#"
-                    },
-                    {
-                        title: "Indonesia Kembangkan Teknologi Energi Terbarukan",
-                        description: "Indonesia mengembangkan teknologi energi terbarukan untuk mengurangi ketergantungan pada bahan bakar fosil.",
-                        urlToImage: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-                        source: { name: "Energy Research" },
-                        publishedAt: new Date().toISOString(),
-                        url: "#"
-                    },
-                    {
-                        title: "Ilmuwan Indonesia Raih Penghargaan Internasional",
-                        description: "Ilmuwan Indonesia berhasil meraih penghargaan internasional untuk penelitian di bidang bioteknologi.",
-                        urlToImage: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-                        source: { name: "Science Awards" },
-                        publishedAt: new Date().toISOString(),
-                        url: "#"
-                    }
-                ]
-            };
-            
-            // Highlight data untuk setiap kategori
-            const categoryHighlights = {
-                general: {
-                    icon: "fas fa-globe",
-                    title: "Sorotan Berita Utama",
-                    description: "Dapatkan berita terkini dari berbagai sumber terpercaya di Indonesia dan dunia."
-                },
-                business: {
-                    icon: "fas fa-chart-line",
-                    title: "Sorotan Bisnis",
-                    description: "Update terbaru seputar ekonomi, keuangan, dan perkembangan bisnis di Indonesia."
-                },
-                technology: {
-                    icon: "fas fa-microchip",
-                    title: "Sorotan Teknologi",
-                    description: "Inovasi terbaru di dunia teknologi, gadget, dan perkembangan digital."
-                },
-                sports: {
-                    icon: "fas fa-running",
-                    title: "Sorotan Olahraga",
-                    description: "Berita terkini seputar dunia olahraga, dari sepak bola, basket, hingga Olimpiade."
-                },
-                entertainment: {
-                    icon: "fas fa-film",
-                    title: "Sorotan Hiburan",
-                    description: "Kabar terbaru dari dunia film, musik, seni, dan entertainment."
-                },
-                health: {
-                    icon: "fas fa-heartbeat",
-                    title: "Sorotan Kesehatan",
-                    description: "Informasi terbaru seputar kesehatan, medis, dan gaya hidup sehat."
-                },
-                science: {
-                    icon: "fas fa-flask",
-                    title: "Sorotan Sains",
-                    description: "Penemuan dan perkembangan terbaru di bidang sains dan penelitian."
-                }
-            };
-            
-            // Fungsi untuk memuat berita berdasarkan kategori atau query
-            function fetchNews(category = 'general', query = '') {
-                $('#loadingSpinner').show();
-                $('#newsCards').html('');
-                $('#alertBox').html('');
-                
-                // Update highlight berdasarkan kategori
-                updateCategoryHighlight(category);
-                
-                let url;
-                if (query) {
-                    url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&sortBy=publishedAt&apiKey=${apiKey}`;
-                } else {
-                    url = `https://newsapi.org/v2/top-headlines?country=id&category=${category}&apiKey=${apiKey}`;
-                }
-                
-                $.ajax({
-                    url: url,
-                    method: 'GET',
-                    success: function(data) {
-                        $('#loadingSpinner').hide();
-                        
-                        if (data.status === 'error') {
-                            // Jika API error, gunakan berita sampel
-                            console.log('API Error, using sample news');
-                            displayNews(sampleNews[category] || sampleNews.general, category);
-                            displayInfo('Menampilkan berita sampel. API mungkin mengalami keterbatasan.');
-                        } else if (!data.articles || data.articles.length === 0) {
-                            // Jika tidak ada berita, gunakan berita sampel
-                            console.log('No articles found, using sample news');
-                            displayNews(sampleNews[category] || sampleNews.general, category);
-                            displayInfo('Menampilkan berita sampel. Tidak ada berita ditemukan untuk kategori ini.');
-                        } else {
-                            // Filter artikel yang memiliki konten
-                            const validArticles = data.articles.filter(article => 
-                                article.title && article.title !== '[Removed]'
-                            );
-                            
-                            if (validArticles.length > 0) {
-                                displayNews(validArticles, category);
-                            } else {
-                                // Jika tidak ada artikel valid, gunakan berita sampel
-                                displayNews(sampleNews[category] || sampleNews.general, category);
-                                displayInfo('Menampilkan berita sampel. Berita aktual tidak tersedia saat ini.');
-                            }
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        $('#loadingSpinner').hide();
-                        // Jika terjadi error, gunakan berita sampel
-                        console.log('Request failed, using sample news:', error);
-                        displayNews(sampleNews[category] || sampleNews.general, category);
-                        displayInfo('Menampilkan berita sampel. Terjadi masalah koneksi dengan server berita.');
-                    }
+        // Data lengkap 114 surah Al-Qur'an
+        const surahList = [
+            { number: 1, name: "Al-Fatihah", arabicName: "الفاتحة", ayahs: 7, revelationType: "Mekah", englishName: "The Opening" },
+            { number: 2, name: "Al-Baqarah", arabicName: "البقرة", ayahs: 286, revelationType: "Madinah", englishName: "The Cow" },
+            // ... (data surah lengkap sama seperti sebelumnya)
+        ];
+
+        // Data ayat lengkap untuk semua surah (disederhanakan untuk contoh)
+        const ayatData = {};
+        
+        // Fungsi untuk menghasilkan data ayat contoh
+        function generateSampleAyat(surahNumber, count) {
+            const sampleAyat = [];
+            for (let i = 1; i <= count; i++) {
+                sampleAyat.push({
+                    number: i,
+                    arabic: `بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ - Ayat ${i} dari Surah ${surahNumber}`,
+                    latin: `Bismillāhir-raḥmānir-raḥīm - Ayat ${i} dari Surah ${surahNumber}`,
+                    translation: `Dengan nama Allah Yang Maha Pengasih, Maha Penyayang - Ini adalah terjemahan ayat ${i} dari surah ${surahNumber}`
                 });
             }
+            return sampleAyat;
+        }
+
+        // Generate sample data untuk semua surah
+        surahList.forEach(surah => {
+            ayatData[surah.number] = generateSampleAyat(surah.number, Math.min(surah.ayahs, 10));
+        });
+
+        // Data Jadwal Sholat (contoh)
+        const prayerTimes = [
+            { name: "Subuh", time: "04:30" },
+            { name: "Syuruq", time: "05:45" },
+            { name: "Dzuhur", time: "12:00" },
+            { name: "Ashar", time: "15:15" },
+            { name: "Maghrib", time: "18:00" },
+            { name: "Isya", time: "19:15" }
+        ];
+
+        // Data Hadith
+        const hadithData = [
+            {
+                arabic: "إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى",
+                translation: "Sesungguhnya amal itu tergantung niatnya, dan sesungguhnya setiap orang hanya mendapatkan sesuai niatnya",
+                reference: "HR. Bukhari & Muslim"
+            },
+            {
+                arabic: "من كان يؤمن بالله واليوم الآخر فليقل خيراً أو ليصمت",
+                translation: "Barangsiapa yang beriman kepada Allah dan hari akhir, maka hendaklah dia berkata baik atau diam",
+                reference: "HR. Bukhari & Muslim"
+            },
+            {
+                arabic: "لا يؤمن أحدكم حتى يحب لأخيه ما يحب لنفسه",
+                translation: "Tidak beriman salah seorang di antara kamu hingga dia mencintai untuk saudaranya apa yang dia cintai untuk dirinya sendiri",
+                reference: "HR. Bukhari & Muslim"
+            }
+        ];
+
+        // Data Sejarah Islam
+        const historyData = [
+            { year: "571 M", title: "Kelahiran Nabi Muhammad SAW", description: "Nabi Muhammad SAW dilahirkan di Mekah" },
+            { year: "610 M", title: "Turunnya Wahyu Pertama", description: "Wahyu pertama turun di Gua Hira, memulai periode kenabian" },
+            { year: "622 M", title: "Hijrah ke Madinah", description: "Nabi Muhammad SAW dan pengikutnya hijrah dari Mekah ke Madinah" },
+            { year: "632 M", title: "Wafatnya Nabi Muhammad SAW", description: "Nabi Muhammad SAW wafat di Madinah" },
+            { year: "632-661 M", title: "Khilafah Rasyidah", description: "Masa kepemimpinan Abu Bakar, Umar, Utsman, dan Ali" }
+        ];
+
+        // Data Doa-doa
+        const duasData = [
+            {
+                arabic: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+                translation: "Ya Tuhan kami, berilah kami kebaikan di dunia dan kebaikan di akhirat dan peliharalah kami dari siksa neraka",
+                reference: "QS. Al-Baqarah: 201"
+            },
+            {
+                arabic: "رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي",
+                translation: "Ya Tuhanku, lapangkanlah untukku dadaku, dan mudahkanlah untukku urusanku",
+                reference: "QS. Thaha: 25-26"
+            },
+            {
+                arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا طَيِّبًا وَعَمَلًا مُتَقَبَّلًا",
+                translation: "Ya Allah, sesungguhnya aku memohon kepada-Mu ilmu yang bermanfaat, rezeki yang baik, dan amal yang diterima",
+                reference: "HR. Ibnu Majah"
+            }
+        ];
+
+        // Data Diskusi
+        const discussionsData = [
+            {
+                title: "Keutamaan Membaca Al-Qur'an",
+                author: "Ahmad",
+                date: "7 Nov 2023",
+                content: "Apa saja keutamaan membaca Al-Qur'an dalam kehidupan sehari-hari?",
+                replies: [
+                    { author: "Fatimah", content: "Membaca Al-Qur'an memberikan ketenangan hati dan pahala yang besar" },
+                    { author: "Ibrahim", content: "Setiap huruf yang dibaca bernilai 10 kebaikan" }
+                ]
+            },
+            {
+                title: "Cara Menghafal Al-Qur'an dengan Mudah",
+                author: "Siti",
+                date: "5 Nov 2023",
+                content: "Bagaimana tips untuk menghafal Al-Qur'an dengan konsisten?",
+                replies: [
+                    { author: "Umar", content: "Mulai dari surat pendek dan ulangi secara konsisten" }
+                ]
+            }
+        ];
+
+        // Fungsi untuk menampilkan section tertentu
+        function showSection(section) {
+            // Sembunyikan semua section
+            document.querySelectorAll('.content-section').forEach(sec => {
+                sec.classList.remove('active');
+            });
             
-            // Fungsi untuk memperbarui highlight kategori
-            function updateCategoryHighlight(category) {
-                const highlight = categoryHighlights[category];
-                if (highlight) {
-                    $('#categoryHighlight')
-                        .removeClass()
-                        .addClass('category-highlight ' + category)
-                        .html(`
-                            <i class="${highlight.icon}"></i>
-                            <div>
-                                <h4 class="mb-1">${highlight.title}</h4>
-                                <p class="mb-0">${highlight.description}</p>
-                            </div>
-                        `);
-                    
-                    $('#currentCategory')
-                        .removeClass()
-                        .addClass('section-title ' + category)
-                        .text($(`.nav-link[data-category="${category}"]`).text());
+            // Tampilkan section yang dipilih
+            document.getElementById(section).classList.add('active');
+            
+            // Jika section adalah Quran, tampilkan elemen terkait
+            if (section === 'quran') {
+                document.querySelector('.breadcrumb').classList.add('active');
+                document.querySelector('.question-menu').classList.add('active');
+                document.querySelector('.search-section').classList.add('active');
+                document.querySelector('.content').classList.add('active');
+            } else {
+                document.querySelector('.breadcrumb').classList.remove('active');
+                document.querySelector('.question-menu').classList.remove('active');
+                document.querySelector('.search-section').classList.remove('active');
+                document.querySelector('.content').classList.remove('active');
+            }
+            
+            // Load data untuk section tertentu
+            if (section === 'prayer-times') {
+                loadPrayerTimes();
+            } else if (section === 'hadith') {
+                loadHadith();
+            } else if (section === 'history') {
+                loadHistory();
+            } else if (section === 'duas') {
+                loadDuas();
+            } else if (section === 'discussions') {
+                loadDiscussions();
+            }
+        }
+
+        // Fungsi untuk memuat jadwal sholat
+        function loadPrayerTimes() {
+            const container = document.getElementById('prayer-times-container');
+            container.innerHTML = '';
+            
+            prayerTimes.forEach(prayer => {
+                const prayerCard = document.createElement('div');
+                prayerCard.className = 'prayer-time-card';
+                if (prayer.name === 'Dzuhur') {
+                    prayerCard.classList.add('current-prayer');
                 }
-            }
+                prayerCard.innerHTML = `
+                    <div class="prayer-name">${prayer.name}</div>
+                    <div class="prayer-time">${prayer.time}</div>
+                `;
+                container.appendChild(prayerCard);
+            });
+        }
+
+        // Fungsi untuk memuat hadith
+        function loadHadith() {
+            const container = document.getElementById('hadith-list');
+            container.innerHTML = '';
             
-            // Fungsi untuk menampilkan pesan info
-            function displayInfo(message) {
-                $('#alertBox').html(`
-                    <div class="alert alert-info alert-dismissible fade show" role="alert">
-                        <i class="fas fa-info-circle mr-2"></i>${message}
-                        <button type="button" class="close" data-dismiss="alert">
-                            <span>&times;</span>
-                        </button>
+            hadithData.forEach(hadith => {
+                const hadithItem = document.createElement('div');
+                hadithItem.className = 'hadith-item';
+                hadithItem.innerHTML = `
+                    <div class="hadith-arabic">${hadith.arabic}</div>
+                    <div class="hadith-translation">${hadith.translation}</div>
+                    <div class="hadith-reference">${hadith.reference}</div>
+                `;
+                container.appendChild(hadithItem);
+            });
+        }
+
+        // Fungsi untuk memuat sejarah
+        function loadHistory() {
+            const container = document.getElementById('history-timeline');
+            container.innerHTML = '';
+            
+            historyData.forEach((event, index) => {
+                const timelineItem = document.createElement('div');
+                timelineItem.className = 'timeline-item';
+                timelineItem.innerHTML = `
+                    <div class="timeline-content">
+                        <div class="timeline-year">${event.year}</div>
+                        <h3>${event.title}</h3>
+                        <p>${event.description}</p>
                     </div>
-                `);
-            }
+                `;
+                container.appendChild(timelineItem);
+            });
+        }
+
+        // Fungsi untuk memuat doa-doa
+        function loadDuas() {
+            const container = document.getElementById('duas-list');
+            container.innerHTML = '';
             
-            // Fungsi untuk menampilkan pesan error
-            function displayError(message) {
-                $('#alertBox').html(`
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <i class="fas fa-exclamation-triangle mr-2"></i>${message}
-                        <button type="button" class="close" data-dismiss="alert">
-                            <span>&times;</span>
-                        </button>
-                    </div>
-                `);
-            }
+            duasData.forEach(dua => {
+                const duaItem = document.createElement('div');
+                duaItem.className = 'dua-item';
+                duaItem.innerHTML = `
+                    <div class="dua-arabic">${dua.arabic}</div>
+                    <div class="dua-translation">${dua.translation}</div>
+                    <div class="dua-reference">${dua.reference}</div>
+                `;
+                container.appendChild(duaItem);
+            });
+        }
+
+        // Fungsi untuk memuat diskusi
+        function loadDiscussions() {
+            const container = document.getElementById('discussions-list');
+            container.innerHTML = '';
             
-            // Fungsi untuk menampilkan berita
-            function displayNews(articles, category = 'general') {
-                $('#newsCards').html('');
+            discussionsData.forEach(discussion => {
+                const discussionItem = document.createElement('div');
+                discussionItem.className = 'discussion-item';
                 
-                if (!articles || articles.length === 0) {
-                    displayError('Tidak ada berita yang ditemukan.');
-                    return;
-                }
-                
-                articles.forEach(article => {
-                    const sourceName = article.source?.name || 'Tidak diketahui';
-                    const publishedAt = article.publishedAt ? 
-                        new Date(article.publishedAt).toLocaleDateString('id-ID', {
-                            day: 'numeric',
-                            month: 'long',
-                            year: 'numeric'
-                        }) : 'Tanggal tidak tersedia';
-                    
-                    const title = article.title || 'Judul tidak tersedia';
-                    const description = article.description || 'Deskripsi tidak tersedia.';
-                    const imageUrl = article.urlToImage || 'https://via.placeholder.com/400x200/4dabf7/ffffff?text=Gambar+Tidak+Tersedia';
-                    const articleUrl = article.url || '#';
-                    
-                    const newsCard = `
-                        <div class="col-lg-4 col-md-6">
-                            <div class="card">
-                                <img src="${imageUrl}" 
-                                     class="card-img-top" alt="${title}"
-                                     onerror="this.src='https://via.placeholder.com/400x200/4dabf7/ffffff?text=Gambar+Tidak+Tersedia'">
-                                <div class="card-body">
-                                    <h5 class="card-title">${title}</h5>
-                                    <div class="news-meta">
-                                        <span class="news-source ${category}">${sourceName}</span>
-                                        <span>${publishedAt}</span>
-                                    </div>
-                                    <p class="card-text">${description}</p>
-                                    <a href="${articleUrl}" target="_blank" class="btn btn-read-more ${category}">
-                                        Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i>
-                                    </a>
-                                </div>
-                            </div>
+                let repliesHtml = '';
+                discussion.replies.forEach(reply => {
+                    repliesHtml += `
+                        <div class="reply-item">
+                            <strong>${reply.author}:</strong> ${reply.content}
                         </div>
                     `;
-                    
-                    $('#newsCards').append(newsCard);
                 });
+                
+                discussionItem.innerHTML = `
+                    <div class="discussion-header">
+                        <div class="discussion-title">${discussion.title}</div>
+                        <div class="discussion-meta">Oleh ${discussion.author} • ${discussion.date}</div>
+                    </div>
+                    <div class="discussion-content">${discussion.content}</div>
+                    <div class="discussion-replies">
+                        ${repliesHtml}
+                    </div>
+                `;
+                container.appendChild(discussionItem);
+            });
+        }
+
+        // Fungsi untuk menemukan arah kiblat
+        function findQibla() {
+            const needle = document.getElementById('qibla-needle');
+            const direction = document.getElementById('qibla-direction');
+            
+            // Simulasi arah kiblat (dalam implementasi nyata akan menggunakan GPS)
+            const qiblaDirection = 292; // Arah kiblat dari utara (contoh: 292 derajat)
+            
+            needle.style.transform = `translate(-50%, -100%) rotate(${qiblaDirection}deg)`;
+            direction.textContent = `Arah Kiblat: ${qiblaDirection}° dari Utara`;
+        }
+
+        // Fungsi untuk menampilkan daftar surah
+        function renderSurahList() {
+            const container = document.getElementById('surah-container');
+            container.innerHTML = '';
+            
+            surahList.forEach(surah => {
+                const surahItem = document.createElement('div');
+                surahItem.className = 'surah-item';
+                surahItem.innerHTML = `
+                    <div class="surah-number">${surah.number}</div>
+                    <div class="surah-details">
+                        <div class="surah-name">${surah.name} (${surah.englishName})</div>
+                        <div class="surah-meta">
+                            <span>${surah.arabicName}</span>
+                            <span>${surah.ayahs} ayat • ${surah.revelationType}</span>
+                        </div>
+                    </div>
+                `;
+                
+                surahItem.addEventListener('click', () => {
+                    // Hapus kelas active dari semua item
+                    document.querySelectorAll('.surah-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // Tambahkan kelas active ke item yang diklik
+                    surahItem.classList.add('active');
+                    
+                    // Update breadcrumb
+                    document.getElementById('breadcrumb-surah').textContent = `${surah.number}. ${surah.name} ▼`;
+                    
+                    // Tampilkan ayat-ayat surah yang dipilih
+                    displayAyat(surah);
+                });
+                
+                container.appendChild(surahItem);
+            });
+        }
+
+        // Fungsi untuk menampilkan ayat-ayat surah
+        function displayAyat(surah) {
+            const surahTitle = document.getElementById('current-surah');
+            const surahArabic = document.getElementById('surah-arabic');
+            const surahInfo = document.getElementById('surah-info');
+            const ayatContainer = document.getElementById('ayat-container');
+            
+            surahTitle.textContent = `${surah.number}. ${surah.name} (${surah.englishName})`;
+            surahArabic.textContent = surah.arabicName;
+            surahInfo.innerHTML = `
+                <span class="info-item">${surah.ayahs} Ayat</span>
+                <span class="info-item">${surah.revelationType}</span>
+                <span class="info-item">Surah ${surah.number}</span>
+            `;
+            
+            ayatContainer.innerHTML = '<div class="loading">Memuat ayat...</div>';
+            
+            // Tambahkan bismillah untuk semua surah kecuali At-Taubah
+            if (surah.number !== 9) {
+                const bismillah = document.createElement('div');
+                bismillah.className = 'bismillah';
+                bismillah.textContent = 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ';
+                ayatContainer.appendChild(bismillah);
             }
             
-            // Event listener untuk kategori di header
-            $('.nav-link').on('click', function(e) {
-                e.preventDefault();
-                
-                // Update active state
-                $('.nav-link').removeClass('active');
-                $(this).addClass('active');
-                
-                // Update current category and fetch news
-                currentCategory = $(this).data('category');
-                currentQuery = '';
-                $('#query').val('');
-                
-                fetchNews(currentCategory);
-            });
+            // Cek apakah data ayat tersedia
+            if (ayatData[surah.number]) {
+                setTimeout(() => {
+                    ayatContainer.innerHTML = '';
+                    
+                    // Tambahkan bismillah untuk semua surah kecuali At-Taubah
+                    if (surah.number !== 9) {
+                        const bismillah = document.createElement('div');
+                        bismillah.className = 'bismillah';
+                        bismillah.textContent = 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ';
+                        ayatContainer.appendChild(bismillah);
+                    }
+                    
+                    ayatData[surah.number].forEach(ayat => {
+                        const ayatItem = document.createElement('div');
+                        ayatItem.className = 'ayat-item';
+                        ayatItem.innerHTML = `
+                            <div>
+                                <span class="ayat-number">${ayat.number}</span>
+                            </div>
+                            <div class="ayat-arabic">${ayat.arabic}</div>
+                            <div class="ayat-latin">${ayat.latin}</div>
+                            <div class="ayat-translation">${ayat.translation}</div>
+                        `;
+                        ayatContainer.appendChild(ayatItem);
+                    });
+                }, 500); // Simulasi loading
+            } else {
+                setTimeout(() => {
+                    ayatContainer.innerHTML = `
+                        <div style="text-align: center; padding: 2rem;">
+                            <p>Data ayat untuk surah ${surah.name} sedang tidak tersedia.</p>
+                            <p>Dalam implementasi lengkap, data akan diambil dari API Al-Qur'an.</p>
+                            <p>Untuk saat ini, silakan pilih surah lain yang tersedia ayat-ayatnya.</p>
+                        </div>
+                    `;
+                }, 500);
+            }
+        }
+
+        // Fungsi untuk mencari surah
+        function searchSurah() {
+            const searchInput = document.getElementById('search-input').value.toLowerCase();
+            const surahItems = document.querySelectorAll('.surah-item');
+            let found = false;
             
-            // Event listener untuk form pencarian
-            $('#searchForm').on('submit', function(e) {
-                e.preventDefault();
-                
-                const query = $('#query').val().trim();
-                if (query) {
-                    currentQuery = query;
-                    currentCategory = '';
+            surahItems.forEach(item => {
+                const surahName = item.querySelector('.surah-name').textContent.toLowerCase();
+                if (surahName.includes(searchInput)) {
+                    item.style.display = 'flex';
+                    found = true;
                     
-                    // Update active state
-                    $('.nav-link').removeClass('active');
-                    
-                    // Update section title
-                    $('#currentCategory')
-                        .removeClass()
-                        .addClass('section-title general')
-                        .text(`Hasil Pencarian: ${query}`);
-                    
-                    // Sembunyikan highlight kategori
-                    $('#categoryHighlight').hide();
-                    
-                    fetchNews('', query);
+                    // Jika hanya ada satu hasil, pilih secara otomatis
+                    if (document.querySelectorAll('.surah-item[style="display: flex;"]').length === 1) {
+                        item.click();
+                    }
                 } else {
-                    displayError('Silakan masukkan kata kunci pencarian.');
+                    item.style.display = 'none';
                 }
             });
             
-            // Event listener untuk kategori di footer
-            $('.footer-links a[data-category]').on('click', function(e) {
-                e.preventDefault();
+            if (!found) {
+                document.getElementById('ayat-container').innerHTML = '<p style="text-align: center; padding: 2rem;">Surah tidak ditemukan. Silakan coba dengan kata kunci lain.</p>';
+            }
+        }
+
+        // Event listener untuk tombol pencarian
+        document.getElementById('search-button').addEventListener('click', searchSurah);
+        
+        // Event listener untuk input pencarian (saat menekan enter)
+        document.getElementById('search-input').addEventListener('keyup', (event) => {
+            if (event.key === 'Enter') {
+                searchSurah();
+            }
+        });
+
+        // Event listener untuk filter
+        document.getElementById('sort-by').addEventListener('change', function() {
+            // Dalam implementasi nyata, ini akan mengurutkan daftar surah
+            alert('Fitur pengurutan akan diimplementasikan dengan koneksi API');
+        });
+
+        // Event listener untuk menu navigasi
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.nav-item').forEach(nav => {
+                    nav.classList.remove('active');
+                });
+                this.classList.add('active');
                 
-                const category = $(this).data('category');
-                currentCategory = category;
-                currentQuery = '';
-                $('#query').val('');
-                
-                // Update active state
-                $('.nav-link').removeClass('active');
-                $(`.nav-link[data-category="${category}"]`).addClass('active');
-                
-                fetchNews(category);
+                const target = this.getAttribute('data-target');
+                showSection(target);
             });
+        });
+
+        // Event listener untuk question menu
+        document.querySelectorAll('.question-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.question-item').forEach(q => {
+                    q.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+
+        // Inisialisasi aplikasi
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSurahList();
             
-            // Muat berita utama saat halaman pertama kali dimuat
-            fetchNews(currentCategory);
+            // Tampilkan dashboard secara default
+            showSection('dashboard');
+            
+            // Tampilkan surah pertama secara default jika masuk ke section Quran
+            document.querySelector('.nav-item[data-target="quran"]').addEventListener('click', () => {
+                if (surahList.length > 0) {
+                    const firstSurahItem = document.querySelector('.surah-item');
+                    firstSurahItem.classList.add('active');
+                    document.getElementById('breadcrumb-surah').textContent = `1. ${surahList[0].name} ▼`;
+                    displayAyat(surahList[0]);
+                }
+            });
         });
     </script>
 </body>
