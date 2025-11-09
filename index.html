@@ -74,6 +74,15 @@
             z-index: 100;
         }
         
+        .nav-toggle {
+            display: none; /* Sembunyikan di desktop */
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
         .header-content {
             display: flex;
             justify-content: space-between;
@@ -969,6 +978,12 @@
             background-color: #e63946;
             color: white;
         }
+
+        /* Wrapper untuk tabel agar bisa scroll horizontal */
+        .table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch; /* Scroll lebih mulus di iOS */
+        }
         
         /* Responsive */
         @media (max-width: 768px) {
@@ -976,11 +991,27 @@
                 flex-direction: column;
                 text-align: center;
             }
+
+            .nav-toggle {
+                display: block; /* Tampilkan di mobile */
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
             
             nav ul {
-                margin-top: 20px;
-                flex-wrap: wrap;
-                justify-content: center;
+                display: none; /* Sembunyikan menu utama */
+                flex-direction: column;
+                width: 100%;
+                background-color: #d62839; /* Warna sedikit lebih gelap */
+                position: absolute;
+                top: 70px; /* Sesuaikan dengan tinggi header */
+                left: 0;
+                padding: 10px 0;
+            }
+
+            nav ul.active {
+                display: flex; /* Tampilkan saat di-klik */
             }
             
             nav ul li {
@@ -1021,6 +1052,11 @@
             .form-row {
                 flex-direction: column;
                 gap: 0;
+            }
+
+            .menu-items-kasir {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 10px;
             }
         }
 
@@ -1064,8 +1100,8 @@
             <div class="logo">
                 <h1>Soto Lamongan</h1>
             </div>
-            <nav>
-                <ul>
+            <nav id="mainNav">
+                <ul id="mainNavMenu">
                     <li><a href="#tentang">Tentang</a></li>
                     <li><a href="#lokasi">Lokasi</a></li>
                     <li><a href="#testimoni">Testimoni</a></li>
@@ -1073,6 +1109,7 @@
                     <li><a href="#" id="loginBtn">Login</a></li>
                 </ul>
             </nav>
+            <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
         </div>
     </header>
 
@@ -1439,63 +1476,69 @@
                 <div class="dashboard-section" id="menu-management">
                     <h2>Kelola Menu</h2>
                     <button class="btn btn-small" style="margin-bottom: 20px;" id="addMenuBtn">Tambah Menu Baru</button>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama Menu</th>
-                                <th>Kategori</th>
-                                <th>Harga</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="menuTableBody">
-                            <!-- Menu items will be inserted here by JavaScript -->
-                        </tbody>
-                    </table>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Menu</th>
+                                    <th>Kategori</th>
+                                    <th>Harga</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="menuTableBody">
+                                <!-- Menu items will be inserted here by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 
                 <!-- Data Penjualan Section -->
                 <div class="dashboard-section" id="penjualan">
                     <h2>Data Penjualan</h2>
                     <button class="btn btn-small btn-danger" style="margin-bottom: 20px;" id="resetSalesBtn">Hapus & Mulai Ulang Penjualan</button>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>ID Pesanan</th>
-                                <th>Tanggal</th>
-                                <th>Kasir</th>
-                                <th>Total</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody id="salesTableBody">
-                            <!-- Sales data will be inserted here by JavaScript -->
-                        </tbody>
-                    </table>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>ID Pesanan</th>
+                                    <th>Tanggal</th>
+                                    <th>Kasir</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="salesTableBody">
+                                <!-- Sales data will be inserted here by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 
                 <!-- User Management Section -->
                 <div class="dashboard-section" id="user-management">
                     <h2>Kelola Pengguna</h2>
                     <button class="btn btn-small" style="margin-bottom: 20px;" id="addUserBtn">Tambah Pengguna Baru</button>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="userTableBody">
-                            <!-- User items will be inserted here by JavaScript -->
-                        </tbody>
-                    </table>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="userTableBody">
+                                <!-- User items will be inserted here by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 
                 <!-- Laporan Section -->
@@ -1643,6 +1686,13 @@
             // Initialize user role selectors
             initializeUserRoleSelectors();
             
+            // Initialize hamburger menu
+            const navToggle = document.getElementById('navToggle');
+            const mainNavMenu = document.getElementById('mainNavMenu');
+            navToggle.addEventListener('click', () => {
+                mainNavMenu.classList.toggle('active');
+            });
+
             // Initialize kasir
             initializeKasir();
 
@@ -2707,36 +2757,6 @@
                 notification.addEventListener('animationend', () => {
                     document.body.removeChild(notification);
                 }, 300);
-            }, 3000);
-        }
-    </script>
-</body>
-</html>         }, 300);
-            }, 3000);
-        }
-    </script>
-</body>
-</html>         }, 300);
-            }, 3000);
-        }
-    </script>
-</body>
-</html>         }, 300);
-            }, 3000);
-        }
-    </script>
-</body>
-</html>         }, 300);
-            }, 3000);
-        }
-    </script>
-</body>
-</html>         }, 300);
-            }, 3000);
-        }
-    </script>
-</body>
-</html>         }, 300);
             }, 3000);
         }
     </script>
