@@ -534,6 +534,16 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
+        .sidebar-toggle {
+            display: none; /* Sembunyikan di desktop */
+            background: none;
+            border: none;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+
         .dashboard-nav {
             display: flex;
             justify-content: space-between;
@@ -1393,6 +1403,7 @@
         <div class="dashboard-header">
             <div class="container dashboard-nav">
                 <div class="logo">
+                    <button class="sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
                     <h1 id="dashboardTitle">Dashboard Soto Lamongan</h1>
                 </div>
                 <ul>
@@ -1663,6 +1674,7 @@
         const overviewTotalOrders = document.getElementById('overviewTotalOrders');
         const overviewBestSeller = document.getElementById('overviewBestSeller');
         const overviewRating = document.getElementById('overviewRating');
+        const sidebarToggle = document.getElementById('sidebarToggle');
 
         // Report elements
         const generateReportBtn = document.getElementById('generateReportBtn');
@@ -1695,6 +1707,11 @@
 
             // Initialize kasir
             initializeKasir();
+
+            // Initialize dashboard sidebar toggle
+            sidebarToggle.addEventListener('click', () => {
+                document.querySelector('.sidebar').classList.toggle('open');
+            });
 
             // Initialize report generator
             generateReportBtn.addEventListener('click', generateSalesReport);
@@ -2030,6 +2047,12 @@
                     
                     // Show corresponding section
                     const sectionId = this.getAttribute('data-section');
+
+                    // Close sidebar on mobile after clicking a link
+                    if (window.innerWidth <= 768) {
+                        document.querySelector('.sidebar').classList.remove('open');
+                    }
+
                     showDashboardSection(sectionId);
                 });
             });
