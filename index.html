@@ -3,8 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Al-Qur'an Digital Lengkap</title>
+    <title>Soto Lamongan - Kuliner Khas Lamongan</title>
+    <!-- Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Tambahkan kode ini di dalam bagian header aplikasi utama -->
+<style>
+    .restaurant-header {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                    url('rafa.jpeg');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 40px 20px;
+        text-align: center;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .restaurant-header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .restaurant-header p {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    
+    .restaurant-tagline {
+        font-style: italic;
+        font-size: 1.1rem;
+        color: #f39c12;
+        
+    }
+</style>
     <style>
+        /* Reset dan Styling Dasar */
         * {
             margin: 0;
             padding: 0;
@@ -13,1601 +52,2693 @@
         }
         
         body {
-            background-color: #f8f6f0;
+            background-color: #f9f5eb;
             color: #333;
             line-height: 1.6;
-        }
-        
-        header {
-            background: linear-gradient(135deg, #1a5f4e 0%, #2c786c 100%);
-            color: white;
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
-            background-size: cover;
-        }
-        
-        header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-            position: relative;
-        }
-        
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            position: relative;
-        }
-        
-        /* Navigation Menu */
-        .nav-menu {
-            display: flex;
-            justify-content: center;
-            margin-top: 1rem;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .nav-item {
-            margin: 0 1rem;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s;
-            border-radius: 4px;
-        }
-        
-        .nav-item:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        .nav-item.active {
-            background-color: rgba(255, 255, 255, 0.2);
-            font-weight: 600;
-        }
-        
-        /* Dashboard Menu */
-        .dashboard-menu {
-            background: white;
-            padding: 1.5rem;
-            margin: 1rem auto;
-            max-width: 1400px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-        }
-        
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-        
-        .dashboard-card {
-            background: linear-gradient(135deg, #f0f7f5 0%, #e0f0ec 100%);
-            padding: 1.5rem;
-            border-radius: 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 1px solid #e0e0e0;
-        }
-        
-        .dashboard-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-        
-        .dashboard-card i {
-            font-size: 2.5rem;
-            color: #2c786c;
-            margin-bottom: 1rem;
-        }
-        
-        .dashboard-card h3 {
-            color: #1a5f4e;
-            margin-bottom: 0.5rem;
-        }
-        
-        .dashboard-card p {
-            color: #666;
-            font-size: 0.9rem;
-        }
-        
-        /* Content Sections */
-        .content-section {
-            background: white;
-            padding: 1.5rem;
-            margin: 1rem auto;
-            max-width: 1400px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-            display: none;
-        }
-        
-        .content-section.active {
-            display: block;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .section-header h2 {
-            color: #1a5f4e;
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .section-header p {
-            color: #666;
-            font-size: 1.1rem;
-        }
-        
-        /* Prayer Times */
-        .prayer-times-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        
-        .prayer-time-card {
-            background: linear-gradient(135deg, #f0f7f5 0%, #e0f0ec 100%);
-            padding: 1.5rem;
-            border-radius: 10px;
-            text-align: center;
-            border: 1px solid #e0e0e0;
-        }
-        
-        .prayer-name {
-            font-weight: bold;
-            color: #1a5f4e;
-            margin-bottom: 0.5rem;
-        }
-        
-        .prayer-time {
-            font-size: 1.5rem;
-            color: #2c786c;
-            font-weight: bold;
-        }
-        
-        .current-prayer {
-            background: linear-gradient(135deg, #2c786c 0%, #1a5f4e 100%);
-            color: white;
-        }
-        
-        .current-prayer .prayer-name,
-        .current-prayer .prayer-time {
-            color: white;
-        }
-        
-        /* Qibla Direction */
-        .qibla-container {
-            text-align: center;
-            margin: 2rem 0;
-            padding: 2rem;
-            background: linear-gradient(135deg, #f9f9f9 0%, #f0f7f5 100%);
-            border-radius: 10px;
-            border: 1px solid #e0e0e0;
-        }
-        
-        .compass {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 1rem;
-            position: relative;
-            border: 10px solid #2c786c;
-            border-radius: 50%;
-            background: white;
-        }
-        
-        .compass-needle {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 4px;
-            height: 80px;
-            background: #e74c3c;
-            transform-origin: 50% 100%;
-            transform: translate(-50%, -100%) rotate(0deg);
-            transition: transform 1s ease;
-        }
-        
-        .compass-needle::after {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -8px;
-            width: 20px;
-            height: 20px;
-            background: #e74c3c;
-            border-radius: 50%;
-        }
-        
-        .qibla-direction {
-            font-size: 1.2rem;
-            color: #2c786c;
-            font-weight: bold;
-            margin-top: 1rem;
-        }
-        
-        /* Hadith List */
-        .hadith-list {
-            display: grid;
-            gap: 1.5rem;
-        }
-        
-        .hadith-item {
-            padding: 1.5rem;
-            border-radius: 10px;
-            background: #f9f9f9;
-            border-left: 4px solid #2c786c;
-        }
-        
-        .hadith-arabic {
-            font-size: 1.4rem;
-            text-align: right;
-            margin-bottom: 1rem;
-            font-family: 'Traditional Arabic', 'Scheherazade New', serif;
-            line-height: 1.8;
-        }
-        
-        .hadith-translation {
-            color: #555;
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-        
-        .hadith-reference {
-            font-size: 0.9rem;
-            color: #666;
-            font-style: italic;
-        }
-        
-        /* History Timeline */
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 4px;
-            background: #2c786c;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -2px;
-        }
-        
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            width: 50%;
-            box-sizing: border-box;
-        }
-        
-        .timeline-item:nth-child(odd) {
-            left: 0;
-        }
-        
-        .timeline-item:nth-child(even) {
-            left: 50%;
-        }
-        
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: white;
-            border: 4px solid #2c786c;
-            border-radius: 50%;
-            top: 15px;
-            z-index: 1;
-        }
-        
-        .timeline-item:nth-child(odd)::after {
-            right: -10px;
-        }
-        
-        .timeline-item:nth-child(even)::after {
-            left: -10px;
-        }
-        
-        .timeline-content {
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-            border: 1px solid #eaeaea;
-        }
-        
-        .timeline-year {
-            font-weight: bold;
-            color: #2c786c;
-            margin-bottom: 0.5rem;
-        }
-        
-        /* Duas List */
-        .duas-list {
-            display: grid;
-            gap: 1.5rem;
-        }
-        
-        .dua-item {
-            padding: 1.5rem;
-            border-radius: 10px;
-            background: #f9f9f9;
-            border-left: 4px solid #2c786c;
-        }
-        
-        .dua-arabic {
-            font-size: 1.4rem;
-            text-align: right;
-            margin-bottom: 1rem;
-            font-family: 'Traditional Arabic', 'Scheherazade New', serif;
-            line-height: 1.8;
-        }
-        
-        .dua-translation {
-            color: #555;
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-        
-        .dua-reference {
-            font-size: 0.9rem;
-            color: #666;
-            font-style: italic;
-        }
-        
-        /* Discussions */
-        .discussions-list {
-            display: grid;
-            gap: 1.5rem;
-        }
-        
-        .discussion-item {
-            padding: 1.5rem;
-            border-radius: 10px;
-            background: #f9f9f9;
-            border: 1px solid #eaeaea;
-        }
-        
-        .discussion-header {
-            display: flex;
-            justify-content: between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        
-        .discussion-title {
-            font-weight: bold;
-            color: #1a5f4e;
-            font-size: 1.1rem;
-        }
-        
-        .discussion-meta {
-            color: #666;
-            font-size: 0.9rem;
-        }
-        
-        .discussion-content {
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-        
-        .discussion-replies {
-            background: white;
-            padding: 1rem;
-            border-radius: 8px;
-            border: 1px solid #e0e0e0;
-        }
-        
-        .reply-item {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        
-        .reply-item:last-child {
-            border-bottom: none;
-        }
-        
-        /* Breadcrumb */
-        .breadcrumb {
-            background-color: #f0f7f5;
-            padding: 0.8rem 1.5rem;
-            font-size: 0.9rem;
-            color: #555;
-            border-bottom: 1px solid #e0e0e0;
-            display: none;
-        }
-        
-        .breadcrumb.active {
-            display: block;
-        }
-        
-        .breadcrumb a {
-            color: #2c786c;
-            text-decoration: none;
-        }
-        
-        .breadcrumb a:hover {
-            text-decoration: underline;
-        }
-        
-        .breadcrumb .separator {
-            margin: 0 0.5rem;
-            color: #888;
-        }
-        
-        .breadcrumb .current {
-            color: #333;
-            font-weight: 500;
-        }
-        
-        /* Question Menu */
-        .question-menu {
-            display: none;
-            align-items: center;
-            margin-top: 1rem;
-            padding: 0 1.5rem;
-        }
-        
-        .question-menu.active {
-            display: flex;
-        }
-        
-        .question-label {
-            font-weight: 600;
-            margin-right: 1rem;
-            color: #333;
-        }
-        
-        .question-nav {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .question-item {
-            padding: 0.5rem 1rem;
-            background-color: #f0f7f5;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-        }
-        
-        .question-item:hover {
-            background-color: #e0f0ec;
-        }
-        
-        .question-item.active {
-            background-color: #2c786c;
-            color: white;
         }
         
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 1.5rem;
+            padding: 0 20px;
         }
         
-        .search-section {
-            background-color: white;
-            padding: 1.5rem;
+        /* Header */
+        header {
+            background-color: #e63946;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 28px;
+            margin-left: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: #ffd166;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://www.bing.com/ck/a?!&&p=a005d741fa502d06d2ad774a1c3526b07c52c72743154df5a18c5945d9240bc9JmltdHM9MTc2MjU2MDAwMA&ptn=3&ver=2&hsh=4&fclid=022f94bd-ac59-66a8-238c-82c1ad1e679c&u=a1L2ltYWdlcy9zZWFyY2g_cT1sb2dvK2VsK3JhaG1hJmlkPUM2OUQxMERDQUM1MzE3NkU5NTA5MTQ5NzcyODExRjdGMTg2RTI2RTMmRk9STT1JQUNGSVI&ntb=1') no-repeat center center/cover;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('elrahma.jpeg') no-repeat center center/cover;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+        
+        .hero-content h2 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+        
+        .hero-content p {
+            font-size: 20px;
+            max-width: 650px;
+            margin: 0 auto 30px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #e63946;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #d62839;
+            transform: translateY(-3px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #e63946;
+            color: #e63946;
+        }
+        
+        .btn-outline:hover {
+            background-color: #e63946;
+            color: white;
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: #e63946;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background-color: #e63946;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Tentang Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-            margin-bottom: 2rem;
-            border: 1px solid #eaeaea;
-            display: none;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
-        .search-section.active {
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Lokasi Section */
+        .location-content {
+            display: flex;
+            gap: 40px;
+        }
+        
+        .location-info {
+            flex: 1;
+        }
+        
+        .location-map {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .location-map iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 300px;
+            border: none;
+        }
+        
+        /* Testimoni Section */
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .testimonial:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        /* Galeri Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(230, 57, 70, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 30px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* Lightbox Modal */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #e63946;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #e63946;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: #e63946;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 14px;
+        }
+        
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .modal-header h2 {
+            color: #e63946;
+            margin: 0;
+        }
+        
+        .close {
+            font-size: 24px;
+            cursor: pointer;
+            color: #777;
+            background: none;
+            border: none;
+        }
+        
+        .close:hover {
+            color: #e63946;
+        }
+        
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .form-footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .form-footer a {
+            color: #e63946;
+            text-decoration: none;
+        }
+        
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Dashboard */
+        .dashboard {
+            display: none;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+        
+        .dashboard-header {
+            background-color: #e63946;
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .dashboard-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .dashboard-nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        .dashboard-nav ul li {
+            margin-left: 20px;
+        }
+        
+        .dashboard-nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .dashboard-content {
+            display: flex;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background-color: #333;
+            color: white;
+            min-height: calc(100vh - 70px);
+            padding: 20px 0;
+        }
+        
+        .sidebar ul {
+            list-style: none;
+        }
+        
+        .sidebar ul li {
+            padding: 15px 20px;
+            border-bottom: 1px solid #444;
+            cursor: pointer;
+        }
+        
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sidebar ul li a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .sidebar ul li.active {
+            background-color: #e63946;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 30px;
+        }
+        
+        .dashboard-section {
+            display: none;
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        
+        .dashboard-section.active {
             display: block;
         }
         
-        .search-box {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 1rem;
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
         }
         
-        .search-box input {
-            flex: 1;
-            padding: 14px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-        
-        .search-box input:focus {
-            border-color: #2c786c;
-            box-shadow: 0 0 0 3px rgba(44, 120, 108, 0.1);
-            outline: none;
-        }
-        
-        .search-box button {
-            padding: 14px 24px;
-            background: linear-gradient(to right, #2c786c, #1a5f4e);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        
-        .search-box button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        
-        .filter-options {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .filter-options select {
-            padding: 10px 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+        .stat-card {
             background-color: white;
-            font-size: 0.95rem;
-            transition: all 0.3s;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(230, 57, 70, 0.15);
+        }
+
+        
+        .stat-card h3 {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 10px;
         }
         
-        .filter-options select:focus {
-            border-color: #2c786c;
-            outline: none;
+        .stat-card .value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #e63946;
         }
         
-        .content {
+        /* Kasir Styling */
+        .kasir-container {
             display: flex;
-            gap: 25px;
-            display: none;
+            gap: 20px;
+            height: calc(100vh - 200px);
         }
         
-        .content.active {
-            display: flex;
-        }
-        
-        .surah-list {
+        .menu-kasir {
             flex: 1;
             background-color: white;
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-            overflow: hidden;
-            border: 1px solid #eaeaea;
-            max-height: 700px;
-        }
-        
-        .surah-list h2 {
-            padding: 1.2rem;
-            background: linear-gradient(to right, #f0f7f5, #e0f0ec);
-            border-bottom: 1px solid #e0e0e0;
-            color: #1a5f4e;
-            font-size: 1.3rem;
-        }
-        
-        .surah-container {
-            max-height: 600px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             overflow-y: auto;
         }
         
-        .surah-item {
-            padding: 1.2rem;
-            border-bottom: 1px solid #f0f0f0;
+        .keranjang-kasir {
+            width: 350px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .menu-categories-kasir {
+            display: flex;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .category-btn-kasir {
+            padding: 8px 16px;
+            background-color: #f1faee;
+            border: none;
+            border-radius: 20px;
             cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
         
-        .surah-item:hover {
-            background-color: #f9f9f9;
-            transform: translateX(5px);
-        }
-        
-        .surah-item.active {
-            background: linear-gradient(to right, #e8f4f1, #d4ece6);
-            border-left: 5px solid #2c786c;
-        }
-        
-        .surah-number {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            background-color: #2c786c;
+        .category-btn-kasir.active {
+            background-color: #e63946;
             color: white;
-            border-radius: 50%;
-            margin-right: 15px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            flex-shrink: 0;
         }
         
-        .surah-details {
-            flex: 1;
+        .menu-items-kasir {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
         }
         
-        .surah-name {
-            font-weight: bold;
+        .menu-item-kasir {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        .menu-item-kasir img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .menu-item-kasir:hover {
+            background-color: #e63946;
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .menu-item-kasir h4 {
             margin-bottom: 5px;
-            color: #333;
-            font-size: 1.1rem;
+            font-size: 14px;
         }
         
-        .surah-meta {
+        .menu-item-kasir .price {
+            font-weight: bold;
+            color: #e63946;
+            font-size: 13px;
+        }
+        
+        .menu-item-kasir:hover .price {
+            color: white;
+        }
+        
+        .keranjang-header {
             display: flex;
             justify-content: space-between;
-            color: #666;
-            font-size: 0.9rem;
-        }
-        
-        .ayat-display {
-            flex: 2;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-            padding: 1.5rem;
-            max-height: 700px;
-            overflow-y: auto;
-            border: 1px solid #eaeaea;
-        }
-        
-        .surah-header {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1.5rem;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
             border-bottom: 1px solid #eee;
-            background: linear-gradient(to right, #f9f9f9, #f0f7f5);
-            padding: 1.5rem;
-            border-radius: 8px;
         }
         
-        .surah-title {
-            font-size: 2rem;
-            color: #1a5f4e;
-            margin-bottom: 8px;
+        .keranjang-items {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 20px;
         }
         
-        .surah-arabic {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            font-family: 'Traditional Arabic', 'Scheherazade New', serif;
-        }
-        
-        .surah-info {
-            color: #666;
-            font-size: 1rem;
+        .keranjang-item {
             display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .info-item {
-            background-color: #e8f4f1;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-        
-        .ayat-item {
-            margin-bottom: 1.8rem;
-            padding: 1.5rem;
-            border-radius: 10px;
-            background-color: #f9f9f9;
-            border-left: 4px solid #2c786c;
-            transition: all 0.3s;
-        }
-        
-        .ayat-item:hover {
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-            transform: translateY(-2px);
-        }
-        
-        .ayat-number {
-            display: inline-flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            background-color: #2c786c;
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            text-align: center;
-            margin-right: 12px;
-            font-size: 0.85rem;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .keranjang-item:last-child {
+            border-bottom: none;
+        }
+        
+        .keranjang-item-info {
+            flex: 1;
+        }
+        
+        .keranjang-item-name {
             font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 14px;
         }
         
-        .ayat-arabic {
-            font-size: 1.8rem;
-            text-align: right;
-            margin: 15px 0;
-            line-height: 2.2;
-            font-family: 'Traditional Arabic', 'Scheherazade New', serif;
-            direction: rtl;
+        .keranjang-item-price {
+            color: #e63946;
+            font-weight: bold;
+            font-size: 13px;
         }
         
-        .ayat-latin {
-            color: #666;
-            margin: 10px 0;
-            font-style: italic;
-            line-height: 1.7;
-            padding: 10px;
-            background-color: #f5f5f5;
-            border-radius: 8px;
-            border-left: 3px solid #ddd;
-        }
-        
-        .ayat-translation {
-            color: #555;
-            margin-top: 10px;
-            line-height: 1.7;
-            padding: 10px;
-            background-color: white;
-            border-radius: 8px;
-            border-left: 3px solid #e0e0e0;
-        }
-        
-        .bismillah {
-            text-align: center;
-            font-size: 2rem;
-            margin: 20px 0;
-            font-family: 'Traditional Arabic', 'Scheherazade New', serif;
-            color: #1a5f4e;
-            padding: 15px;
-            background: linear-gradient(to right, #f0f7f5, #e8f4f1);
-            border-radius: 8px;
-        }
-        
-        .loading {
-            text-align: center;
-            padding: 2rem;
-            color: #666;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-            color: #666;
-            border-top: 1px solid #eaeaea;
-            background-color: #f9f9f9;
-        }
-        
-        @media (max-width: 992px) {
-            .content {
-                flex-direction: column;
-            }
-            
-            .surah-list, .ayat-display {
-                width: 100%;
-                max-height: none;
-            }
-            
-            .surah-container {
-                max-height: 400px;
-            }
-            
-            .nav-menu {
-                flex-wrap: wrap;
-            }
-            
-            .nav-item {
-                margin: 0.25rem;
-                padding: 0.5rem;
-            }
-            
-            .dashboard-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
-            
-            .timeline::after {
-                left: 31px;
-            }
-            
-            .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-            }
-            
-            .timeline-item:nth-child(even) {
-                left: 0;
-            }
-            
-            .timeline-item::after {
-                left: 21px;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            .search-box {
-                flex-direction: column;
-            }
-            
-            .surah-info {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .surah-title {
-                font-size: 1.6rem;
-            }
-            
-            .surah-arabic {
-                font-size: 1.5rem;
-            }
-            
-            .ayat-arabic {
-                font-size: 1.5rem;
-            }
-            
-            .question-menu {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .question-label {
-                margin-bottom: 0.5rem;
-            }
-            
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .prayer-times-container {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* Scrollbar styling */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: #a8a8a8;
-        }
-        
-        .audio-player {
-            margin-top: 10px;
-            width: 100%;
-        }
-        
-        .audio-controls {
+        .keranjang-item-controls {
             display: flex;
-            gap: 10px;
-            margin-top: 10px;
             align-items: center;
+            gap: 8px;
         }
         
-        .play-button {
-            background: #2c786c;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
+        .quantity-btn-kasir {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            background-color: white;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 5px;
+            justify-content: center;
+            font-size: 12px;
         }
         
-        .play-button:hover {
-            background: #1a5f4e;
+        .keranjang-item-quantity {
+            font-weight: bold;
+            min-width: 25px;
+            text-align: center;
+            font-size: 14px;
         }
         
-        /* Icons */
-        .icon {
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-            background-size: contain;
-            background-repeat: no-repeat;
+        .keranjang-total {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .keranjang-actions {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .btn-kasir {
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-kasir-primary {
+            background-color: #2a9d8f;
+            color: white;
+        }
+        
+        .btn-kasir-primary:hover {
+            background-color: #21867a;
+        }
+        
+        .btn-kasir-secondary {
+            background-color: #e63946;
+            color: white;
+        }
+        
+        .btn-kasir-secondary:hover {
+            background-color: #d62839;
+        }
+        
+        .btn-kasir-outline {
+            background-color: transparent;
+            border: 1px solid #e63946;
+            color: #e63946;
+        }
+        
+        .btn-kasir-outline:hover {
+            background-color: #e63946;
+            color: white;
+        }
+        
+        /* Receipt Styling */
+        .receipt {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .receipt-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed #e63946;
+        }
+        
+        .receipt-header h2 {
+            color: #e63946;
+            margin-bottom: 5px;
+        }
+        
+        .receipt-info {
+            margin-bottom: 20px;
+        }
+        
+        .receipt-info p {
+            margin-bottom: 5px;
+        }
+        
+        .receipt-items {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .receipt-items th {
+            text-align: left;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .receipt-items td {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .receipt-total {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .receipt-footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px dashed #e63946;
+            font-style: italic;
+            color: #777;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        table th, table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        table th {
+            background-color: #f5f5f5;
+            font-weight: 600;
+        }
+        
+        .btn-small {
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+        
+        .btn-success {
+            background-color: #2a9d8f;
+        }
+        
+        .btn-danger {
+            background-color: #e63946;
+        }
+        
+        /* User Management */
+        .user-role-selector {
+            display: flex;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .user-role {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            background-color: #f9f9f9;
+            transition: all 0.3s ease;
+        }
+        
+        .user-role.active {
+            background-color: #e63946;
+            color: white;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .hero-content h2 {
+                font-size: 36px;
+            }
+            
+            .about-content, .location-content {
+                flex-direction: column;
+            }
+            
+            section {
+                padding: 50px 0;
+            }
+            
+            .dashboard-content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                min-height: auto;
+            }
+            
+            .kasir-container {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .keranjang-kasir {
+                width: 100%;
+                margin-top: 20px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
 
+        /* Back to Top Button */
+        .back-to-top-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #e63946;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 20px;
+            line-height: 50px;
+            z-index: 999;
+            cursor: pointer;
+            transition: opacity 0.4s, transform 0.4s, visibility 0.4s;
+            opacity: 0;
+            transform: translateY(100px);
+            visibility: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
-        
-        .icon-quran { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232c786c"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/></svg>'); }
-        .icon-bookmark { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232c786c"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>'); }
-        .icon-prayer { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232c786c"><path d="M9.4 10.5l4.77-8.26C13.47 2.09 12.75 2 12 2c-2.4 0-4.6.85-6.32 2.25l3.66 6.35.06-.1zM21.54 9c-.92-2.92-3.15-5.26-6-6.34L11.88 9l9.66.01zM8.54 12L2 12c0 3.86 1.69 7.31 4.38 9.67l5.62-9.73-3.46-6zM12 22c1.52 0 2.93-.44 4.13-1.18L12 14.27 7.87 20.82C9.07 21.56 10.48 22 12 22z"/></svg>'); }
-        .icon-hadith { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232c786c"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/></svg>'); }
-        .icon-history { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232c786c"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>'); }
-        .icon-dua { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232c786c"><path d="M7 2v11h3v9l7-12h-4l4-8H7z"/></svg>'); }
-        .icon-discussion { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232c786c"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>'); }
-        .icon-qibla { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232c786c"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>'); }
+
+        .back-to-top-btn.show {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+
+        .back-to-top-btn:hover {
+            background-color: #d62839;
+        }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <h1>Al-Qur'an Digital Lengkap</h1>
-        <p>Baca, pelajari, dan tadabburi Al-Qur'an dengan mudah</p>
-        
-        <!-- Navigation Menu -->
-        <div class="nav-menu">
-            <div class="nav-item active" data-target="dashboard">Dashboard</div>
-            <div class="nav-item" data-target="quran">Qur'an</div>
-            <div class="nav-item" data-target="hadith">Hadith</div>
-            <div class="nav-item" data-target="history">History</div>
-            <div class="nav-item" data-target="duas">Duas</div>
-            <div class="nav-item" data-target="discussions">Discussions</div>
+        <div class="container header-content">
+            <div class="logo">
+                <h1>Soto Lamongan</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#tentang">Tentang</a></li>
+                    <li><a href="#lokasi">Lokasi</a></li>
+                    <li><a href="#testimoni">Testimoni</a></li>
+                    <li><a href="#kontak">Kontak</a></li>
+                    <li><a href="#" id="loginBtn">Login</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
-    
-    <!-- Dashboard Section -->
-    <div class="dashboard-menu content-section active" id="dashboard">
-        <h2>Dashboard Al-Qur'an Digital</h2>
-        <div class="dashboard-grid">
-            <div class="dashboard-card" onclick="showSection('quran')">
-                <div class="icon icon-quran"></div>
-                <h3>Baca Qur'an</h3>
-                <p>Baca dan pelajari Al-Qur'an dengan terjemahan lengkap</p>
-            </div>
-            <div class="dashboard-card" onclick="showSection('prayer-times')">
-                <div class="icon icon-prayer"></div>
-                <h3>Jadwal Sholat</h3>
-                <p>Jadwal sholat dan waktu-waktu mustajab untuk berdoa</p>
-            </div>
-            <div class="dashboard-card" onclick="showSection('qibla')">
-                <div class="icon icon-qibla"></div>
-                <h3>Arah Qiblat</h3>
-                <p>Penunjuk arah kiblat berdasarkan lokasi Anda</p>
-            </div>
-            <div class="dashboard-card" onclick="showSection('hadith')">
-                <div class="icon icon-hadith"></div>
-                <h3>Kumpulan Hadith</h3>
-                <p>Hadith-hadith shahih dari Rasulullah SAW</p>
-            </div>
-            <div class="dashboard-card" onclick="showSection('history')">
-                <div class="icon icon-history"></div>
-                <h3>Sejarah Islam</h3>
-                <p>Perjalanan sejarah Islam dari masa ke masa</p>
-            </div>
-            <div class="dashboard-card" onclick="showSection('duas')">
-                <div class="icon icon-dua"></div>
-                <h3>Doa-doa Harian</h3>
-                <p>Kumpulan doa dari Al-Qur'an dan Hadith</p>
-            </div>
-            <div class="dashboard-card" onclick="showSection('discussions')">
-                <div class="icon icon-discussion"></div>
-                <h3>Diskusi</h3>
-                <p>Forum diskusi tentang Islam dan Al-Qur'an</p>
-            </div>
-            <div class="dashboard-card" onclick="showSection('bookmarks')">
-                <div class="icon icon-bookmark"></div>
-                <h3>Bookmarks</h3>
-                <p>Ayat-ayat yang telah Anda tandai untuk dibaca kembali</p>
-            </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Soto Lamongan Asli</h2>
+            <p class="animate__animated animate__fadeInUp animate__delay-1s">Rasakan kelezatan soto ayam khas Lamongan dengan cita rasa autentik yang menggugah selera</p>
+            <a href="#tentang" class="btn">silahkan masuk</a>
         </div>
-    </div>
-    
-    <!-- Quran Section -->
-    <div class="content-section" id="quran">
-        <div class="breadcrumb active">
-            <a href="#">Home</a>
-            <span class="separator">→</span>
-            <a href="#">Al-Qur'an</a>
-            <span class="separator">→</span>
-            <span class="current" id="breadcrumb-surah">Pilih Surah</span>
-        </div>
-        
-        <div class="question-menu active">
-            <div class="question-label">Question</div>
-            <div class="question-nav">
-                <div class="question-item active">Qur'an</div>
-                <div class="question-item">Translation (Compare)</div>
-            </div>
-        </div>
-        
+    </section>
+
+    <!-- Tentang Section -->
+    <section id="tentang">
         <div class="container">
-            <section class="search-section active">
-                <div class="search-box">
-                    <input type="text" id="search-input" placeholder="Cari surah atau ayat...">
-                    <button id="search-button">Cari</button>
+            <div class="section-title">
+                <h2>Tentang Soto Lamongan</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Soto Lamongan adalah salah satu kuliner khas Indonesia yang berasal dari Lamongan, Jawa Timur. Soto ini memiliki ciri khas kuah kuning yang gurih dengan tambahan koya, yaitu campuran kerupuk udang dan bawang putih yang dihaluskan.</p>
+                    <p>Keunikan soto Lamongan terletak pada penggunaan bumbu rempah yang khas serta penyajiannya yang dilengkapi dengan suwiran ayam, tauge, seledri, daun bawang, dan telur rebus. Tidak lupa, soto ini selalu disajikan dengan nasi putih hangat dan sambal.</p>
+                    <p>Di warung kami, kami menggunakan resep turun-temurun yang telah diwariskan selama beberapa generasi untuk memastikan cita rasa autentik soto Lamongan tetap terjaga.</p>
                 </div>
-                <div class="filter-options">
-                    <select id="sort-by">
-                        <option value="number">Urut berdasarkan nomor</option>
-                        <option value="name">Urut berdasarkan nama</option>
-                        <option value="revelation">Urut berdasarkan turunnya</option>
-                    </select>
-                    <select id="verse-count">
-                        <option value="all">Semua ayat</option>
-                        <option value="10">10 ayat pertama</option>
-                        <option value="20">20 ayat pertama</option>
-                    </select>
+                <div class="about-image">
+                    <img src="rafa.jpeg" alt="Soto Lamongan">
                 </div>
-            </section>
-            
-            <section class="content active">
-                <div class="surah-list">
-                    <h2>Daftar Surah (114)</h2>
-                    <div class="surah-container" id="surah-container">
-                        <!-- Daftar surah akan dimuat di sini -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Lokasi Section -->
+    <section id="lokasi">
+        <div class="container">
+            <div class="section-title">
+                <h2>Lokasi Kami</h2>
+            </div>
+            <div class="location-content">
+                <div class="location-info">
+                    <h3>Warung Soto Lamongan Asli</h3>
+                    <p>Jl. Raya Lamongan No. 123, Lamongan, Jawa Timur</p>
+                    <p>Buka setiap hari:</p>
+                    <p>Senin - Jumat: 08.00 - 20.00 WIB</p>
+                    <p>Sabtu - Minggu: 08.00 - 22.00 WIB</p>
+                    <p>Telepon: (0322) 123456</p>
+                    <p>Email: info@sotolamongan.com</p>
+                </div>
+                <div class="location-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.715178559567!2d112.41427407499654!3d-7.268465392732326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7805b56c6e0e4f%3A0x6f6b8f9b8f9b8f9b!2sLamongan%2C%20Jawa%20Timur!5e0!3m2!1sid!2sid!4v1647856789012!5m2!1sid!2sid" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimoni Section -->
+    <section id="testimoni" style="background-color: #f1faee;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Testimoni Pelanggan</h2>
+            </div>
+            <div class="testimonials">
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        "Soto Lamongan di sini benar-benar autentik! Rasanya persis seperti yang saya makan waktu berkunjung ke Lamongan. Koyanya yang gurih membuat soto ini semakin istimewa."
                     </div>
-                </div>
-                
-                <div class="ayat-display">
-                    <div class="surah-header">
-                        <h2 class="surah-title" id="current-surah">Pilih Surah</h2>
-                        <div class="surah-arabic" id="surah-arabic"></div>
-                        <div class="surah-info" id="surah-info">
-                            <span class="info-item" id="surah-type">Klik pada nama surah untuk menampilkan ayat-ayatnya</span>
+                    <div class="testimonial-author">
+                        <img src="kakek.jpeg" alt="Pelanggan">
+                        <div>
+                            <h4>Budi Santoso</h4>
+                            <p>Pelanggan Setia</p>
                         </div>
                     </div>
-                    <div id="ayat-container">
-                        <!-- Ayat-ayat akan dimuat di sini -->
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        "Tempat yang nyaman dengan pelayanan ramah. Soto ayamnya lezat dan harganya terjangkau. Sudah berkali-kali makan di sini dan tidak pernah kecewa."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="senyum.jpeg" alt="Pelanggan">
+                        <div>
+                            <h4>Sari Indah</h4>
+                            <p>Pelanggan</p>
+                        </div>
                     </div>
                 </div>
-            </section>
-        </div>
-    </div>
-    
-    <!-- Prayer Times Section -->
-    <div class="content-section" id="prayer-times">
-        <div class="section-header">
-            <h2>Jadwal Sholat</h2>
-            <p>Jadwal sholat untuk lokasi Anda hari ini</p>
-        </div>
-        
-        <div class="prayer-times-container" id="prayer-times-container">
-            <!-- Jadwal sholat akan dimuat di sini -->
-        </div>
-        
-        <div class="qibla-container">
-            <h3>Arah Qiblat</h3>
-            <div class="compass">
-                <div class="compass-needle" id="qibla-needle"></div>
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        "Sebagai orang Lamongan asli, saya bisa membuktikan bahwa soto di tempat ini benar-benar otentik. Rasa kuah dan koyanya persis seperti di kampung halaman saya."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="cowok.jpeg" alt="Pelanggan">
+                        <div>
+                            <h4>Ahmad Fauzi</h4>
+                            <p>Warga Lamongan</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="qibla-direction" id="qibla-direction">Mengambil arah kiblat...</div>
-            <button onclick="findQibla()" class="play-button" style="margin-top: 1rem;">Cari Arah Kiblat</button>
         </div>
-    </div>
-    
-    <!-- Hadith Section -->
-    <div class="content-section" id="hadith">
-        <div class="section-header">
-            <h2>Kumpulan Hadith</h2>
-            <p>Hadith-hadith shahih dari Rasulullah SAW</p>
+    </section>
+
+    <!-- Footer -->
+    <footer id="kontak">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Soto Lamongan</h3>
+                    <p>Warung Soto Lamongan Asli dengan cita rasa autentik yang telah diwariskan turun-temurun.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <ul>
+                        <li>Jl. Raya Lamongan No. 123</li>
+                        <li>Lamongan, Jawa Timur</li>
+                        <li>Telepon: (0322) 123456</li>
+                        <li>Email: info@sotolamongan.com</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Jam Operasional</h3>
+                    <ul>
+                        <li>Senin - Jumat: 08.00 - 20.00 WIB</li>
+                        <li>Sabtu - Minggu: 08.00 - 22.00 WIB</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Soto Lamongan. All Rights Reserved.</p>
+            </div>
         </div>
-        
-        <div class="hadith-list" id="hadith-list">
-            <!-- Daftar hadith akan dimuat di sini -->
-        </div>
-    </div>
-    
-    <!-- History Section -->
-    <div class="content-section" id="history">
-        <div class="section-header">
-            <h2>Sejarah Islam</h2>
-            <p>Perjalanan sejarah Islam dari masa ke masa</p>
-        </div>
-        
-        <div class="timeline" id="history-timeline">
-            <!-- Timeline sejarah akan dimuat di sini -->
-        </div>
-    </div>
-    
-    <!-- Duas Section -->
-    <div class="content-section" id="duas">
-        <div class="section-header">
-            <h2>Doa-doa Harian</h2>
-            <p>Kumpulan doa dari Al-Qur'an dan Hadith untuk berbagai keperluan</p>
-        </div>
-        
-        <div class="duas-list" id="duas-list">
-            <!-- Daftar doa akan dimuat di sini -->
-        </div>
-    </div>
-    
-    <!-- Discussions Section -->
-    <div class="content-section" id="discussions">
-        <div class="section-header">
-            <h2>Diskusi Islami</h2>
-            <p>Forum diskusi tentang Islam dan Al-Qur'an</p>
-        </div>
-        
-        <div class="discussions-list" id="discussions-list">
-            <!-- Daftar diskusi akan dimuat di sini -->
-        </div>
-    </div>
-    
-    <footer>
-        <p>Al-Qur'an Digital Lengkap &copy; 2023 - Dibuat untuk kemudahan membaca dan mempelajari Al-Qur'an</p>
     </footer>
 
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Login</h2>
+                <button class="close">&times;</button>
+            </div>
+            <div class="user-role-selector">
+                <div class="user-role active" data-role="kasir">Kasir</div>
+                <div class="user-role" data-role="admin">Admin</div>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Masukkan username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Masukkan password" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Login</button>
+                <div class="form-footer">
+                    <p><a href="#" id="forgotPasswordLink">Lupa Password?</a></p>
+                    <p><a href="#" id="createAccountLink">Buat Akun Baru</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Lupa Password</h2>
+                <button class="close">&times;</button>
+            </div>
+            <form id="forgotPasswordForm">
+                <div class="form-group">
+                    <label for="forgotUsername">Username</label>
+                    <input type="text" id="forgotUsername" placeholder="Masukkan username Anda" required>
+                </div>
+                <div class="form-group">
+                    <label for="forgotEmail">Email</label>
+                    <input type="email" id="forgotEmail" placeholder="Masukkan email Anda" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Reset Password</button>
+                <div class="form-footer">
+                    <p><a href="#" id="backToLoginFromForgot">Kembali ke Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Create Account Modal -->
+    <div id="createAccountModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Buat Akun Baru</h2>
+                <button class="close">&times;</button>
+            </div>
+            <div class="user-role-selector">
+                <div class="user-role active" data-role="kasir">Kasir</div>
+                <div class="user-role" data-role="admin">Admin</div>
+            </div>
+            <form id="createAccountForm">
+                <div class="form-group">
+                    <label for="newUsername">Username</label>
+                    <input type="text" id="newUsername" placeholder="Buat username" required>
+                </div>
+                <div class="form-group">
+                    <label for="newEmail">Email</label>
+                    <input type="email" id="newEmail" placeholder="Masukkan email" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">Password</label>
+                    <input type="password" id="newPassword" placeholder="Buat password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Konfirmasi Password</label>
+                    <input type="password" id="confirmPassword" placeholder="Konfirmasi password" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Buat Akun</button>
+                <div class="form-footer">
+                    <p><a href="#" id="backToLoginFromCreate">Kembali ke Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Menu Modal -->
+    <div id="addMenuModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Tambah Menu Baru</h2>
+                <button class="close">&times;</button>
+            </div>
+            <form id="addMenuForm">
+                <div class="form-group">
+                    <label for="menuName">Nama Menu</label>
+                    <input type="text" id="menuName" placeholder="Masukkan nama menu" required>
+                </div>
+                <div class="form-group">
+                    <label for="menuCategory">Kategori</label>
+                    <select id="menuCategory" required>
+                        <option value="">Pilih Kategori</option>
+                        <option value="makanan">Makanan</option>
+                        <option value="minuman">Minuman</option>
+                        <option value="tambahan">Tambahan</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="menuPrice">Harga</label>
+                    <input type="number" id="menuPrice" placeholder="Masukkan harga" required>
+                </div>
+                <div class="form-group">
+                    <label for="menuDescription">Deskripsi (Opsional)</label>
+                    <textarea id="menuDescription" placeholder="Masukkan deskripsi menu" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="menuImage">Gambar Menu (URL)</label>
+                    <input type="text" id="menuImage" placeholder="Masukkan URL gambar">
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Tambah Menu</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Receipt Modal -->
+    <div id="receiptModal" class="modal">
+        <div class="modal-content">
+            <div class="receipt" id="receiptContent">
+                <!-- Receipt content will be inserted here by JavaScript -->
+            </div>
+            <div class="cart-actions" style="margin-top: 20px; justify-content: center;">
+                <button class="btn" id="printReceipt">Cetak Struk</button>
+                <button class="btn btn-outline" id="newOrder">Pesanan Baru</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="dashboard" id="dashboard">
+        <div class="dashboard-header">
+            <div class="container dashboard-nav">
+                <div class="logo">
+                    <h1 id="dashboardTitle">Dashboard Soto Lamongan</h1>
+                </div>
+                <ul>
+                    <li><span id="userRoleDisplay"></span></li>
+                    <li><a href="#" id="logoutBtn">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="dashboard-content">
+            <div class="sidebar">
+                <ul id="sidebarMenu">
+                    <!-- Sidebar menu will be populated based on user role -->
+                </ul>
+            </div>
+            <div class="main-content">
+                <!-- Kasir Section -->
+                <div class="dashboard-section active" id="kasir">
+                    <h2>Kasir - Sistem Pemesanan</h2>
+                    <div class="kasir-container">
+                        <div class="menu-kasir">
+                            <div class="menu-categories-kasir">
+                                <button class="category-btn-kasir active" data-category="all">Semua</button>
+                                <button class="category-btn-kasir" data-category="makanan">Makanan</button>
+                                <button class="category-btn-kasir" data-category="minuman">Minuman</button>
+                                <button class="category-btn-kasir" data-category="tambahan">Tambahan</button>
+                            </div>
+                            <div class="menu-items-kasir" id="menuItemsKasir">
+                                <!-- Menu items will be inserted here by JavaScript -->
+                            </div>
+                        </div>
+                        <div class="keranjang-kasir">
+                            <div class="keranjang-header">
+                                <h3>Keranjang Pesanan</h3>
+                                <button class="btn-kasir btn-kasir-outline" id="clearCartKasir">Kosongkan</button>
+                            </div>
+                            <div class="keranjang-items" id="keranjangItemsKasir">
+                                <!-- Cart items will be inserted here -->
+                            </div>
+                            <div class="keranjang-total">
+                                <span>Total:</span>
+                                <span id="keranjangTotalKasir">Rp 0</span>
+                            </div>
+                            <div class="keranjang-actions">
+                                <button class="btn-kasir btn-kasir-primary" id="checkoutKasir">Proses Pembayaran</button>
+                                <button class="btn-kasir btn-kasir-secondary" id="saveOrderKasir">Simpan Pesanan</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Overview Section -->
+                <div class="dashboard-section" id="overview">
+                    <h2>Overview Penjualan</h2>
+                    <div class="stats-cards">
+                        <div class="stat-card">
+                            <h3>Pendapatan Hari Ini</h3>
+                            <div class="value" id="overviewRevenueToday">Rp 0</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Total Pesanan (Hari Ini)</h3>
+                            <div class="value" id="overviewTotalOrders">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Menu Terlaris</h3>
+                            <div class="value" id="overviewBestSeller">-</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Rating Pelanggan</h3>
+                            <div class="value" id="overviewRating">4.8/5</div>
+                        </div>
+                    </div>
+                    
+                    <h3>Grafik Penjualan 7 Hari Terakhir</h3>
+                    <div style="background-color: #f9f9f9; padding: 20px; border-radius: 10px; margin-top: 20px;">
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                </div>
+
+                
+                <!-- Kelola Menu Section -->
+                <div class="dashboard-section" id="menu-management">
+                    <h2>Kelola Menu</h2>
+                    <button class="btn btn-small" style="margin-bottom: 20px;" id="addMenuBtn">Tambah Menu Baru</button>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Menu</th>
+                                <th>Kategori</th>
+                                <th>Harga</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="menuTableBody">
+                            <!-- Menu items will be inserted here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Data Penjualan Section -->
+                <div class="dashboard-section" id="penjualan">
+                    <h2>Data Penjualan</h2>
+                    <button class="btn btn-small btn-danger" style="margin-bottom: 20px;" id="resetSalesBtn">Hapus & Mulai Ulang Penjualan</button>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>ID Pesanan</th>
+                                <th>Tanggal</th>
+                                <th>Kasir</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="salesTableBody">
+                            <!-- Sales data will be inserted here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- User Management Section -->
+                <div class="dashboard-section" id="user-management">
+                    <h2>Kelola Pengguna</h2>
+                    <button class="btn btn-small" style="margin-bottom: 20px;" id="addUserBtn">Tambah Pengguna Baru</button>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userTableBody">
+                            <!-- User items will be inserted here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Laporan Section -->
+                <div class="dashboard-section" id="laporan">
+                    <h2>Laporan Penjualan</h2>
+                    <div class="form-group">
+                        <label>Pilih Periode Laporan</label>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <input type="date" id="reportStartDate" style="flex: 1;">
+                            <span style="line-height: 40px;">s/d</span>
+                            <input type="date" id="reportEndDate" style="flex: 1;">
+                            <button class="btn btn-small" id="generateReportBtn">Generate Laporan</button>
+                        </div>
+                    </div>
+                    
+                    <div id="reportResult" style="background-color: #f9f9f9; padding: 20px; border-radius: 10px; margin-top: 20px; display: none;">
+                        <!-- Konten laporan akan dibuat di sini oleh JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Pengaturan Section -->
+                <div class="dashboard-section" id="pengaturan">
+                    <h2>Pengaturan Sistem</h2>
+                    <div class="form-group">
+                        <label>Nama Warung</label>
+                        <input type="text" value="Soto Lamongan Asli">
+                    </div>
+                    <div class="form-group">
+                        <label>Alamat</label>
+                        <input type="text" value="Jl. Raya Lamongan No. 123, Lamongan, Jawa Timur">
+                    </div>
+                    <div class="form-group">
+                        <label>Telepon</label>
+                        <input type="text" value="(0322) 123456">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" value="info@sotolamongan.com">
+                    </div>
+                    <button class="btn">Simpan Pengaturan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightboxModal" class="lightbox-modal">
+        <button class="close" style="position: absolute; top: 20px; right: 30px; font-size: 40px; color: white;">&times;</button>
+        <div class="modal-content" style="background: none; box-shadow: none; max-width: 90vw; max-height: 90vh;">
+            <img src="" id="lightboxImage" alt="Tampilan Gambar" style="width: 100%; height: auto; max-height: 90vh; border-radius: 5px;">
+        </div>
+    </div>
+
+
+    <!-- Back to Top Button -->
+    <div id="backToTopBtn" class="back-to-top-btn" title="Kembali ke atas">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+
     <script>
-        // Data lengkap 114 surah Al-Qur'an
-        const surahList = [
-            { number: 1, name: "Al-Fatihah", arabicName: "الفاتحة", ayahs: 7, revelationType: "Mekah", englishName: "The Opening" },
-            { number: 2, name: "Al-Baqarah", arabicName: "البقرة", ayahs: 286, revelationType: "Madinah", englishName: "The Cow" },
-            // ... (data surah lengkap sama seperti sebelumnya)
+        // Data and State Management
+        let cartKasir = [];
+        let currentUserRole = 'kasir';
+        let salesChart = null;
+        let menuItems = [
+            { id: 1, name: "Soto Ayam Lamongan", category: "makanan", price: 25000, status: "active", image: null },
+            { id: 2, name: "Soto Daging Lamongan", category: "makanan", price: 30000, status: "active", image: null },
+            { id: 3, name: "Nasi Goreng Lamongan", category: "makanan", price: 20000, status: "active", image: null },
+            { id: 4, name: "Es Jeruk", category: "minuman", price: 8000, status: "active", image: null },
+            { id: 5, name: "Teh Manis", category: "minuman", price: 5000, status: "active", image: null },
+            { id: 6, name: "Kerupuk Udang", category: "tambahan", price: 3000, status: "active", image: null },
+            { id: 7, name: "Telur Rebus", category: "tambahan", price: 5000, status: "active", image: null },
+            { id: 8, name: "Emping Melinjo", category: "tambahan", price: 4000, status: "active", image: null }
         ];
 
-        // Data ayat lengkap untuk semua surah (disederhanakan untuk contoh)
-        const ayatData = {};
-        
-        // Fungsi untuk menghasilkan data ayat contoh
-        function generateSampleAyat(surahNumber, count) {
-            const sampleAyat = [];
-            for (let i = 1; i <= count; i++) {
-                sampleAyat.push({
-                    number: i,
-                    arabic: `بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ - Ayat ${i} dari Surah ${surahNumber}`,
-                    latin: `Bismillāhir-raḥmānir-raḥīm - Ayat ${i} dari Surah ${surahNumber}`,
-                    translation: `Dengan nama Allah Yang Maha Pengasih, Maha Penyayang - Ini adalah terjemahan ayat ${i} dari surah ${surahNumber}`
-                });
-            }
-            return sampleAyat;
-        }
+        // Sales data (will be populated automatically)
+        let salesData = [];
+        let orderNumber = 1;
 
-        // Generate sample data untuk semua surah
-        surahList.forEach(surah => {
-            ayatData[surah.number] = generateSampleAyat(surah.number, Math.min(surah.ayahs, 10));
+        // User data (in a real app, this would be stored in a database)
+        let users = [
+            { username: "admin", password: "admin123", email: "admin@sotolamongan.com", role: "admin", status: "active" },
+            { username: "kasir1", password: "kasir123", email: "kasir1@sotolamongan.com", role: "kasir", status: "active" },
+            { username: "kasir2", password: "kasir123", email: "kasir2@sotolamongan.com", role: "kasir", status: "active" }
+        ];
+
+        // DOM Elements
+        const loginBtn = document.getElementById('loginBtn');
+        const loginModal = document.getElementById('loginModal');
+        const loginForm = document.getElementById('loginForm');
+        const forgotPasswordModal = document.getElementById('forgotPasswordModal');
+        const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+        const createAccountModal = document.getElementById('createAccountModal');
+        const createAccountForm = document.getElementById('createAccountForm');
+        const addMenuModal = document.getElementById('addMenuModal');
+        const addMenuForm = document.getElementById('addMenuForm');
+        const dashboard = document.getElementById('dashboard');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const closeButtons = document.querySelectorAll('.close');
+        const receiptModal = document.getElementById('receiptModal');
+        const receiptContent = document.getElementById('receiptContent');
+        const printReceiptBtn = document.getElementById('printReceipt');
+        const newOrderBtn = document.getElementById('newOrder');
+
+        // Kasir Elements
+        const menuItemsKasir = document.getElementById('menuItemsKasir');
+        const keranjangItemsKasir = document.getElementById('keranjangItemsKasir');
+        const keranjangTotalKasir = document.getElementById('keranjangTotalKasir');
+        const clearCartKasirBtn = document.getElementById('clearCartKasir');
+        const checkoutKasirBtn = document.getElementById('checkoutKasir');
+        const saveOrderKasirBtn = document.getElementById('saveOrderKasir');
+        const categoryButtonsKasir = document.querySelectorAll('.category-btn-kasir');
+        const menuTableBody = document.getElementById('menuTableBody');
+        const addMenuBtn = document.getElementById('addMenuBtn');
+        const userTableBody = document.getElementById('userTableBody');
+        const addUserBtn = document.getElementById('addUserBtn');
+        const salesTableBody = document.getElementById('salesTableBody');
+
+        // Overview elements
+        const overviewRevenueToday = document.getElementById('overviewRevenueToday');
+        const overviewTotalOrders = document.getElementById('overviewTotalOrders');
+        const overviewBestSeller = document.getElementById('overviewBestSeller');
+        const overviewRating = document.getElementById('overviewRating');
+
+        // Report elements
+        const generateReportBtn = document.getElementById('generateReportBtn');
+        const reportResultDiv = document.getElementById('reportResult');
+
+
+        // User role elements
+        const userRoleSelectors = document.querySelectorAll('.user-role-selector .user-role');
+        const dashboardTitle = document.getElementById('dashboardTitle');
+        const userRoleDisplay = document.getElementById('userRoleDisplay');
+        const sidebarMenu = document.getElementById('sidebarMenu');
+
+        // Modal navigation elements
+        const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+        const createAccountLink = document.getElementById('createAccountLink');
+        const backToLoginFromForgot = document.getElementById('backToLoginFromForgot');
+        const backToLoginFromCreate = document.getElementById('backToLoginFromCreate');
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize user role selectors
+            initializeUserRoleSelectors();
+            
+            // Initialize kasir
+            initializeKasir();
+
+            // Initialize report generator
+            generateReportBtn.addEventListener('click', generateSalesReport);
+            
+            // Modal close buttons
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const modal = this.closest('.modal');
+                    modal.style.display = 'none';
+                });
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal')) {
+                    e.target.style.display = 'none';
+                }
+            });
+            
+            // Login functionality
+            loginBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                loginModal.style.display = 'flex';
+            });
+            
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                const selectedRole = document.querySelector('#loginModal .user-role.active').getAttribute('data-role');
+                
+                let user = users.find(u => u.username === username);
+                let canLogin = false;
+
+                if (user) {
+                    // Pengguna ada, periksa password dan status
+                    if (user.password === password && user.status === 'active') {
+                        canLogin = true;
+                    }
+                } else if (selectedRole === 'kasir') {
+                    // Pengguna tidak ada, dan mereka mencoba login sebagai kasir
+                    // Buat akun kasir baru secara otomatis
+                    const newUser = {
+                        username: username,
+                        password: password,
+                        email: `${username}@sotolamongan.com`, // Buat email default
+                        role: 'kasir',
+                        status: 'active'
+                    };
+                    users.push(newUser);
+                    user = newUser; // Pengguna yang baru dibuat sekarang menjadi pengguna saat ini
+                    canLogin = true;
+                    showNotification(`Akun kasir baru "${username}" telah dibuat.`);
+                }
+                
+                if (canLogin) {
+                    // Hide main website and show dashboard
+                    document.querySelector('header').style.display = 'none';
+                    document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
+                    document.querySelector('footer').style.display = 'none';
+                    
+                    // Set current user role and update dashboard
+                    currentUserRole = user.role;
+                    updateDashboardForUserRole();
+                    
+                    // Show dashboard
+                    dashboard.style.display = 'block';
+                    loginModal.style.display = 'none';
+                    
+                    // Clear login form
+                    loginForm.reset();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Login Gagal',
+                        text: 'Username atau password salah!',
+                    });
+                }
+            });
+            
+            // Forgot password functionality
+            forgotPasswordLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                loginModal.style.display = 'none';
+                forgotPasswordModal.style.display = 'flex';
+            });
+            
+            backToLoginFromForgot.addEventListener('click', function(e) {
+                e.preventDefault();
+                forgotPasswordModal.style.display = 'none';
+                loginModal.style.display = 'flex';
+            });
+            
+            forgotPasswordForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const username = document.getElementById('forgotUsername').value;
+                const email = document.getElementById('forgotEmail').value;
+                
+                // Check if user exists
+                const user = users.find(u => u.username === username && u.email === email);
+                
+                if (user) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Permintaan Terkirim',
+                        text: 'Instruksi reset password telah dikirim ke email Anda.',
+                    });
+                    forgotPasswordModal.style.display = 'none';
+                    loginModal.style.display = 'flex';
+                    forgotPasswordForm.reset();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal',
+                        text: 'Username atau email tidak ditemukan.',
+                    });
+                }
+            });
+            
+            // Create account functionality
+            createAccountLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                loginModal.style.display = 'none';
+                createAccountModal.style.display = 'flex';
+            });
+            
+            backToLoginFromCreate.addEventListener('click', function(e) {
+                e.preventDefault();
+                createAccountModal.style.display = 'none';
+                loginModal.style.display = 'flex';
+            });
+            
+            createAccountForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const username = document.getElementById('newUsername').value;
+                const email = document.getElementById('newEmail').value;
+                const password = document.getElementById('newPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                // Check if passwords match
+                if (password !== confirmPassword) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Oops...',
+                        text: 'Password dan konfirmasi password tidak cocok!',
+                    });
+                    return;
+                }
+                
+                // Check if username already exists
+                if (users.find(u => u.username === username)) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Username Tidak Tersedia',
+                        text: 'Username sudah digunakan. Silakan pilih username lain.',
+                    });
+                    return;
+                }
+                
+                // Add new user
+                users.push({
+                    username: username,
+                    password: password,
+                    email: email,
+                    role: currentUserRole,
+                    status: 'active'
+                });
+                
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: 'Akun berhasil dibuat! Silakan login.',
+                });
+                createAccountModal.style.display = 'none';
+                loginModal.style.display = 'flex';
+                createAccountForm.reset();
+            });
+            
+            // Logout functionality
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Show main website and hide dashboard
+                document.querySelector('header').style.display = '';
+                document.querySelectorAll('section').forEach(sec => sec.style.display = '');
+                // Restore hero display to flex
+                document.querySelector('.hero').style.display = 'flex';
+                document.querySelector('footer').style.display = '';
+                
+                // Hide dashboard
+                dashboard.style.display = 'none';
+                
+                // Reset user role
+                currentUserRole = 'kasir';
+            });
+            
+            // Receipt buttons
+            printReceiptBtn.addEventListener('click', printReceipt);
+            newOrderBtn.addEventListener('click', startNewOrder);
+
+            // Animate on scroll
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    // Jika elemen terlihat di layar
+                    if (entry.isIntersecting) {
+                        // Tambahkan kelas animasi
+                        entry.target.classList.add('animate__animated', 'animate__fadeInUp', 'animate__slow');
+                        // Hentikan pengamatan pada elemen ini agar animasi tidak berulang
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.15 // Animasi akan terpicu saat 15% elemen terlihat
+            });
+
+            // Amati setiap elemen konten yang ingin dianimasikan
+            document.querySelectorAll('.about-content, .location-content, .testimonials').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Lightbox Gallery Logic
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const lightboxModal = document.getElementById('lightboxModal');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxClose = lightboxModal.querySelector('.close');
+
+            galleryItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const imgSrc = item.querySelector('img').src;
+                    lightboxImage.src = imgSrc;
+                    lightboxModal.style.display = 'flex';
+                });
+            });
+
+            function closeLightbox() {
+                lightboxModal.style.display = 'none';
+                lightboxImage.src = ''; // Kosongkan ja untuk menghentikan loading jika ada
+            }
+
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightboxModal.addEventListener('click', (e) => {
+                if (e.target === lightboxModal) closeLightbox();
+            });
+
+            // Back to Top Button Logic
+            const backToTopBtn = document.getElementById('backToTopBtn');
+
+            window.addEventListener('scroll', () => {
+                // Tampilkan tombol jika scroll lebih dari 300px
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            });
+
+            backToTopBtn.addEventListener('click', () => {
+                // Gulir ke atas dengan halus
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
         });
 
-        // Data Jadwal Sholat (contoh)
-        const prayerTimes = [
-            { name: "Subuh", time: "04:30" },
-            { name: "Syuruq", time: "05:45" },
-            { name: "Dzuhur", time: "12:00" },
-            { name: "Ashar", time: "15:15" },
-            { name: "Maghrib", time: "18:00" },
-            { name: "Isya", time: "19:15" }
-        ];
-
-        // Data Hadith
-        const hadithData = [
-            {
-                arabic: "إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى",
-                translation: "Sesungguhnya amal itu tergantung niatnya, dan sesungguhnya setiap orang hanya mendapatkan sesuai niatnya",
-                reference: "HR. Bukhari & Muslim"
-            },
-            {
-                arabic: "من كان يؤمن بالله واليوم الآخر فليقل خيراً أو ليصمت",
-                translation: "Barangsiapa yang beriman kepada Allah dan hari akhir, maka hendaklah dia berkata baik atau diam",
-                reference: "HR. Bukhari & Muslim"
-            },
-            {
-                arabic: "لا يؤمن أحدكم حتى يحب لأخيه ما يحب لنفسه",
-                translation: "Tidak beriman salah seorang di antara kamu hingga dia mencintai untuk saudaranya apa yang dia cintai untuk dirinya sendiri",
-                reference: "HR. Bukhari & Muslim"
-            }
-        ];
-
-        // Data Sejarah Islam
-        const historyData = [
-            { year: "571 M", title: "Kelahiran Nabi Muhammad SAW", description: "Nabi Muhammad SAW dilahirkan di Mekah" },
-            { year: "610 M", title: "Turunnya Wahyu Pertama", description: "Wahyu pertama turun di Gua Hira, memulai periode kenabian" },
-            { year: "622 M", title: "Hijrah ke Madinah", description: "Nabi Muhammad SAW dan pengikutnya hijrah dari Mekah ke Madinah" },
-            { year: "632 M", title: "Wafatnya Nabi Muhammad SAW", description: "Nabi Muhammad SAW wafat di Madinah" },
-            { year: "632-661 M", title: "Khilafah Rasyidah", description: "Masa kepemimpinan Abu Bakar, Umar, Utsman, dan Ali" }
-        ];
-
-        // Data Doa-doa
-        const duasData = [
-            {
-                arabic: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
-                translation: "Ya Tuhan kami, berilah kami kebaikan di dunia dan kebaikan di akhirat dan peliharalah kami dari siksa neraka",
-                reference: "QS. Al-Baqarah: 201"
-            },
-            {
-                arabic: "رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي",
-                translation: "Ya Tuhanku, lapangkanlah untukku dadaku, dan mudahkanlah untukku urusanku",
-                reference: "QS. Thaha: 25-26"
-            },
-            {
-                arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا طَيِّبًا وَعَمَلًا مُتَقَبَّلًا",
-                translation: "Ya Allah, sesungguhnya aku memohon kepada-Mu ilmu yang bermanfaat, rezeki yang baik, dan amal yang diterima",
-                reference: "HR. Ibnu Majah"
-            }
-        ];
-
-        // Data Diskusi
-        const discussionsData = [
-            {
-                title: "Keutamaan Membaca Al-Qur'an",
-                author: "Ahmad",
-                date: "7 Nov 2023",
-                content: "Apa saja keutamaan membaca Al-Qur'an dalam kehidupan sehari-hari?",
-                replies: [
-                    { author: "Fatimah", content: "Membaca Al-Qur'an memberikan ketenangan hati dan pahala yang besar" },
-                    { author: "Ibrahim", content: "Setiap huruf yang dibaca bernilai 10 kebaikan" }
-                ]
-            },
-            {
-                title: "Cara Menghafal Al-Qur'an dengan Mudah",
-                author: "Siti",
-                date: "5 Nov 2023",
-                content: "Bagaimana tips untuk menghafal Al-Qur'an dengan konsisten?",
-                replies: [
-                    { author: "Umar", content: "Mulai dari surat pendek dan ulangi secara konsisten" }
-                ]
-            }
-        ];
-
-        // Fungsi untuk menampilkan section tertentu
-        function showSection(section) {
-            // Sembunyikan semua section
-            document.querySelectorAll('.content-section').forEach(sec => {
-                sec.classList.remove('active');
-            });
-            
-            // Tampilkan section yang dipilih
-            document.getElementById(section).classList.add('active');
-            
-            // Jika section adalah Quran, tampilkan elemen terkait
-            if (section === 'quran') {
-                document.querySelector('.breadcrumb').classList.add('active');
-                document.querySelector('.question-menu').classList.add('active');
-                document.querySelector('.search-section').classList.add('active');
-                document.querySelector('.content').classList.add('active');
-            } else {
-                document.querySelector('.breadcrumb').classList.remove('active');
-                document.querySelector('.question-menu').classList.remove('active');
-                document.querySelector('.search-section').classList.remove('active');
-                document.querySelector('.content').classList.remove('active');
-            }
-            
-            // Load data untuk section tertentu
-            if (section === 'prayer-times') {
-                loadPrayerTimes();
-            } else if (section === 'hadith') {
-                loadHadith();
-            } else if (section === 'history') {
-                loadHistory();
-            } else if (section === 'duas') {
-                loadDuas();
-            } else if (section === 'discussions') {
-                loadDiscussions();
-            }
-        }
-
-        // Fungsi untuk memuat jadwal sholat
-        function loadPrayerTimes() {
-            const container = document.getElementById('prayer-times-container');
-            container.innerHTML = '';
-            
-            prayerTimes.forEach(prayer => {
-                const prayerCard = document.createElement('div');
-                prayerCard.className = 'prayer-time-card';
-                if (prayer.name === 'Dzuhur') {
-                    prayerCard.classList.add('current-prayer');
-                }
-                prayerCard.innerHTML = `
-                    <div class="prayer-name">${prayer.name}</div>
-                    <div class="prayer-time">${prayer.time}</div>
-                `;
-                container.appendChild(prayerCard);
-            });
-        }
-
-        // Fungsi untuk memuat hadith
-        function loadHadith() {
-            const container = document.getElementById('hadith-list');
-            container.innerHTML = '';
-            
-            hadithData.forEach(hadith => {
-                const hadithItem = document.createElement('div');
-                hadithItem.className = 'hadith-item';
-                hadithItem.innerHTML = `
-                    <div class="hadith-arabic">${hadith.arabic}</div>
-                    <div class="hadith-translation">${hadith.translation}</div>
-                    <div class="hadith-reference">${hadith.reference}</div>
-                `;
-                container.appendChild(hadithItem);
-            });
-        }
-
-        // Fungsi untuk memuat sejarah
-        function loadHistory() {
-            const container = document.getElementById('history-timeline');
-            container.innerHTML = '';
-            
-            historyData.forEach((event, index) => {
-                const timelineItem = document.createElement('div');
-                timelineItem.className = 'timeline-item';
-                timelineItem.innerHTML = `
-                    <div class="timeline-content">
-                        <div class="timeline-year">${event.year}</div>
-                        <h3>${event.title}</h3>
-                        <p>${event.description}</p>
-                    </div>
-                `;
-                container.appendChild(timelineItem);
-            });
-        }
-
-        // Fungsi untuk memuat doa-doa
-        function loadDuas() {
-            const container = document.getElementById('duas-list');
-            container.innerHTML = '';
-            
-            duasData.forEach(dua => {
-                const duaItem = document.createElement('div');
-                duaItem.className = 'dua-item';
-                duaItem.innerHTML = `
-                    <div class="dua-arabic">${dua.arabic}</div>
-                    <div class="dua-translation">${dua.translation}</div>
-                    <div class="dua-reference">${dua.reference}</div>
-                `;
-                container.appendChild(duaItem);
-            });
-        }
-
-        // Fungsi untuk memuat diskusi
-        function loadDiscussions() {
-            const container = document.getElementById('discussions-list');
-            container.innerHTML = '';
-            
-            discussionsData.forEach(discussion => {
-                const discussionItem = document.createElement('div');
-                discussionItem.className = 'discussion-item';
-                
-                let repliesHtml = '';
-                discussion.replies.forEach(reply => {
-                    repliesHtml += `
-                        <div class="reply-item">
-                            <strong>${reply.author}:</strong> ${reply.content}
-                        </div>
-                    `;
+        // User Role Functions
+        function initializeUserRoleSelectors() {
+            userRoleSelectors.forEach(selector => {
+                selector.addEventListener('click', function() {
+                    // Remove active class from all roles in this selector
+                    const siblings = Array.from(this.parentElement.children);
+                    siblings.forEach(sibling => sibling.classList.remove('active'));
+                    
+                    // Add active class to clicked role
+                    this.classList.add('active');
+                    
+                    // Update current user role
+                    currentUserRole = this.getAttribute('data-role');
                 });
-                
-                discussionItem.innerHTML = `
-                    <div class="discussion-header">
-                        <div class="discussion-title">${discussion.title}</div>
-                        <div class="discussion-meta">Oleh ${discussion.author} • ${discussion.date}</div>
-                    </div>
-                    <div class="discussion-content">${discussion.content}</div>
-                    <div class="discussion-replies">
-                        ${repliesHtml}
-                    </div>
-                `;
-                container.appendChild(discussionItem);
             });
         }
 
-        // Fungsi untuk menemukan arah kiblat
-        function findQibla() {
-            const needle = document.getElementById('qibla-needle');
-            const direction = document.getElementById('qibla-direction');
+        function updateDashboardForUserRole() {
+            // Update dashboard title and user role display
+            dashboardTitle.textContent = `Dashboard Soto Lamongan - ${currentUserRole.toUpperCase()}`;
+            userRoleDisplay.textContent = `Role: ${currentUserRole}`;
             
-            // Simulasi arah kiblat (dalam implementasi nyata akan menggunakan GPS)
-            const qiblaDirection = 292; // Arah kiblat dari utara (contoh: 292 derajat)
+            // Update sidebar menu based on user role
+            updateSidebarMenu();
             
-            needle.style.transform = `translate(-50%, -100%) rotate(${qiblaDirection}deg)`;
-            direction.textContent = `Arah Kiblat: ${qiblaDirection}° dari Utara`;
+            // Show appropriate default section
+            const defaultSection = currentUserRole === 'admin' ? 'overview' : 'kasir';
+            showDashboardSection(defaultSection);
         }
 
-        // Fungsi untuk menampilkan daftar surah
-        function renderSurahList() {
-            const container = document.getElementById('surah-container');
-            container.innerHTML = '';
+        function updateSidebarMenu() {
+            sidebarMenu.innerHTML = '';
             
-            surahList.forEach(surah => {
-                const surahItem = document.createElement('div');
-                surahItem.className = 'surah-item';
-                surahItem.innerHTML = `
-                    <div class="surah-number">${surah.number}</div>
-                    <div class="surah-details">
-                        <div class="surah-name">${surah.name} (${surah.englishName})</div>
-                        <div class="surah-meta">
-                            <span>${surah.arabicName}</span>
-                            <span>${surah.ayahs} ayat • ${surah.revelationType}</span>
-                        </div>
-                    </div>
+            if (currentUserRole === 'admin') {
+                // Admin menu
+                sidebarMenu.innerHTML = `
+                    <li class="active"><a href="#" data-section="overview"><i class="fas fa-chart-line"></i> Overview</a></li>
+                    <li><a href="#" data-section="kasir"><i class="fas fa-cash-register"></i> Kasir</a></li>
+                    <li><a href="#" data-section="menu-management"><i class="fas fa-utensils"></i> Kelola Menu</a></li>
+                    <li><a href="#" data-section="user-management"><i class="fas fa-users"></i> Kelola Pengguna</a></li>
+                    <li><a href="#" data-section="penjualan"><i class="fas fa-shopping-cart"></i> Data Penjualan</a></li>
+                    <li><a href="#" data-section="laporan"><i class="fas fa-chart-bar"></i> Laporan</a></li>
+                    <li><a href="#" data-section="pengaturan"><i class="fas fa-cog"></i> Pengaturan</a></li>
                 `;
-                
-                surahItem.addEventListener('click', () => {
-                    // Hapus kelas active dari semua item
-                    document.querySelectorAll('.surah-item').forEach(item => {
-                        item.classList.remove('active');
-                    });
-                    
-                    // Tambahkan kelas active ke item yang diklik
-                    surahItem.classList.add('active');
-                    
-                    // Update breadcrumb
-                    document.getElementById('breadcrumb-surah').textContent = `${surah.number}. ${surah.name} ▼`;
-                    
-                    // Tampilkan ayat-ayat surah yang dipilih
-                    displayAyat(surah);
-                });
-                
-                container.appendChild(surahItem);
-            });
-        }
-
-        // Fungsi untuk menampilkan ayat-ayat surah
-        function displayAyat(surah) {
-            const surahTitle = document.getElementById('current-surah');
-            const surahArabic = document.getElementById('surah-arabic');
-            const surahInfo = document.getElementById('surah-info');
-            const ayatContainer = document.getElementById('ayat-container');
-            
-            surahTitle.textContent = `${surah.number}. ${surah.name} (${surah.englishName})`;
-            surahArabic.textContent = surah.arabicName;
-            surahInfo.innerHTML = `
-                <span class="info-item">${surah.ayahs} Ayat</span>
-                <span class="info-item">${surah.revelationType}</span>
-                <span class="info-item">Surah ${surah.number}</span>
-            `;
-            
-            ayatContainer.innerHTML = '<div class="loading">Memuat ayat...</div>';
-            
-            // Tambahkan bismillah untuk semua surah kecuali At-Taubah
-            if (surah.number !== 9) {
-                const bismillah = document.createElement('div');
-                bismillah.className = 'bismillah';
-                bismillah.textContent = 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ';
-                ayatContainer.appendChild(bismillah);
-            }
-            
-            // Cek apakah data ayat tersedia
-            if (ayatData[surah.number]) {
-                setTimeout(() => {
-                    ayatContainer.innerHTML = '';
-                    
-                    // Tambahkan bismillah untuk semua surah kecuali At-Taubah
-                    if (surah.number !== 9) {
-                        const bismillah = document.createElement('div');
-                        bismillah.className = 'bismillah';
-                        bismillah.textContent = 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ';
-                        ayatContainer.appendChild(bismillah);
-                    }
-                    
-                    ayatData[surah.number].forEach(ayat => {
-                        const ayatItem = document.createElement('div');
-                        ayatItem.className = 'ayat-item';
-                        ayatItem.innerHTML = `
-                            <div>
-                                <span class="ayat-number">${ayat.number}</span>
-                            </div>
-                            <div class="ayat-arabic">${ayat.arabic}</div>
-                            <div class="ayat-latin">${ayat.latin}</div>
-                            <div class="ayat-translation">${ayat.translation}</div>
-                        `;
-                        ayatContainer.appendChild(ayatItem);
-                    });
-                }, 500); // Simulasi loading
             } else {
-                setTimeout(() => {
-                    ayatContainer.innerHTML = `
-                        <div style="text-align: center; padding: 2rem;">
-                            <p>Data ayat untuk surah ${surah.name} sedang tidak tersedia.</p>
-                            <p>Dalam implementasi lengkap, data akan diambil dari API Al-Qur'an.</p>
-                            <p>Untuk saat ini, silakan pilih surah lain yang tersedia ayat-ayatnya.</p>
-                        </div>
-                    `;
-                }, 500);
+                // Kasir menu
+                sidebarMenu.innerHTML = `
+                    <li class="active"><a href="#" data-section="kasir"><i class="fas fa-cash-register"></i> Kasir</a></li>
+                    <li><a href="#" data-section="penjualan"><i class="fas fa-shopping-cart"></i> Data Penjualan</a></li>
+                `;
+            }
+            
+            // Add event listeners to sidebar menu
+            const sidebarLinks = sidebarMenu.querySelectorAll('a');
+            const dashboardSections = document.querySelectorAll('.dashboard-section');
+            
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links and sections
+                    sidebarLinks.forEach(l => l.parentElement.classList.remove('active'));
+                    dashboardSections.forEach(s => s.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.parentElement.classList.add('active');
+                    
+                    // Show corresponding section
+                    const sectionId = this.getAttribute('data-section');
+                    showDashboardSection(sectionId);
+                });
+            });
+        }
+
+        function showDashboardSection(sectionId) {
+            // Hide all sections
+            const dashboardSections = document.querySelectorAll('.dashboard-section');
+            dashboardSections.forEach(s => s.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Initialize specific sections
+            if (sectionId === 'kasir') {
+                updateKasirDisplay();
+            } else if (sectionId === 'menu-management') {
+                updateMenuTable();
+            } else if (sectionId === 'user-management') {
+                updateUserTable();
+            } else if (sectionId === 'penjualan') {
+                updateSalesTable();
+            } else if (sectionId === 'overview') {
+                initializeSalesChart();
+                updateOverview();
             }
         }
 
-        // Fungsi untuk mencari surah
-        function searchSurah() {
-            const searchInput = document.getElementById('search-input').value.toLowerCase();
-            const surahItems = document.querySelectorAll('.surah-item');
-            let found = false;
+        // Kasir Functions
+        function initializeKasir() {
+            // Load menu items
+            updateKasirDisplay();
             
-            surahItems.forEach(item => {
-                const surahName = item.querySelector('.surah-name').textContent.toLowerCase();
-                if (surahName.includes(searchInput)) {
-                    item.style.display = 'flex';
-                    found = true;
-                    
-                    // Jika hanya ada satu hasil, pilih secara otomatis
-                    if (document.querySelectorAll('.surah-item[style="display: flex;"]').length === 1) {
-                        item.click();
-                    }
+            // Add event listeners to category buttons
+            categoryButtonsKasir.forEach(button => {
+                button.addEventListener('click', filterMenuKasir);
+            });
+            
+            // Add event listeners to kasir buttons
+            clearCartKasirBtn.addEventListener('click', clearCartKasir);
+            checkoutKasirBtn.addEventListener('click', checkoutKasir);
+            saveOrderKasirBtn.addEventListener('click', saveOrderKasir);
+            
+            // Add event listener to add menu button
+            addMenuBtn.addEventListener('click', showAddMenuModal);
+            
+            // Add event listener to add user button
+            if (addUserBtn) {
+                addUserBtn.addEventListener('click', showAddUserModal);
+            }
+        }
+
+        function updateKasirDisplay() {
+            // Update menu items display
+            menuItemsKasir.innerHTML = '';
+
+            const menuImageMapping = {
+                "Soto Ayam Lamongan": "download (1).webp",
+                "Soto Daging Lamongan": "download.webp",
+                "Nasi Goreng Lamongan": "Resep-Nasi-Goreng-Spesial.jpg",
+                "Es Jeruk": "jeruk.jpeg",
+                "Teh Manis": "tehmanis.webp",
+                "Kerupuk Udang": "udang.jpeg",
+                "Telur Rebus": "telur.jpeg",
+                "Emping Melinjo": "emping.jpeg"
+            };
+            
+            menuItems.filter(item => item.status === 'active').forEach(item => {
+                const menuItemElement = document.createElement('div');
+                const imageSrc = item.image || menuImageMapping[item.name] || 'OIP.webp';
+                menuItemElement.className = 'menu-item-kasir';
+                menuItemElement.setAttribute('data-category', item.category);
+                menuItemElement.innerHTML = `
+                    <img src="${imageSrc}" alt="${item.name}">
+                    <h4>${item.name}</h4>
+                    <div class="price">Rp ${item.price.toLocaleString()}</div>
+                `;
+                
+                menuItemElement.addEventListener('click', () => addToCartKasir(item));
+                menuItemsKasir.appendChild(menuItemElement);
+            });
+            
+            // Update cart display
+            updateCartKasirDisplay();
+        }
+
+        function filterMenuKasir(e) {
+            const category = e.target.getAttribute('data-category');
+            
+            // Update active button
+            categoryButtonsKasir.forEach(button => {
+                button.classList.remove('active');
+            });
+            e.target.classList.add('active');
+            
+            // Filter menu items
+            const allMenuItems = document.querySelectorAll('.menu-item-kasir');
+            allMenuItems.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
                 } else {
                     item.style.display = 'none';
                 }
             });
+        }
+
+        function addToCartKasir(item) {
+            // Check if item already in cart
+            const existingItem = cartKasir.find(cartItem => cartItem.id === item.id);
             
-            if (!found) {
-                document.getElementById('ayat-container').innerHTML = '<p style="text-align: center; padding: 2rem;">Surah tidak ditemukan. Silakan coba dengan kata kunci lain.</p>';
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cartKasir.push({
+                    id: item.id,
+                    name: item.name,
+                    price: item.price,
+                    quantity: 1
+                });
+            }
+            
+            updateCartKasirDisplay();
+            showNotification(`${item.name} ditambahkan ke keranjang`);
+        }
+
+        function updateCartKasirDisplay() {
+            keranjangItemsKasir.innerHTML = '';
+            
+            if (cartKasir.length === 0) {
+                keranjangItemsKasir.innerHTML = '<p style="text-align: center; color: #777;">Keranjang kosong</p>';
+                keranjangTotalKasir.textContent = 'Rp 0';
+                return;
+            }
+            
+            let total = 0;
+            
+            cartKasir.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                const cartItemElement = document.createElement('div');
+                cartItemElement.className = 'keranjang-item';
+                cartItemElement.innerHTML = `
+                    <div class="keranjang-item-info">
+                        <div class="keranjang-item-name">${item.name}</div>
+                        <div class="keranjang-item-price">Rp ${item.price.toLocaleString()}</div>
+                    </div>
+                    <div class="keranjang-item-controls">
+                        <button class="quantity-btn-kasir decrease-kasir" data-id="${item.id}">-</button>
+                        <span class="keranjang-item-quantity">${item.quantity}</span>
+                        <button class="quantity-btn-kasir increase-kasir" data-id="${item.id}">+</button>
+                        <button class="quantity-btn-kasir remove-kasir" data-id="${item.id}"><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+                
+                keranjangItemsKasir.appendChild(cartItemElement);
+            });
+            
+            // Add event listeners to quantity buttons
+            document.querySelectorAll('.decrease-kasir').forEach(button => {
+                button.addEventListener('click', decreaseQuantityKasir);
+            });
+            
+            document.querySelectorAll('.increase-kasir').forEach(button => {
+                button.addEventListener('click', increaseQuantityKasir);
+            });
+            
+            document.querySelectorAll('.remove-kasir').forEach(button => {
+                button.addEventListener('click', removeItemKasir);
+            });
+            
+            // Update total
+            keranjangTotalKasir.textContent = `Rp ${total.toLocaleString()}`;
+        }
+
+        function decreaseQuantityKasir(e) {
+            const id = parseInt(e.target.getAttribute('data-id'));
+            const item = cartKasir.find(item => item.id === id);
+            
+            if (item.quantity > 1) {
+                item.quantity -= 1;
+            } else {
+                cartKasir = cartKasir.filter(item => item.id !== id);
+            }
+            
+            updateCartKasirDisplay();
+        }
+
+        function increaseQuantityKasir(e) {
+            const id = parseInt(e.target.getAttribute('data-id'));
+            const item = cartKasir.find(item => item.id === id);
+            item.quantity += 1;
+            updateCartKasirDisplay();
+        }
+
+        function removeItemKasir(e) {
+            const id = parseInt(e.target.closest('button').getAttribute('data-id'));
+            cartKasir = cartKasir.filter(item => item.id !== id);
+            updateCartKasirDisplay();
+        }
+
+        function clearCartKasir() {
+            cartKasir = [];
+            updateCartKasirDisplay();
+            showNotification('Keranjang telah dikosongkan');
+        }
+
+        function checkoutKasir() {
+            if (cartKasir.length === 0) {
+                Swal.fire('Keranjang Kosong', 'Tambahkan item terlebih dahulu sebelum proses pembayaran.', 'warning');
+                return;
+            }
+            
+            Swal.fire({
+                title: 'Konfirmasi Pembayaran',
+                text: "Apakah Anda yakin ingin memproses pembayaran?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#2a9d8f',
+                cancelButtonColor: '#e63946',
+                confirmButtonText: 'Ya, Proses!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    generateReceiptKasir();
+                    Swal.fire(
+                        'Berhasil!',
+                        'Pembayaran telah diproses.',
+                        'success'
+                    );
+                }
+            });
+        }
+
+        function saveOrderKasir() {
+            if (cartKasir.length === 0) {
+                Swal.fire('Keranjang Kosong', 'Tambahkan item terlebih dahulu untuk menyimpan pesanan.', 'warning');
+                return;
+            }
+            
+            // Clear cart after saving
+            cartKasir = [];
+            updateCartKasirDisplay();
+        }
+
+        function generateReceiptKasir() {
+            const now = new Date();
+            const dateTime = now.toLocaleString('id-ID');
+            const orderId = `ORD-${orderNumber.toString().padStart(3, '0')}`;
+            
+            let receiptHTML = `
+                <div class="receipt-header">
+                    <h2>Soto Lamongan Asli</h2>
+                    <p>Jl. Raya Lamongan No. 123</p>
+                    <p>Lamongan, Jawa Timur</p>
+                </div>
+                <div class="receipt-info">
+                    <p><strong>No. Pesanan:</strong> ${orderId}</p>
+                    <p><strong>Tanggal:</strong> ${dateTime}</p>
+                    <p><strong>Kasir:</strong> ${users.find(u => u.role === currentUserRole)?.username || 'Kasir'}</p>
+                </div>
+                <table class="receipt-items">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Qty</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            let total = 0;
+            cartKasir.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                receiptHTML += `
+                    <tr>
+                        <td>${item.name}</td>
+                        <td>${item.quantity}</td>
+                        <td>Rp ${itemTotal.toLocaleString()}</td>
+                    </tr>
+                `;
+            });
+            
+            // Record the sale
+            salesData.push({
+                id: orderId,
+                date: now.toISOString(),
+                kasir: users.find(u => u.role === currentUserRole)?.username || 'Kasir',
+                total: total,
+                status: 'Selesai',
+                items: JSON.parse(JSON.stringify(cartKasir)) // Deep copy cart items
+            });
+            orderNumber++;
+
+            receiptHTML += `
+                    </tbody>
+                </table>
+                <div class="receipt-total">
+                    <span>Total:</span>
+                    <span>Rp ${total.toLocaleString()}</span>
+                </div>
+                <div class="receipt-footer">
+                    <p>Terima kasih atas kunjungan Anda!</p>
+                    <p>Silakan datang kembali</p>
+                </div>
+            `;
+            
+            receiptContent.innerHTML = receiptHTML;
+            receiptModal.style.display = 'flex';
+            
+            // Clear cart after generating receipt
+            cartKasir = [];
+            updateCartKasirDisplay();
+
+            // Update overview and sales table
+            updateOverview();
+            updateSalesTable();
+        }
+
+        // Menu Management Functions
+        function updateMenuTable() {
+            menuTableBody.innerHTML = '';
+            
+            menuItems.forEach((item, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${item.name}</td>
+                    <td>${item.category}</td>
+                    <td>Rp ${item.price.toLocaleString()}</td>
+                    <td>${item.status === 'active' ? 'Aktif' : 'Nonaktif'}</td>
+                    <td>
+                        <button class="btn btn-small edit-menu" data-id="${item.id}">Edit</button>
+                        <button class="btn btn-small btn-danger delete-menu" data-id="${item.id}">${item.status === 'active' ? 'Nonaktifkan' : 'Aktifkan'}</button>
+                    </td>
+                `;
+                
+                menuTableBody.appendChild(row);
+            });
+            
+            // Add event listeners to menu buttons
+            document.querySelectorAll('.edit-menu').forEach(button => {
+                button.addEventListener('click', editMenuItem);
+            });
+            
+            document.querySelectorAll('.delete-menu').forEach(button => {
+                button.addEventListener('click', toggleMenuItemStatus);
+            });
+        }
+
+        function showAddMenuModal() {
+            addMenuModal.style.display = 'flex';
+        }
+
+        addMenuForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('menuName').value;
+            const category = document.getElementById('menuCategory').value;
+            const price = parseInt(document.getElementById('menuPrice').value);
+            const description = document.getElementById('menuDescription').value;
+            const image = document.getElementById('menuImage').value;
+            
+            // Generate new ID
+            const newId = menuItems.length > 0 ? Math.max(...menuItems.map(item => item.id)) + 1 : 1;
+            
+            // Add new menu item
+            menuItems.push({
+                id: newId,
+                name: name,
+                category: category,
+                price: price,
+                description: description,
+                image: image,
+                status: 'active'
+            });
+            
+            // Update displays
+            updateMenuTable();
+            updateKasirDisplay();
+            
+            // Close modal and show success message
+            addMenuModal.style.display = 'none';
+            showNotification(`Menu ${name} berhasil ditambahkan`);
+            addMenuForm.reset();
+        });
+
+        function editMenuItem(e) {
+            const id = parseInt(e.target.getAttribute('data-id'));
+            const item = menuItems.find(item => item.id === id);
+            
+            // For now, we'll use a simple prompt. A modal (like the 'addMenuModal') would be better.
+            const newPrice = prompt(`Masukkan harga baru untuk ${item.name}:`, item.price);
+            if (newPrice && !isNaN(newPrice)) {
+                item.price = parseInt(newPrice);
+                updateMenuTable();
+                updateKasirDisplay();
+                showNotification(`Harga ${item.name} berhasil diubah.`);
+            } else if (newPrice !== null) {
+                Swal.fire('Input Tidak Valid', 'Harga harus berupa angka.', 'error');
+            }
+
+        }
+
+        function toggleMenuItemStatus(e) {
+            const id = parseInt(e.target.getAttribute('data-id'));
+            const item = menuItems.find(item => item.id === id);
+            
+            item.status = item.status === 'active' ? 'inactive' : 'active';
+            updateMenuTable();
+            updateKasirDisplay();
+            
+            showNotification(`Menu ${item.name} ${item.status === 'active' ? 'diaktifkan' : 'dinonaktifkan'}`);
+        }
+
+        // User Management Functions
+        function updateUserTable() {
+            userTableBody.innerHTML = '';
+            
+            users.forEach((user, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${user.username}</td>
+                    <td>${user.email}</td>
+                    <td>${user.role}</td>
+                    <td>${user.status === 'active' ? 'Aktif' : 'Nonaktif'}</td>
+                    <td>
+                        <button class="btn btn-small edit-user" data-username="${user.username}">Edit</button>
+                        <button class="btn btn-small btn-danger delete-user" data-username="${user.username}">${user.status === 'active' ? 'Nonaktifkan' : 'Aktifkan'}</button>
+                    </td>
+                `;
+                
+                userTableBody.appendChild(row);
+            });
+            
+            // Add event listeners to user buttons
+            document.querySelectorAll('.edit-user').forEach(button => {
+                button.addEventListener('click', editUser);
+            });
+            
+            document.querySelectorAll('.delete-user').forEach(button => {
+                button.addEventListener('click', toggleUserStatus);
+            });
+        }
+
+        function showAddUserModal() {
+            // In a real application, this would show a modal to add a new user
+            Swal.fire({
+                title: 'Fitur Dalam Pengembangan',
+                text: 'Fitur untuk menambah pengguna baru akan diimplementasikan di sini, mirip dengan modal "Buat Akun Baru".',
+                icon: 'info'
+            });
+        }
+
+        function editUser(e) {
+            const username = e.target.getAttribute('data-username');
+            const user = users.find(u => u.username === username);
+            Swal.fire({
+                title: 'Fitur Dalam Pengembangan',
+                html: `Fitur untuk mengedit pengguna <b>${user.username}</b> akan diimplementasikan di sini. <br> Ini akan membuka modal untuk mengubah role, email, atau mereset password.`,
+                icon: 'info'
+            });
+
+        }
+
+        function toggleUserStatus(e) {
+            const username = e.target.getAttribute('data-username');
+            const user = users.find(u => u.username === username);
+            
+            user.status = user.status === 'active' ? 'inactive' : 'active';
+            updateUserTable();
+            
+            showNotification(`Pengguna ${user.username} ${user.status === 'active' ? 'diaktifkan' : 'dinonaktifkan'}`);
+        }
+
+        // Sales Data Functions
+        function updateSalesTable() {
+            salesTableBody.innerHTML = '';
+
+            // Display in reverse chronological order (newest first)
+            salesData.slice().reverse().forEach((sale, index) => {
+                const row = document.createElement('tr');
+                const saleDate = new Date(sale.date);
+                row.innerHTML = `
+                    <td>${salesData.length - index}</td>
+                    <td>${sale.id}</td>
+                    <td>${saleDate.toLocaleString('id-ID')}</td>
+                    <td>${sale.kasir}</td>
+                    <td>Rp ${sale.total.toLocaleString()}</td>
+                    <td><span style="background-color: #2a9d8f; color: white; padding: 5px 10px; border-radius: 5px;">${sale.status}</span></td>
+                `;
+                
+                salesTableBody.appendChild(row);
+            });
+
+            // Add event listener for reset button
+            const resetSalesBtn = document.getElementById('resetSalesBtn');
+            if (resetSalesBtn) resetSalesBtn.addEventListener('click', resetSalesData);
+        }
+
+        // Chart.js Function
+        function initializeSalesChart() {
+            const ctx = document.getElementById('salesChart').getContext('2d');
+            
+            if (salesChart) {
+                salesChart.destroy();
+            }
+
+            // Prepare data for the last 7 days
+            const labels = [];
+            const data = [];
+            for (let i = 6; i >= 0; i--) {
+                const d = new Date();
+                d.setDate(d.getDate() - i);
+                labels.push(d.toLocaleDateString('id-ID', { weekday: 'short' }));
+
+                const dailySales = salesData.filter(sale => new Date(sale.date).toDateString() === d.toDateString());
+                const dailyTotal = dailySales.reduce((sum, sale) => sum + sale.total, 0);
+                data.push(dailyTotal);
+            }
+
+            salesChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Pendapatan (Rp)',
+                        data: data,
+                        backgroundColor: 'rgba(230, 57, 70, 0.2)',
+                        borderColor: '#e63946',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value, index, values) {
+                                    return 'Rp ' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `Pendapatan: Rp ${context.parsed.y.toLocaleString()}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Overview and Reset Functions
+        function updateOverview() {
+            const today = new Date().toDateString();
+            const salesToday = salesData.filter(sale => new Date(sale.date).toDateString() === today);
+
+            // 1. Calculate Revenue Today
+            const revenueToday = salesToday.reduce((sum, sale) => sum + sale.total, 0);
+            overviewRevenueToday.textContent = `Rp ${revenueToday.toLocaleString()}`;
+
+            // 2. Calculate Total Orders Today
+            const totalOrdersToday = salesToday.length;
+            overviewTotalOrders.textContent = totalOrdersToday;
+
+            // 3. Calculate Best Seller (all time)
+            if (salesData.length > 0) {
+                const itemCounts = {};
+                salesData.forEach(sale => {
+                    sale.items.forEach(item => {
+                        if (itemCounts[item.name]) {
+                            itemCounts[item.name] += item.quantity;
+                        } else {
+                            itemCounts[item.name] = item.quantity;
+                        }
+                    });
+                });
+
+                let bestSeller = '-';
+                let maxQuantity = 0;
+                for (const itemName in itemCounts) {
+                    if (itemCounts[itemName] > maxQuantity) {
+                        maxQuantity = itemCounts[itemName];
+                        bestSeller = itemName;
+                    }
+                }
+                overviewBestSeller.textContent = bestSeller;
+            } else {
+                overviewBestSeller.textContent = '-';
             }
         }
 
-        // Event listener untuk tombol pencarian
-        document.getElementById('search-button').addEventListener('click', searchSurah);
-        
-        // Event listener untuk input pencarian (saat menekan enter)
-        document.getElementById('search-input').addEventListener('keyup', (event) => {
-            if (event.key === 'Enter') {
-                searchSurah();
-            }
-        });
-
-        // Event listener untuk filter
-        document.getElementById('sort-by').addEventListener('change', function() {
-            // Dalam implementasi nyata, ini akan mengurutkan daftar surah
-            alert('Fitur pengurutan akan diimplementasikan dengan koneksi API');
-        });
-
-        // Event listener untuk menu navigasi
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function() {
-                document.querySelectorAll('.nav-item').forEach(nav => {
-                    nav.classList.remove('active');
-                });
-                this.classList.add('active');
-                
-                const target = this.getAttribute('data-target');
-                showSection(target);
-            });
-        });
-
-        // Event listener untuk question menu
-        document.querySelectorAll('.question-item').forEach(item => {
-            item.addEventListener('click', function() {
-                document.querySelectorAll('.question-item').forEach(q => {
-                    q.classList.remove('active');
-                });
-                this.classList.add('active');
-            });
-        });
-
-        // Inisialisasi aplikasi
-        document.addEventListener('DOMContentLoaded', () => {
-            renderSurahList();
-            
-            // Tampilkan dashboard secara default
-            showSection('dashboard');
-            
-            // Tampilkan surah pertama secara default jika masuk ke section Quran
-            document.querySelector('.nav-item[data-target="quran"]').addEventListener('click', () => {
-                if (surahList.length > 0) {
-                    const firstSurahItem = document.querySelector('.surah-item');
-                    firstSurahItem.classList.add('active');
-                    document.getElementById('breadcrumb-surah').textContent = `1. ${surahList[0].name} ▼`;
-                    displayAyat(surahList[0]);
+        function resetSalesData() {
+            Swal.fire({
+                title: 'Anda Yakin?',
+                text: "Semua data penjualan akan dihapus permanen dan tidak dapat dikembalikan. Ini juga akan mereset ringkasan penjualan.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#e63946',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, Hapus Semua!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    salesData = [];
+                    orderNumber = 1;
+                    updateSalesTable();
+                    updateOverview();
+                    initializeSalesChart();
+                    Swal.fire('Dihapus!', 'Semua data penjualan telah berhasil dihapus.', 'success');
                 }
             });
-        });
+        }
+
+        // Report Generation Function
+        function generateSalesReport() {
+            const startDateInput = document.getElementById('reportStartDate').value;
+            const endDateInput = document.getElementById('reportEndDate').value;
+
+            if (!startDateInput || !endDateInput) {
+                Swal.fire('Tanggal Tidak Lengkap', 'Silakan pilih tanggal mulai dan tanggal akhir.', 'warning');
+                return;
+            }
+
+            const startDate = new Date(startDateInput);
+            const endDate = new Date(endDateInput);
+            endDate.setHours(23, 59, 59, 999); // Set end date to the end of the day
+
+            const filteredSales = salesData.filter(sale => {
+                const saleDate = new Date(sale.date);
+                return saleDate >= startDate && saleDate <= endDate;
+            });
+
+            reportResultDiv.style.display = 'block';
+
+            if (filteredSales.length === 0) {
+                reportResultDiv.innerHTML = '<p style="text-align: center;">Tidak ada data penjualan pada periode yang dipilih.</p>';
+                return;
+            }
+
+            const totalRevenue = filteredSales.reduce((sum, sale) => sum + sale.total, 0);
+            const totalOrders = filteredSales.length;
+            const itemSummary = {};
+
+            filteredSales.forEach(sale => {
+                sale.items.forEach(item => {
+                    if (itemSummary[item.name]) {
+                        itemSummary[item.name] += item.quantity;
+                    } else {
+                        itemSummary[item.name] = item.quantity;
+                    }
+                });
+            });
+
+            let itemsHtml = '<ul>';
+            for (const itemName in itemSummary) {
+                itemsHtml += `<li>${itemName}: <strong>${itemSummary[itemName]}</strong> terjual</li>`;
+            }
+            itemsHtml += '</ul>';
+
+            reportResultDiv.innerHTML = `
+                <h3 style="margin-bottom: 15px; color: #e63946;">Laporan Penjualan Periode ${startDate.toLocaleDateString('id-ID')} - ${endDate.toLocaleDateString('id-ID')}</h3>
+                <p><strong>Total Pendapatan:</strong> Rp ${totalRevenue.toLocaleString()}</p>
+                <p><strong>Total Pesanan:</strong> ${totalOrders} transaksi</p>
+                <hr style="margin: 15px 0;">
+                <h4 style="margin-bottom: 10px;">Ringkasan Item Terjual:</h4>
+                ${itemsHtml}
+            `;
+        }
+
+        // Utility Functions
+        function printReceipt() {
+            const receipt = receiptContent.innerHTML;
+            const originalContent = document.body.innerHTML;
+            
+            document.body.innerHTML = receipt;
+            window.print();
+            document.body.innerHTML = originalContent;
+            
+            // Restore event listeners
+            location.reload();
+        }
+
+        function startNewOrder() {
+            receiptModal.style.display = 'none';
+            showNotification('Pesanan baru telah dimulai!');
+        }
+
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.position = 'fixed';
+            notification.style.top = '20px';
+            notification.style.right = '20px';
+            notification.style.backgroundColor = '#2a9d8f';
+            notification.style.color = '#fff';
+            notification.style.padding = '15px 20px';
+            notification.style.borderRadius = '5px';
+            notification.style.boxShadow = '0 3px 10px rgba(0,0,0,0.2)';
+            notification.style.zIndex = '1000';
+            notification.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
+            notification.classList.add('animate__animated', 'animate__fadeInRight');
+            
+            document.body.appendChild(notification);
+            
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.classList.replace('animate__fadeInRight', 'animate__fadeOutRight');
+                notification.addEventListener('animationend', () => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>         }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>         }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>         }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>         }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>         }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>         }, 300);
+            }, 3000);
+        }
     </script>
 </body>
 </html>
