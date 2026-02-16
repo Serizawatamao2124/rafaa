@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achmad Rafa Rafsanjana - Web Developer Portfolio</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #6610f2;
+            --dark-bg: #0f172a;
+            --light-bg: #f8f9fa;
+            --text-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --card-light: #ffffff;
+            --card-dark: #1e293b;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --bg-body: var(--dark-bg);
+            --text-main: var(--text-light);
+            --card-bg: var(--card-dark);
+            --navbar-bg: rgba(15, 23, 42, 0.95);
+            --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="light"] {
+            --bg-body: var(--light-bg);
+            --text-main: var(--text-dark);
+            --card-bg: var(--card-light);
+            --navbar-bg: rgba(255, 255, 255, 0.95);
+            --shadow: 0 10px 30px -10px rgba(13, 110, 253, 0.15);
+            --border-color: rgba(0, 0, 0, 0.05);
+        }
+
+        * { cursor: none !important; } /* Hide default cursor */
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        /* --- CUSTOM CURSOR --- */
+        .cursor-dot, .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary-color);
+        }
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--primary-color);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+        body.hovering .cursor-outline {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(13, 110, 253, 0.1);
+            border-color: transparent;
+        }
+
+        /* --- THREE.JS BACKGROUND --- */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            background-color: transparent;
+            backdrop-filter: none;
+            border-bottom: none;
+            box-shadow: none;
+            transition: var(--transition);
+            padding: 1.5rem 0;
+        }
+        .navbar.scrolled {
+            background-color: var(--navbar-bg);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            padding: 1rem 0;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+            text-decoration: none !important;
+        }
+        .nav-link {
+            color: var(--text-main) !important;
+            font-weight: 500;
+            position: relative;
+            margin: 0 10px;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        .status-badge {
+            font-size: 0.75rem;
+            padding: 5px 12px;
+            border-radius: 20px;
+            background: rgba(25, 135, 84, 0.1);
+            color: #198754;
+            border: 1px solid rgba(25, 135, 84, 0.2);
+        }
+        .nav-avatar {
+            width: 35px;
+            height: 35px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 80px;
+            overflow: hidden;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 30px;
+            background: rgba(13, 110, 253, 0.1);
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(13, 110, 253, 0.2);
+        }
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        .text-highlight {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-profile-img {
+            width: 350px;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid var(--card-bg);
+            box-shadow: var(--shadow);
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .floating-card {
+            position: absolute;
+            background: var(--card-bg);
+            padding: 15px 25px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 2;
+            animation: float 5s ease-in-out infinite;
+        }
+        .fc-1 { top: 20%; right: 10%; animation-delay: 1s; }
+        .fc-2 { bottom: 20%; left: 0; animation-delay: 2s; }
+
+        /* --- ABOUT SECTION --- */
+        .about-img-wrapper {
+            position: relative;
+            padding: 20px;
+        }
+        .about-img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            position: relative;
+            z-index: 2;
+        }
+        .about-blob {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 20px;
+            transform: rotate(-6deg) scale(0.95);
+            opacity: 0.2;
+            z-index: 1;
+            transition: var(--transition);
+        }
+        .about-img-wrapper:hover .about-blob {
+            transform: rotate(-12deg) scale(1.05);
+        }
+        .stat-box {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        .stat-box:hover { transform: translateY(-5px); }
+        .tech-badge {
+            display: inline-block;
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 8px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        .tech-badge:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* --- CARDS (Projects, Services, Blog) --- */
+        .custom-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            height: 100%;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .custom-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+            border-color: var(--primary-color);
+        }
+        .project-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+        }
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(13, 110, 253, 0.1);
+            color: var(--primary-color);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+        .custom-card:hover .service-icon {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* --- CONTACT --- */
+        .form-control {
+            background-color: var(--bg-body);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 12px 20px;
+            border-radius: 10px;
+        }
+        .form-control:focus {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 0;
+        }
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(13, 110, 253, 0.1);
+            color: var(--primary-color);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 5px;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        .social-link:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* --- UTILS --- */
+        .section-title {
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50%;
+            height: 4px;
+            background: var(--primary-color);
+            margin-top: 5px;
+            border-radius: 2px;
+        }
+        .btn-primary {
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
+            transition: var(--transition);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(13, 110, 253, 0.4);
+        }
+
+        /* --- MUSIC PLAYER --- */
+        #music-toggle.playing i {
+            animation: music-spin 3s linear infinite;
+        }
+        @keyframes music-spin { 100% { transform: rotate(360deg); } }
+        .cursor-pointer { cursor: pointer !important; }
+
+        /* --- FILTER ANIMATION --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        /* --- 3D PROGRAMMER REVEAL ANIMATION --- */
+        /* Mengubah animasi fade-up biasa menjadi efek 3D Tilt dari bawah */
+        [data-aos="fade-up"] {
+            transform: perspective(1000px) rotateX(30deg) translateY(60px) scale(0.9) !important;
+            opacity: 0 !important;
+            transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+        }
+        [data-aos="fade-up"].aos-animate {
+            transform: perspective(1000px) rotateX(0) translateY(0) scale(1) !important;
+            opacity: 1 !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- 3D Background -->
+    <div id="canvas-container"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand text-decoration-none" href="#">
+                Achmad Rafa <span class="text-primary">Rafsanjana</span>
+                <div style="font-size: 0.7rem; font-weight: 400; color: var(--text-main);">RafaDev</div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#blog">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="status-badge d-none d-lg-block">
+                        <i class="fas fa-circle fa-xs me-1"></i> Available for Work
+                    </div>
+                    <button class="btn btn-link text-primary p-0" id="music-toggle" title="Play Music">
+                        <i class="fas fa-music fa-lg"></i>
+                    </button>
+                    <audio id="bg-music" loop>
+                        <source src="https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
+                    </audio>
+                    <button class="btn btn-link text-primary p-0" id="theme-toggle">
+                        <i class="fas fa-moon fa-lg"></i>
+                    </button>
+                    <div class="nav-avatar">AR</div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-up">
+                    <div class="hero-badge">
+                        <i class="fas fa-hand-sparkles"></i> Welcome to my portfolio
+                    </div>
+                    <h1 class="hero-title text-decoration-none border-0">Hi, I'm <br><span class="text-highlight name-trigger" style="cursor: pointer;">Achmad Rafa Rafsanjana</span></h1>
+                    <h3 class="h4 mb-4">I am a <span class="text-primary" id="typed-text"></span></h3>
+                    <p class="lead mb-4 text-muted">A passionate Web Developer based in Bogor, Indonesia. I build accessible, pixel-perfect, and performant web experiences.</p>
+                    
+                    <div class="d-flex gap-3 mb-5">
+                        <a href="#contact" class="btn btn-primary">Hire Me <i class="fas fa-paper-plane ms-2"></i></a>
+                        <a href="#projects" class="btn btn-outline-primary rounded-pill px-4 py-2 fw-bold">View Projects</a>
+                        <button onclick="downloadCV()" class="btn btn-link text-decoration-none fw-bold border-0 bg-transparent cursor-pointer">Download CV <i class="fas fa-download ms-1"></i></button>
+                    </div>
+
+                    <div class="d-flex gap-4 text-muted">
+                        <div><i class="fas fa-map-marker-alt text-primary me-2"></i>Bogor, Indonesia</div>
+                        <div><i class="fas fa-envelope text-primary me-2"></i>rafa@example.com</div>
+                    </div>
+                </div>
+                <div class="col-lg-6 position-relative text-center mt-5 mt-lg-0" data-aos="fade-up">
+                    <img src="https://ui-avatars.com/api/?name=Achmad+Rafa&background=0d6efd&color=fff&size=500" alt="Achmad Rafa" class="hero-profile-img">
+                    
+                    <!-- Floating Badges -->
+                    <div class="floating-card fc-1">
+                        <div class="bg-primary text-white rounded-circle p-2"><i class="fas fa-code"></i></div>
+                        <div>
+                            <div class="fw-bold small">Web Developer</div>
+                            <div class="text-muted" style="font-size: 0.7rem;">Expert</div>
+                        </div>
+                    </div>
+                    <div class="floating-card fc-2">
+                        <div class="bg-success text-white rounded-circle p-2"><i class="fas fa-check"></i></div>
+                        <div>
+                            <div class="fw-bold small">3+ Years</div>
+                            <div class="text-muted" style="font-size: 0.7rem;">Experience</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <!-- Left: Visual -->
+                <div class="col-lg-5 mb-5 mb-lg-0" data-aos="fade-up">
+                    <div class="about-img-wrapper">
+                        <div class="about-blob"></div>
+                        <img src="https://ui-avatars.com/api/?name=AR&background=random&size=600" alt="About Rafa" class="about-img">
+                        
+                        <div class="position-absolute bottom-0 start-50 translate-middle-x mb-4 z-3 bg-white rounded-pill shadow px-4 py-2 d-flex gap-3">
+                            <a href="#" class="text-primary"><i class="fab fa-github fa-lg"></i></a>
+                            <a href="#" class="text-primary"><i class="fab fa-linkedin fa-lg"></i></a>
+                            <a href="#" class="text-primary"><i class="fab fa-instagram fa-lg"></i></a>
+                            <a href="#" class="text-primary"><i class="fab fa-twitter fa-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Content -->
+                <div class="col-lg-7 ps-lg-5" data-aos="fade-up" data-aos-delay="100">
+                    <div class="d-inline-block px-3 py-1 rounded-pill bg-primary bg-opacity-10 text-primary fw-bold small mb-3">
+                        #OpenToWork
+                    </div>
+                    <h2 class="section-title mb-4">Get To Know <span class="text-highlight">Achmad Rafa R.</span></h2>
+                    
+                    <div class="p-4 bg-light rounded-3 border-start border-4 border-primary mb-4 fst-italic text-muted">
+                        "I believe that good code is not just about functionality, but also about creating seamless and enjoyable user experiences."
+                    </div>
+
+                    <p class="text-muted mb-4">
+                        I am a dedicated Web Developer with a strong foundation in PHP and Bootstrap. My journey involves solving complex problems and turning ideas into reality through code. I am constantly learning and evolving with the latest tech trends.
+                    </p>
+
+                    <!-- Stats -->
+                    <div class="row g-3 mb-5">
+                        <div class="col-4">
+                            <div class="stat-box">
+                                <h3 class="fw-bold text-primary mb-0 counter" data-target="15">0</h3>
+                                <small class="text-muted">Projects Done</small>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="stat-box">
+                                <h3 class="fw-bold text-primary mb-0 counter" data-target="10">0</h3>
+                                <small class="text-muted">Happy Clients</small>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="stat-box">
+                                <h3 class="fw-bold text-primary mb-0 counter" data-target="3">0</h3>
+                                <small class="text-muted">Years Exp</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tech Stack & Skills -->
+                    <div class="mb-4">
+                        <h5 class="fw-bold mb-3">Tech Stack</h5>
+                        <div>
+                            <span class="tech-badge"><i class="fab fa-php me-1"></i> PHP</span>
+                            <span class="tech-badge"><i class="fab fa-laravel me-1"></i> Laravel</span>
+                            <span class="tech-badge"><i class="fab fa-js me-1"></i> JavaScript</span>
+                            <span class="tech-badge"><i class="fab fa-vuejs me-1"></i> Vue.js</span>
+                            <span class="tech-badge"><i class="fas fa-database me-1"></i> MySQL</span>
+                            <span class="tech-badge"><i class="fab fa-bootstrap me-1"></i> Bootstrap</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-1"><small class="fw-bold">PHP</small><small>90%</small></div>
+                        <div class="progress mb-3" style="height: 6px;"><div class="progress-bar" style="width: 90%"></div></div>
+                        
+                        <div class="d-flex justify-content-between mb-1"><small class="fw-bold">JavaScript</small><small>85%</small></div>
+                        <div class="progress mb-3" style="height: 6px;"><div class="progress-bar bg-info" style="width: 85%"></div></div>
+                        
+                        <div class="d-flex justify-content-between mb-1"><small class="fw-bold">Database</small><small>80%</small></div>
+                        <div class="progress" style="height: 6px;"><div class="progress-bar bg-warning" style="width: 80%"></div></div>
+                    </div>
+
+                    <!-- Fun Facts -->
+                    <div class="row g-2 text-center">
+                        <div class="col-3"><div class="p-2 border rounded"><i class="fas fa-coffee text-warning"></i><br><small>Coffee</small></div></div>
+                        <div class="col-3"><div class="p-2 border rounded"><i class="fas fa-moon text-dark"></i><br><small>Night Owl</small></div></div>
+                        <div class="col-3"><div class="p-2 border rounded"><i class="fas fa-code-branch text-success"></i><br><small>Open Source</small></div></div>
+                        <div class="col-3"><div class="p-2 border rounded"><i class="fas fa-gamepad text-danger"></i><br><small>Gamer</small></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-5 bg-light bg-opacity-50">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">My Projects</h2>
+                <p class="text-muted">Some of my recent works</p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="row justify-content-center mb-5" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-auto">
+                    <div class="btn-group" role="group" id="project-filters">
+                        <button type="button" class="btn btn-outline-primary active rounded-start-pill px-4" data-filter="all">All</button>
+                        <button type="button" class="btn btn-outline-primary px-4" data-filter="web">Web</button>
+                        <button type="button" class="btn btn-outline-primary px-4" data-filter="mobile">Mobile</button>
+                        <button type="button" class="btn btn-outline-primary rounded-end-pill px-4" data-filter="design">Design</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4" id="projects-grid">
+                <!-- Project 1 -->
+                <div class="col-md-4 project-item web" data-aos="fade-up" data-aos-delay="100">
+                    <div class="custom-card p-0">
+                        <img src="https://placehold.co/600x400/0d6efd/ffffff?text=E-Commerce" class="img-fluid w-100 cursor-pointer" alt="Project 1" onclick="openProject(1)">
+                        <div class="p-4">
+                            <h5 class="fw-bold">E-Commerce Platform</h5>
+                            <p class="text-muted small">A full-stack e-commerce solution with payment gateway integration.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-primary bg-opacity-10 text-primary">Laravel</span>
+                                <span class="badge bg-primary bg-opacity-10 text-primary">MySQL</span>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button onclick="openProject(1)" class="btn btn-sm btn-primary rounded-pill px-3 cursor-pointer">Detail & Demo</button>
+                                <a href="https://github.com" target="_blank" class="btn btn-sm btn-outline-dark rounded-pill px-3 cursor-pointer"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="col-md-4 project-item web" data-aos="fade-up" data-aos-delay="200">
+                    <div class="custom-card p-0">
+                        <img src="https://placehold.co/600x400/6610f2/ffffff?text=Dashboard" class="img-fluid w-100 cursor-pointer" alt="Project 2" onclick="openProject(2)">
+                        <div class="p-4">
+                            <h5 class="fw-bold">Admin Dashboard</h5>
+                            <p class="text-muted small">Responsive admin panel with analytics charts and user management.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-primary bg-opacity-10 text-primary">Bootstrap 5</span>
+                                <span class="badge bg-primary bg-opacity-10 text-primary">Chart.js</span>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button onclick="openProject(2)" class="btn btn-sm btn-primary rounded-pill px-3 cursor-pointer">Detail & Demo</button>
+                                <a href="https://github.com" target="_blank" class="btn btn-sm btn-outline-dark rounded-pill px-3 cursor-pointer"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="col-md-4 project-item design" data-aos="fade-up" data-aos-delay="300">
+                    <div class="custom-card p-0">
+                        <img src="https://placehold.co/600x400/198754/ffffff?text=Portfolio" class="img-fluid w-100 cursor-pointer" alt="Project 3" onclick="openProject(3)">
+                        <div class="p-4">
+                            <h5 class="fw-bold">Personal Portfolio</h5>
+                            <p class="text-muted small">Modern portfolio website with 3D animations and dark mode.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-primary bg-opacity-10 text-primary">Three.js</span>
+                                <span class="badge bg-primary bg-opacity-10 text-primary">GSAP</span>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button onclick="openProject(3)" class="btn btn-sm btn-primary rounded-pill px-3 cursor-pointer">Detail & Demo</button>
+                                <a href="https://github.com" target="_blank" class="btn btn-sm btn-outline-dark rounded-pill px-3 cursor-pointer"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 4 (New Mobile Project) -->
+                <div class="col-md-4 project-item mobile" data-aos="fade-up" data-aos-delay="400">
+                    <div class="custom-card p-0">
+                        <img src="https://placehold.co/600x400/ffc107/ffffff?text=Mobile+App" class="img-fluid w-100 cursor-pointer" alt="Project 4" onclick="openProject(4)">
+                        <div class="p-4">
+                            <h5 class="fw-bold">Fitness Tracker App</h5>
+                            <p class="text-muted small">Mobile application to track daily workouts and diet plans.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-primary bg-opacity-10 text-primary">Flutter</span>
+                                <span class="badge bg-primary bg-opacity-10 text-primary">Firebase</span>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button onclick="openProject(4)" class="btn btn-sm btn-primary rounded-pill px-3 cursor-pointer">Detail & Demo</button>
+                                <a href="https://github.com" target="_blank" class="btn btn-sm btn-outline-dark rounded-pill px-3 cursor-pointer"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">My Services</h2>
+                <p class="text-muted">What I can do for you</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="custom-card text-center">
+                        <div class="service-icon mx-auto"><i class="fas fa-laptop-code"></i></div>
+                        <h5 class="fw-bold">Web Development</h5>
+                        <p class="text-muted small">Building fast, secure, and scalable websites tailored to your needs.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="custom-card text-center">
+                        <div class="service-icon mx-auto"><i class="fab fa-php"></i></div>
+                        <h5 class="fw-bold">PHP Customization</h5>
+                        <p class="text-muted small">Custom backend solutions and API integrations using PHP & Laravel.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="custom-card text-center">
+                        <div class="service-icon mx-auto"><i class="fas fa-mobile-alt"></i></div>
+                        <h5 class="fw-bold">Responsive Design</h5>
+                        <p class="text-muted small">Ensuring your website looks amazing on all devices and screen sizes.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="custom-card text-center">
+                        <div class="service-icon mx-auto"><i class="fas fa-tools"></i></div>
+                        <h5 class="fw-bold">Maintenance</h5>
+                        <p class="text-muted small">Regular updates, bug fixes, and performance optimization.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="py-5 bg-light bg-opacity-50">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">Latest Articles</h2>
+                <p class="text-muted">Thoughts and tutorials on web development</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6" data-aos="fade-up">
+                    <div class="card border-0 shadow-sm h-100 cursor-pointer" onclick="openBlog(1)">
+                        <div class="row g-0 h-100">
+                            <div class="col-md-4">
+                                <img src="https://placehold.co/400x400/0d6efd/ffffff?text=Blog+1" class="img-fluid rounded-start h-100 object-fit-cover" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <small class="text-primary fw-bold">Tutorial</small>
+                                    <h5 class="card-title fw-bold mt-1">Mastering Bootstrap 5 Grid</h5>
+                                    <p class="card-text small text-muted">A comprehensive guide to understanding the flexbox grid system in Bootstrap 5.</p>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card border-0 shadow-sm h-100 cursor-pointer" onclick="openBlog(2)">
+                        <div class="row g-0 h-100">
+                            <div class="col-md-4">
+                                <img src="https://placehold.co/400x400/6610f2/ffffff?text=Blog+2" class="img-fluid rounded-start h-100 object-fit-cover" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <small class="text-primary fw-bold">Tips</small>
+                                    <h5 class="card-title fw-bold mt-1">PHP 8.2 New Features</h5>
+                                    <p class="card-text small text-muted">Exploring the latest features and improvements in the newest PHP version.</p>
+                                    <p class="card-text"><small class="text-muted">Last updated 1 day ago</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="custom-card" data-aos="fade-up">
+                        <div class="text-center mb-4">
+                            <h2 class="section-title">Hubungi Saya</h2>
+                            <p class="text-muted">Let's discuss your next project</p>
+                        </div>
+                        
+                        <!-- Alert Success (Hidden by default) -->
+                        <div id="contact-alert" class="alert alert-success d-none" role="alert">
+                            <i class="fas fa-check-circle me-2"></i> Pesan Anda berhasil dikirim! Saya akan segera membalasnya.
+                        </div>
+
+                        <form id="contact-form">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Nama Lengkap</label>
+                                    <input type="text" class="form-control" placeholder="John Doe" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Email</label>
+                                    <input type="email" class="form-control" placeholder="john@example.com" required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-bold">Pesan</label>
+                                    <textarea class="form-control" rows="5" placeholder="Ceritakan tentang project Anda..." required></textarea>
+                                </div>
+                                <div class="col-12 text-center mt-4">
+                                    <button type="submit" class="btn btn-primary px-5 py-2 rounded-pill cursor-pointer" id="btn-submit">
+                                        <span class="btn-text">Kirim Pesan <i class="fas fa-paper-plane ms-2"></i></span>
+                                        <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="row mt-5 text-center">
+                            <div class="col-md-4">
+                                <i class="fas fa-envelope fa-2x text-primary mb-2"></i>
+                                <p class="small">rfaa149@gmail.com</p>
+                            </div>
+                            <div class="col-md-4">
+                                <i class="fas fa-phone fa-2x text-primary mb-2"></i>
+                                <p class="small">+62 888 0931 2319</p>
+                            </div>
+                            <div class="col-md-4">
+                                <i class="fas fa-map-marker-alt fa-2x text-primary mb-2"></i>
+                                <p class="small">Bogor, Indonesia</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <h3 class="fw-bold mb-3">Achmad Rafa Rafsanjana</h3>
+            <div class="d-flex justify-content-center gap-3 mb-4">
+                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            </div>
+            <hr class="w-50 mx-auto border-secondary opacity-25 mb-4">
+            <p class="mb-1">© 2026 Achmad Rafa Rafsanjana. All rights reserved.</p>
+            <small class="text-muted">Built with ❤️ using PHP & Bootstrap 5</small>
+        </div>
+    </footer>
+
+    <!-- GLOBAL MODAL FOR DYNAMIC CONTENT -->
+    <div class="modal fade" id="globalModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow-lg" style="background: var(--card-bg); color: var(--text-main);">
+                <div class="modal-header border-bottom border-secondary border-opacity-10">
+                    <h5 class="modal-title fw-bold" id="modalTitle">Modal Title</h5>
+                    <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4" id="modalBody">
+                    <!-- Content will be injected here -->
+                </div>
+                <div class="modal-footer border-top border-secondary border-opacity-10">
+                    <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Close</button>
+                    <a href="#" id="modalActionBtn" class="btn btn-primary rounded-pill d-none" target="_blank">Visit Link</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
+    <script>
+        // --- 1. INITIALIZATION ---
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // --- 2. TYPING EFFECT ---
+        new Typed('#typed-text', {
+            strings: ['Web Developer', 'PHP Enthusiast', 'Bootstrap Lover', 'Problem Solver'],
+            typeSpeed: 50,
+            backSpeed: 30,
+            backDelay: 2000,
+            loop: true
+        });
+
+        // --- 3. CUSTOM CURSOR ---
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            // Smooth follow for outline
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // Hover effects
+        document.querySelectorAll('a, button, .btn, .card').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+        });
+
+        // Ripple effect
+        window.addEventListener('click', (e) => {
+            const ripple = document.createElement('div');
+            ripple.style.position = 'fixed';
+            ripple.style.left = `${e.clientX}px`;
+            ripple.style.top = `${e.clientY}px`;
+            ripple.style.width = '0';
+            ripple.style.height = '0';
+            ripple.style.border = '2px solid var(--primary-color)';
+            ripple.style.borderRadius = '50%';
+            ripple.style.transform = 'translate(-50%, -50%)';
+            ripple.style.pointerEvents = 'none';
+            ripple.style.zIndex = '9998';
+            document.body.appendChild(ripple);
+
+            const animation = ripple.animate([
+                { width: '0', height: '0', opacity: 1 },
+                { width: '100px', height: '100px', opacity: 0 }
+            ], { duration: 500, easing: 'ease-out' });
+
+            animation.onfinish = () => ripple.remove();
+        });
+
+        // --- 4. DARK MODE TOGGLE ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const icon = themeToggle.querySelector('i');
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            icon.className = newTheme === 'light' ? 'fas fa-moon fa-lg' : 'fas fa-sun fa-lg';
+        });
+
+        // --- 5. COUNTER ANIMATION ---
+        const counters = document.querySelectorAll('.counter');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = +counter.getAttribute('data-target');
+                    const speed = 200;
+                    
+                    const updateCount = () => {
+                        const count = +counter.innerText;
+                        const inc = target / speed;
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count + inc);
+                            setTimeout(updateCount, 20);
+                        } else {
+                            counter.innerText = target + "+";
+                        }
+                    };
+                    updateCount();
+                    observer.unobserve(counter);
+                }
+            });
+        });
+        counters.forEach(counter => observer.observe(counter));
+
+        // --- 6. THREE.JS BACKGROUND PARTICLES ---
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Particles
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 700;
+        const posArray = new Float32Array(particlesCount * 3);
+
+        for(let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 15; // Spread
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+        // Material
+        const material = new THREE.PointsMaterial({
+            size: 0.02,
+            color: 0x0d6efd,
+            transparent: true,
+            opacity: 0.8,
+        });
+
+        const particlesMesh = new THREE.Points(particlesGeometry, material);
+        scene.add(particlesMesh);
+        camera.position.z = 3;
+
+        // Animation Loop
+        let mouseX = 0;
+        let mouseY = 0;
+
+        document.addEventListener('mousemove', (event) => {
+            mouseX = event.clientX / window.innerWidth - 0.5;
+            mouseY = event.clientY / window.innerHeight - 0.5;
+        });
+
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const elapsedTime = clock.getElapsedTime();
+
+            particlesMesh.rotation.y = elapsedTime * 0.05;
+            particlesMesh.rotation.x = mouseY * 0.5;
+            particlesMesh.rotation.y += mouseX * 0.5;
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Resize Handler
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // --- 7. CONFETTI EFFECT ---
+        document.querySelector('.name-trigger').addEventListener('click', (e) => {
+            // Get click position relative to viewport
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { x: x, y: y },
+                colors: ['#0d6efd', '#6610f2', '#0dcaf0']
+            });
+        });
+
+        // --- 8. MUSIC PLAYER ---
+        const musicToggle = document.getElementById('music-toggle');
+        const bgMusic = document.getElementById('bg-music');
+        const musicIcon = musicToggle.querySelector('i');
+
+        bgMusic.volume = 0.3; // Volume 30% agar tidak terlalu keras
+
+        function updateMusicState() {
+            if (bgMusic.paused) {
+                musicIcon.classList.replace('fa-compact-disc', 'fa-music');
+                musicToggle.classList.remove('playing');
+            } else {
+                musicIcon.classList.replace('fa-music', 'fa-compact-disc');
+                musicToggle.classList.add('playing');
+            }
+        }
+
+        // Coba Autoplay saat website dibuka
+        bgMusic.play().then(updateMusicState).catch(() => {
+            // Jika diblokir browser, tunggu interaksi pertama (klik) user
+            document.addEventListener('click', () => {
+                bgMusic.play().then(updateMusicState);
+            }, { once: true });
+        });
+
+        musicToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (bgMusic.paused) {
+                bgMusic.play().then(updateMusicState);
+            } else {
+                bgMusic.pause();
+                updateMusicState();
+            }
+        });
+
+        // --- 9. INTERACTIVE DATA & MODALS ---
+        
+        // Data Dummy Projects
+        const projectsData = {
+            1: {
+                title: "E-Commerce Platform",
+                img: "https://placehold.co/800x400/0d6efd/ffffff?text=E-Commerce+Detail",
+                desc: "Platform belanja online lengkap dengan fitur keranjang, checkout, dan integrasi payment gateway Midtrans. Dibangun menggunakan Laravel 10 dan MySQL.",
+                tech: ["Laravel", "MySQL", "Bootstrap 5", "jQuery"],
+                link: "https://google.com"
+            },
+            2: {
+                title: "Admin Dashboard",
+                img: "https://placehold.co/800x400/6610f2/ffffff?text=Dashboard+Detail",
+                desc: "Panel admin responsif untuk memantau aktivitas user, statistik penjualan, dan manajemen konten. Dilengkapi dengan Dark Mode dan Chart interaktif.",
+                tech: ["Bootstrap 5", "Chart.js", "DataTables", "Node.js"],
+                link: "https://google.com"
+            },
+            3: {
+                title: "Personal Portfolio",
+                img: "https://placehold.co/800x400/198754/ffffff?text=Portfolio+Detail",
+                desc: "Website portofolio pribadi dengan animasi 3D menggunakan Three.js dan efek partikel interaktif. Skor SEO 100% dan PWA Ready.",
+                tech: ["HTML5", "CSS3", "Three.js", "AOS"],
+                link: "https://google.com"
+            },
+            4: {
+                title: "Fitness Tracker App",
+                img: "https://placehold.co/800x400/ffc107/ffffff?text=Mobile+App+Detail",
+                desc: "Aplikasi mobile cross-platform untuk melacak aktivitas olahraga harian, menghitung kalori, dan memantau progress diet. Terintegrasi dengan Google Fit.",
+                tech: ["Flutter", "Dart", "Firebase", "Google Maps API"],
+                link: "https://google.com"
+            }
+        };
+
+        // Data Dummy Blog
+        const blogData = {
+            1: {
+                title: "Mastering Bootstrap 5 Grid",
+                content: "<p>Bootstrap 5 grid system uses a series of containers, rows, and columns to layout and align content. It's built with flexbox and is fully responsive.</p><p>In this article, we will explore how to use <code>.col-</code> classes effectively to create complex layouts without writing custom CSS.</p><h5>Key Concepts:</h5><ul><li>Containers</li><li>Rows</li><li>Columns</li></ul>",
+                date: "16 Feb 2026"
+            },
+            2: {
+                title: "PHP 8.2 New Features",
+                content: "<p>PHP 8.2 brings major improvements including Readonly classes, Disjunctive Normal Form (DNF) Types, and stand-alone null, false, and true types.</p><p>This update focuses on developer experience and performance optimization.</p><h5>What's New?</h5><ul><li>Readonly Classes</li><li>New Random Extension</li><li>Deprecations</li></ul>",
+                date: "15 Feb 2026"
+            }
+        };
+
+        const globalModal = new bootstrap.Modal(document.getElementById('globalModal'));
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        const modalActionBtn = document.getElementById('modalActionBtn');
+
+        // Function Buka Project
+        window.openProject = function(id) {
+            const data = projectsData[id];
+            if(!data) return;
+
+            modalTitle.innerText = data.title;
+            let techBadges = data.tech.map(t => `<span class="badge bg-secondary me-1">${t}</span>`).join('');
+            
+            modalBody.innerHTML = `
+                <img src="${data.img}" class="img-fluid rounded mb-3 w-100" alt="${data.title}">
+                <p>${data.desc}</p>
+                <div class="mb-3"><strong>Technologies:</strong><br>${techBadges}</div>
+            `;
+            
+            modalActionBtn.classList.remove('d-none');
+            modalActionBtn.innerText = "Visit Live Site";
+            modalActionBtn.href = data.link;
+            
+            globalModal.show();
+        }
+
+        // Function Buka Blog
+        window.openBlog = function(id) {
+            const data = blogData[id];
+            if(!data) return;
+
+            modalTitle.innerText = data.title;
+            modalBody.innerHTML = `
+                <small class="text-muted mb-3 d-block"><i class="far fa-calendar me-2"></i> ${data.date}</small>
+                <div class="blog-content">${data.content}</div>
+            `;
+            
+            modalActionBtn.classList.add('d-none'); // Hide action button for blog
+            globalModal.show();
+        }
+
+        // Function Download CV
+        window.downloadCV = function() {
+            const btn = event.currentTarget;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Downloading...';
+            
+            setTimeout(() => {
+                alert("CV berhasil diunduh! (Simulasi)");
+                btn.innerHTML = originalText;
+            }, 1500);
+        }
+
+        // --- 10. CONTACT FORM HANDLING ---
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btn-submit');
+            const btnText = btn.querySelector('.btn-text');
+            const spinner = btn.querySelector('.spinner-border');
+            const alertBox = document.getElementById('contact-alert');
+
+            // Loading State
+            btn.disabled = true;
+            btnText.classList.add('d-none');
+            spinner.classList.remove('d-none');
+
+            // Simulate Server Delay (2 seconds)
+            setTimeout(() => {
+                btn.disabled = false;
+                btnText.classList.remove('d-none');
+                spinner.classList.add('d-none');
+                
+                // Show Success
+                alertBox.classList.remove('d-none');
+                this.reset(); // Reset form
+
+                // Hide alert after 5 seconds
+                setTimeout(() => {
+                    alertBox.classList.add('d-none');
+                }, 5000);
+            }, 2000);
+        });
+
+        // --- 11. PROJECT FILTERING ---
+        const filterButtons = document.querySelectorAll('#project-filters button');
+        const projectItems = document.querySelectorAll('.project-item');
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                projectItems.forEach(item => {
+                    item.classList.remove('fade-in'); // Reset animation
+
+                    if (filterValue === 'all' || item.classList.contains(filterValue)) {
+                        item.classList.remove('d-none');
+                        setTimeout(() => item.classList.add('fade-in'), 50);
+                    } else {
+                        item.classList.add('d-none');
+                    }
+                });
+            });
+        });
+
+        // --- 12. NAVBAR SCROLL EFFECT ---
+        const navbar = document.querySelector('.navbar');
+        const updateNavbar = () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        };
+        window.addEventListener('scroll', updateNavbar);
+        updateNavbar(); // Cek saat halaman dimuat
+    </script>
+</body>
+</html>
